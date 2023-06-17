@@ -248,7 +248,9 @@ const TopNav = () => {
           variant="h6"
           className="mr-4 cursor-pointer flex items-center py-1.5 lg:ml-2"
         >
-          <CpuChipIcon className="h-6 w-6 mr-1" />
+          <div className="bg-blue-500 rounded-full text-white shadow-md p-1 mr-1 animate-[spin_1s_linear_1]">
+            <CpuChipIcon className="h-6 w-6" />
+          </div>
           EDM PC
         </Typography>
         <div className="hidden lg:block">
