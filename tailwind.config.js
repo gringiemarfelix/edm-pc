@@ -15,7 +15,7 @@ export default withMT({
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Roboto', ...defaultTheme.fontFamily.sans],
             },
         },
     },
