@@ -17,7 +17,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::name('products')->controller(ProductsController::class)->group(function () {
+Route::name('products.')->controller(ProductsController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/products/{id}', 'show')->name('show');
 });
