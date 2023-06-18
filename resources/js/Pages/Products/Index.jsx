@@ -1,4 +1,5 @@
 import CustomCarousel from "@/Components/CustomCarousel"
+import Product from "@/Components/Product"
 import Layout from "@/Layouts/Layout"
 import { Head, usePage } from "@inertiajs/react"
 import { Typography } from "@material-tailwind/react"
@@ -22,8 +23,8 @@ const Index = () => {
         <div className="flex justify-start space-x-6 py-3 flex-nowrap overflow-x-scroll w-full md:justify-center md:flex-wrap md:overflow-auto">
           {
             payments.map(payment => 
-              <div key={payment.name} className="bg-gray-50 rounded-xl shadow-lg text-center p-3 min-w-fit">
-                <Typography variant="h6" className="mb-1">{ payment.name }</Typography>
+              <div key={payment.name} className="bg-gray-50 rounded-xl shadow-lg text-center p-4 min-w-fit">
+                <Typography variant="h6" className="mb-2">{ payment.name }</Typography>
                 <div className="flex justify-center items-center space-x-3">
                   {
                     payment.items.map(item =>
@@ -36,7 +37,12 @@ const Index = () => {
           }
         </div>
       </div>
-      <Typography variant="h1" className="text-center my-3">New Products</Typography>
+      <div className="text-gray-900 flex flex-col items-center py-3">
+        <Typography variant="h1" className="text-center mb-3">New Products</Typography>
+        <div className="grid grid-cols-6 gap-3 w-3/4">
+          <Product />
+        </div>
+      </div>
       <Typography variant="h1" className="text-center my-3">Top-Rated Products</Typography>
       <Typography variant="h1" className="text-center my-3">Top-Selling Products</Typography>
     </Layout>
