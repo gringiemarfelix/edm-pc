@@ -35,7 +35,6 @@ const LoginForm = ({ status, canResetPassword }) => {
             label="Email"
             value={data.email}
             onChange={(e) => setData("email", e.target.value)}
-            autoFocus
             success={errors.length && !errors.email}
             error={errors.email !== undefined}
           />

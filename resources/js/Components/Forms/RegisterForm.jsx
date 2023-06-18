@@ -39,7 +39,6 @@ const RegisterForm = () => {
             label="Name"
             value={data.name}
             onChange={(e) => setData("name", e.target.value)}
-            autoFocus
             success={errors.length && !errors.name}
             error={errors.name !== undefined}
           />
@@ -56,7 +55,6 @@ const RegisterForm = () => {
             label="Email"
             value={data.email}
             onChange={(e) => setData("email", e.target.value)}
-            autoFocus
             success={errors.length && !errors.email}
             error={errors.email !== undefined}
           />
