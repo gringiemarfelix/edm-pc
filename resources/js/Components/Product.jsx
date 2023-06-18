@@ -72,9 +72,8 @@ const Product = () => {
           </Button>
         </Link>
         <Link href="#wish">
-          <IconButton variant="gradient" className="group transition-opacity duration-1000">
-            <OutlineHeartIcon className="w-6 h-6 group-hover:hidden" />
-            <HeartIcon className="w-6 h-6 hidden group-hover:block group-hover:opacity-100" />
+          <IconButton variant="gradient" className="group transition-transform duration-300 active:scale-125">
+            <OutlineHeartIcon className="w-6 h-6 transition-all duration-300 fill-transparent group-hover:fill-white" />
           </IconButton>
         </Link>
       </CardFooter>
