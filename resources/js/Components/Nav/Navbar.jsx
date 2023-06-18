@@ -20,6 +20,7 @@ import {
   XMarkIcon,
   CubeIcon,
   CpuChipIcon,
+  MagnifyingGlassIcon
 } from "@heroicons/react/24/outline";
 import { AiOutlineLaptop, AiOutlineDesktop } from "react-icons/ai"
 import CpuIcon from "../Icons/CpuIcon";
@@ -30,6 +31,7 @@ import HardDriveIcon from "../Icons/HardDriveIcon";
 import DisplayIcon from "../Icons/DisplayIcon";
 import CaseIcon from "../Icons/CaseIcon";
 import FanIcon from "../Icons/FanIcon";
+import { Input } from "@material-tailwind/react";
  
 const colors = {
   blue: "bg-blue-50 text-blue-500 fill-blue-500 stroke-blue-500",
@@ -181,7 +183,8 @@ function NavListMenu() {
  
 function NavList() {
   return (
-    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
+    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:items-center lg:p-1">
+      <Input label="Search" icon={<MagnifyingGlassIcon />} containerProps={{ className: 'block my-3 lg:my-0 lg:mx-3 lg:hidden' }} />
       <Typography
         as="a"
         href="#"
@@ -242,21 +245,26 @@ const TopNav = () => {
   return (
     <Navbar className="mx-auto max-w-full rounded-none bg-opacity-100 px-4 py-2 sticky inset-0 z-10 h-max lg:px-8 lg:py-4" id="navbar">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer flex items-center py-1.5 lg:ml-2"
-        >
-          <div className="bg-blue-500 rounded-full text-white shadow-md p-1 mr-1 animate-[spin_1s_linear_1]">
-            <CpuChipIcon className="h-6 w-6" />
-          </div>
-          EDM PC
-        </Typography>
-        <div className="hidden lg:block">
+        <div className="flex items-center basis-1/4">
+          <Typography
+            as="a"
+            href="#"
+            variant="h6"
+            className="mr-4 cursor-pointer flex items-center py-1.5 lg:ml-2"
+          >
+            <div className="bg-blue-500 rounded-full text-white shadow-md p-1 mr-1 animate-[spin_1s_linear_1]">
+              <CpuChipIcon className="h-6 w-6" />
+            </div>
+            <span className="w-max">
+              EDM PC
+            </span>
+          </Typography>
+          <Input label="Search" icon={<MagnifyingGlassIcon />} containerProps={{ className: 'hidden my-3 lg:my-0 lg:mx-0 lg:inline-block' }} />
+        </div>
+        <div className="hidden lg:flex justify-center basis-2/4">
           <NavList />
         </div>
-        <div className="hidden gap-2 lg:flex">
+        <div className="hidden gap-2 lg:flex justify-end basis-1/4">
           <Button variant="text" size="sm" color="blue-gray">
             Sign In
           </Button>
