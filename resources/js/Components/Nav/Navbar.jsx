@@ -243,7 +243,7 @@ const TopNav = () => {
   }, []);
  
   return (
-    <Navbar className="mx-auto max-w-full rounded-none bg-opacity-100 px-4 py-2 sticky inset-0 z-10 h-max lg:px-8 lg:py-4" id="navbar">
+    <Navbar className="mx-auto max-w-full rounded-none bg-opacity-100 px-4 py-2 sticky inset-0 z-[100] h-max lg:px-8 lg:py-4" id="navbar">
       <div className="flex items-center justify-between text-blue-gray-900">
         <div className="flex items-center basis-1/4">
           <Typography
