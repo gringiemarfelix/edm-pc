@@ -259,7 +259,7 @@ const TopNav = () => {
               EDM PC
             </span>
           </Typography>
-          <Input label="Search" icon={<MagnifyingGlassIcon />} containerProps={{ className: 'hidden my-3 lg:my-0 lg:mx-0 lg:inline-block' }} />
+          <Input label="Search" icon={<MagnifyingGlassIcon />} containerProps={{ className: 'hidden my-3 lg:my-0 lg:mx-0 lg:inline-block min-w-[100px] max-w-[100px] transition-all duration-300 focus-within:max-w-xs' }} className="" />
         </div>
         <div className="hidden lg:flex justify-center basis-2/4">
           <NavList />
