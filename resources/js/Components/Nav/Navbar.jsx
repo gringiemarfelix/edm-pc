@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@inertiajs/react";
 import {
   Navbar,
   Collapse,
@@ -185,24 +186,25 @@ function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:items-center lg:p-1">
       <Input label="Search" icon={<MagnifyingGlassIcon />} containerProps={{ className: 'block my-3 lg:my-0 lg:mx-3 lg:hidden' }} />
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-normal"
-      >
-        <ListItem 
-          className="flex items-center gap-2 py-2 pr-4 
-          data-[active=true]:bg-gradient-to-tr data-[active=true]:from-blue-600 data-[active=true]:to-blue-400
-          data-[active=true]:text-white data-[active=true]:shadow
-          " 
-          data-active={route().current('products.index')}
+      <Link href={route('products.index')}>
+        <Typography
+          as="div"
+          variant="small"
+          color="blue-gray"
+          className="font-normal"
         >
-          <HomeIcon className="h-[18px] w-[18px]" />
-          Home
-        </ListItem>
-      </Typography>
+          <ListItem 
+            className="flex items-center gap-2 py-2 pr-4 
+            data-[active=true]:bg-gradient-to-tr data-[active=true]:from-blue-600 data-[active=true]:to-blue-400
+            data-[active=true]:text-white data-[active=true]:shadow
+            " 
+            data-active={route().current('products.index')}
+          >
+            <HomeIcon className="h-[18px] w-[18px]" />
+            Home
+          </ListItem>
+        </Typography>
+      </Link>
       <NavListMenu />
       <Typography
         as="a"
@@ -246,31 +248,35 @@ const TopNav = () => {
     <Navbar className="mx-auto max-w-full rounded-none bg-opacity-100 px-4 py-2 sticky inset-0 z-[100] h-max lg:px-8 lg:py-4" id="navbar">
       <div className="flex items-center justify-between text-blue-gray-900">
         <div className="flex items-center basis-1/4">
-          <Typography
-            as="a"
-            href="#"
-            variant="h6"
-            className="mr-4 cursor-pointer flex items-center py-1.5 lg:ml-2"
-          >
-            <div className="bg-blue-500 rounded-full text-white shadow-md p-1 mr-1 animate-[spin_1s_linear_1]">
-              <CpuChipIcon className="h-6 w-6" />
-            </div>
-            <span className="w-max">
-              EDM PC
-            </span>
-          </Typography>
+          <Link href={route('products.index')}>
+            <Typography
+              variant="h6"
+              className="mr-4 cursor-pointer flex items-center py-1.5 lg:ml-2"
+            >
+              <div className="bg-blue-500 rounded-full text-white shadow-md p-1 mr-1 animate-[spin_1s_linear_1]">
+                <CpuChipIcon className="h-6 w-6" />
+              </div>
+              <span className="w-max">
+                EDM PC
+              </span>
+            </Typography>
+          </Link>
           <Input label="Search" icon={<MagnifyingGlassIcon />} containerProps={{ className: 'hidden my-3 lg:my-0 lg:mx-0 lg:inline-block min-w-[100px] max-w-[100px] transition-all duration-300 focus-within:max-w-xs' }} className="" />
         </div>
         <div className="hidden lg:flex justify-center basis-2/4">
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex justify-end basis-1/4">
-          <Button variant="text" size="sm" color="blue-gray">
-            Sign In
-          </Button>
-          <Button variant="gradient" size="sm">
-            Sign Up
-          </Button>
+          <Link href={route('login')} preserveScroll={true}>
+            <Button variant="text" size="sm" color="blue-gray">
+              Sign In
+            </Button>
+          </Link>
+          <Link href={route('register')} preserveScroll={true}>
+            <Button variant="gradient" size="sm">
+              Sign Up
+            </Button>
+          </Link>
         </div>
         <IconButton
           variant="text"
@@ -288,12 +294,16 @@ const TopNav = () => {
       <Collapse open={openNav}>
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
-            Sign In
-          </Button>
-          <Button variant="gradient" size="sm" fullWidth>
-            Sign Up
-          </Button>
+          <Link href={route('login')}>
+            <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
+              Sign In
+            </Button>
+          </Link>
+          <Link href={route('register')}>
+            <Button variant="gradient" size="sm" fullWidth>
+              Sign Up
+            </Button>
+          </Link>
         </div>
       </Collapse>
     </Navbar>
