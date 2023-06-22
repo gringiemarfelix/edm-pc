@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('products.')->controller(ProductController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::post('/products/{id}', 'show')->name('show');
+    Route::get('/products/{id}', 'show')->name('show');
 });
 
 Route::middleware('auth')->group(function () {
