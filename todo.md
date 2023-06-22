@@ -3,6 +3,7 @@ Front
 - [x] Login
 - [x] Register
 - [] Cart
+- [] Wishlist
 - [] Account/Profile
     - [] Account
     - [] Address
