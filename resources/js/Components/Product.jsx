@@ -22,7 +22,7 @@ const Product = ({ product }) => {
   return (
     <Card className="transition-shadow duration-300 hover:shadow-lg">
       <Link href="#product">
-        <CardHeader shadow={false} floated={false} className="h-48">
+        <CardHeader shadow={false} floated={false} className="mt-2 mx-2 lg:mt-4 lg:mx-4 h-48">
           <img 
             src={product.image?.file ?? "https://placehold.co/600x400"}
             alt={product.name}
@@ -30,7 +30,7 @@ const Product = ({ product }) => {
           />
         </CardHeader>
       </Link>
-      <CardBody>
+      <CardBody className="p-3 lg:p-6">
         <Link href="#test">
           <Typography variant="small" color="blue-gray" className="text-gray-700">
             {product.brand.name}
@@ -61,7 +61,7 @@ const Product = ({ product }) => {
           </Typography>
         </Link>
       </CardBody>
-      <CardFooter className="flex space-x-1 pt-0">
+      <CardFooter className="p-3 flex space-x-1 pt-0 lg:p-6">
         <Link href="#add" className="grow">
           <Button
             ripple={false}
