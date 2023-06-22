@@ -37,6 +37,7 @@ const RegisterForm = () => {
           <Input
             size="lg"
             label="Name"
+            type="text"
             value={data.name}
             onChange={(e) => setData("name", e.target.value)}
             success={errors.length && !errors.name}
@@ -53,6 +54,7 @@ const RegisterForm = () => {
           <Input
             size="lg"
             label="Email"
+            type="email"
             value={data.email}
             onChange={(e) => setData("email", e.target.value)}
             success={errors.length && !errors.email}

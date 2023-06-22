@@ -33,6 +33,7 @@ const LoginForm = ({ status, canResetPassword }) => {
           <Input
             size="lg"
             label="Email"
+            type="email"
             value={data.email}
             onChange={(e) => setData("email", e.target.value)}
             success={errors.length && !errors.email}
