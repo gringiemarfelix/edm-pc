@@ -18,6 +18,12 @@ Back
 - [] Orders
 - [] Refunds
 
+Feature
+- [] Socialite (Facebook, Twitter, Google)
+- [] PayMongo
+- [] Lalamove
+- [] Geocoder (For verifying address)
+
 https://www.npmjs.com/package/react-google-places-autocomplete
 https://github.com/alexpechkarev/google-maps
 https://github.com/foodkit/lalamove-php-api
