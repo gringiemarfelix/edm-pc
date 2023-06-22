@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import {
   Navbar,
   Collapse,
@@ -13,6 +13,8 @@ import {
   MenuList,
   MenuItem,
   Chip,
+  Input,
+  Badge
 } from "@material-tailwind/react";
 import {
   ChevronDownIcon,
@@ -21,7 +23,9 @@ import {
   XMarkIcon,
   CubeIcon,
   CpuChipIcon,
-  MagnifyingGlassIcon
+  MagnifyingGlassIcon,
+  ShoppingCartIcon,
+  HeartIcon
 } from "@heroicons/react/24/outline";
 import { AiOutlineLaptop, AiOutlineDesktop } from "react-icons/ai"
 import CpuIcon from "../Icons/CpuIcon";
@@ -32,7 +36,7 @@ import HardDriveIcon from "../Icons/HardDriveIcon";
 import DisplayIcon from "../Icons/DisplayIcon";
 import CaseIcon from "../Icons/CaseIcon";
 import FanIcon from "../Icons/FanIcon";
-import { Input } from "@material-tailwind/react";
+import ProfileMenu from "./ProfileMenu";
  
 const colors = {
   blue: "bg-blue-50 text-blue-500 fill-blue-500 stroke-blue-500",
@@ -235,6 +239,7 @@ function NavList() {
 }
  
 const TopNav = () => {
+  const { auth } = usePage().props
   const [openNav, setOpenNav] = React.useState(false);
  
   React.useEffect(() => {
@@ -266,18 +271,35 @@ const TopNav = () => {
         <div className="hidden lg:flex justify-center basis-2/4">
           <NavList />
         </div>
-        <div className="hidden gap-2 lg:flex justify-end basis-1/4">
-          <Link href={route('login')} preserveScroll={true}>
-            <Button variant="text" size="sm" color="blue-gray">
-              Sign In
-            </Button>
-          </Link>
-          <Link href={route('register')} preserveScroll={true}>
-            <Button variant="gradient" size="sm">
-              Sign Up
-            </Button>
-          </Link>
-        </div>
+        {
+          auth.user ?
+          <div className="hidden lg:flex space-x-3 justify-end basis-1/4">
+            <Badge content="5" placement="top-end">
+              <IconButton variant="text">
+                <ShoppingCartIcon className="h-6 w-6" />
+              </IconButton>
+            </Badge>
+            <Badge content="5" placement="top-end" color="deep-orange">
+              <IconButton variant="text" color="red">
+                <HeartIcon className="h-6 w-6" />
+              </IconButton>
+            </Badge>
+            <ProfileMenu />
+          </div>
+          :
+          <div className="hidden gap-2 lg:flex justify-end basis-1/4">
+            <Link href={route('login')} preserveScroll={true}>
+              <Button variant="text" size="sm" color="blue-gray">
+                Sign In
+              </Button>
+            </Link>
+            <Link href={route('register')} preserveScroll={true}>
+              <Button variant="gradient" size="sm">
+                Sign Up
+              </Button>
+            </Link>
+          </div>
+        }
         <IconButton
           variant="text"
           color="blue-gray"
