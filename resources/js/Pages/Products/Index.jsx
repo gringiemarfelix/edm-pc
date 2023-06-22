@@ -1,7 +1,7 @@
 import CustomCarousel from "@/Components/CustomCarousel"
 import Product from "@/Components/Product"
 import Layout from "@/Layouts/Layout"
-import { Head, Link, usePage } from "@inertiajs/react"
+import { Head, usePage } from "@inertiajs/react"
 import { Typography } from "@material-tailwind/react"
 
 const Index = () => {
@@ -38,9 +38,7 @@ const Index = () => {
         </div>
       </div>
       <div className="text-gray-900 flex flex-col items-center py-3">
-        <Link method="post" href={route('logout')}>
-          <Typography variant="h1" className="text-center mb-3">New Products</Typography>
-        </Link>
+        <Typography variant="h1" className="text-center mb-3">New Products</Typography>
         <div className="grid grid-cols-6 gap-3 w-3/4">
           <Product />
         </div>
