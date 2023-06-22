@@ -5,7 +5,7 @@ import { Head, usePage } from "@inertiajs/react"
 import { Typography } from "@material-tailwind/react"
 
 const Index = () => {
-  const { payments } = usePage().props
+  const { payments, products } = usePage().props
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
 
   return (
@@ -40,7 +40,11 @@ const Index = () => {
       <div className="text-gray-900 flex flex-col items-center py-3">
         <Typography variant="h1" className="text-center mb-3">New Products</Typography>
         <div className="grid grid-cols-6 gap-3 w-3/4">
-          <Product />
+          {
+            products.map(product =>
+              <Product product={product} />
+            )
+          }
         </div>
       </div>
       <Typography variant="h1" className="text-center my-3">Top-Rated Products</Typography>

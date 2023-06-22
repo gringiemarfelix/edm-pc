@@ -18,13 +18,14 @@ import {
   HeartIcon
 } from "@heroicons/react/24/solid";
 
-const Product = () => {
+const Product = ({ product }) => {
   return (
     <Card className="transition-shadow duration-300 hover:shadow-lg">
       <Link href="#product">
         <CardHeader shadow={false} floated={false} className="h-48">
           <img 
-            src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" 
+            src={product.image?.file ?? "https://placehold.co/600x400"}
+            alt={product.name}
             className="w-full h-full object-cover object-center"
           />
         </CardHeader>
@@ -32,16 +33,16 @@ const Product = () => {
       <CardBody>
         <Link href="#test">
           <Typography variant="small" color="blue-gray" className="text-gray-700">
-            Apple
+            {product.brand.name}
           </Typography>
         </Link>
         <Link href="#product">
           <div className="flex items-center justify-between">
             <Typography color="blue-gray" className="font-medium truncate">
-              Apple AirPods with long product title and some other things
+              {product.name}
             </Typography>
             <Typography color="blue-gray" className="font-medium">
-              P95.00
+              P{product.price}
             </Typography>
           </div>
           <div className="flex items-center gap-1">

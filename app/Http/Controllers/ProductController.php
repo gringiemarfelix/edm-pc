@@ -22,7 +22,8 @@ class ProductController extends Controller
         ]);
 
         $data = [
-            'payments' => $this->getPaymentMethods()
+            'payments' => $this->getPaymentMethods(),
+            'products' => Product::get()
         ];
 
         return Inertia::render('Products/Index', $data);
