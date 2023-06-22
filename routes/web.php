@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +15,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::name('products.')->controller(ProductsController::class)->group(function () {
+Route::name('products.')->controller(ProductController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/products/{id}', 'show')->name('show');
 });
