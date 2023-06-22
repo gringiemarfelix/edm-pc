@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Product;
+use App\Models\Role;
 use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +17,35 @@ use Tests\TestCase;
 |
 */
 
-uses(TestCase::class, RefreshDatabase::class)->in('Feature');
+uses(TestCase::class, RefreshDatabase::class)->beforeEach(function () {
+    $adminRole = Role::factory()->create([
+        'name' => 'Admin'
+    ]);
+    $customerRole = Role::factory()->create([
+        'name' => 'Customer'
+    ]);
+
+    $this->admin = User::factory()->create([
+        'name' => 'Admin',
+        'email' => 'admin@edmpc.com'
+    ]);
+    
+    $this->user = User::factory()->create([
+        'name' => 'Customer'
+    ]);
+
+    $this->user2 = User::factory()->create([
+        'name' => 'Customer 2'
+    ]);
+
+    $this->user->roles()->attach($customerRole);
+    $this->user2->roles()->attach($customerRole);
+    $this->admin->roles()->attach($adminRole);
+
+    $this->product = Product::factory()->create([
+        'name' => 'Product'
+    ]);
+})->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
