@@ -79,7 +79,7 @@ const navListMenuItems = [
     color: "blue-gray",
     icon: RamIcon,
     title: "RAM",
-    description: "Random Acceess Memory",
+    description: "Random Access Memory",
   },
   {
     color: "purple",
