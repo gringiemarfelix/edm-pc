@@ -38,8 +38,8 @@ const Index = () => {
         </div>
       </div>
       <div className="text-gray-900 flex flex-col items-center py-3">
-        <Typography variant="h1" className="text-center mb-3">New Products</Typography>
-        <div className="grid grid-cols-6 gap-3 w-3/4">
+        <Typography variant="h1" className="text-center mb-3 text-4xl lg:text-5xl">New Products</Typography>
+        <div className="grid grid-cols-2  gap-3 lg:grid-cols-6 lg:w-3/4">
           {
             products.map(product =>
               <Product product={product} />
@@ -47,8 +47,8 @@ const Index = () => {
           }
         </div>
       </div>
-      <Typography variant="h1" className="text-center my-3">Top-Rated Products</Typography>
-      <Typography variant="h1" className="text-center my-3">Top-Selling Products</Typography>
+      <Typography variant="h1" className="text-center my-3 text-4xl lg:text-5xl">Top-Rated Products</Typography>
+      <Typography variant="h1" className="text-center my-3 text-4xl lg:text-5xl">Top-Selling Products</Typography>
     </Layout>
   )
 }
