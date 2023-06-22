@@ -23,6 +23,7 @@ Feature
 - [] PayMongo
 - [] Lalamove
 - [] Geocoder (For verifying address)
+- [] 2FA - Fortify
 
 https://www.npmjs.com/package/react-google-places-autocomplete
 https://github.com/alexpechkarev/google-maps
