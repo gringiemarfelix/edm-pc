@@ -19,7 +19,7 @@ const CartItem = ({ item }) => {
           <Typography variant="paragraph" color="blue-gray" className="font-normal">
             {item.product.name}
           </Typography>
-          <div className="flex items-center mt-6">
+          <div className="flex space-x-3 items-center mt-6">
             <div className="relative w-fit">
               <div className="flex items-center space-x-3 w-fit border p-1 rounded-xl">
                 <Link
@@ -71,19 +71,18 @@ const CartItem = ({ item }) => {
                 </Typography>
               }
             </div>
-            <div className="ml-3 pl-3 border-l">
-              <Link
-                as="a" 
-                method="delete" 
-                href={route('cart.destroy', {
-                  cart: item.id
-                })}
-              >
-                <IconButton size="sm" variant="gradient" className="h-6 w-6" color="red">
-                  <TrashIcon className="h-4 w-4" />
-                </IconButton>
-              </Link>
-            </div>
+            <div className="w-px min-h-[1em] self-stretch bg-gray-200"></div>
+            <Link
+              as="a" 
+              method="delete" 
+              href={route('cart.destroy', {
+                cart: item.id
+              })}
+            >
+              <IconButton size="sm" variant="gradient" className="h-6 w-6" color="red">
+                <TrashIcon className="h-4 w-4" />
+              </IconButton>
+            </Link>
           </div>
         </div>
       </div>

@@ -110,19 +110,18 @@ const CartItems = ({ items }) => {
                           </Typography>
                         }
                       </div>
-                      <div className="ml-3 pl-3 border-l">
-                        <Link
-                          as="a" 
-                          method="delete" 
-                          href={route('cart.destroy', {
-                            cart: id
-                          })}
-                        >
-                          <IconButton size="sm" variant="gradient" className="h-6 w-6" color="red">
-                            <TrashIcon className="h-4 w-4" />
-                          </IconButton>
-                        </Link>
-                      </div>
+                      <div className="w-px min-h-[1em] self-stretch bg-gray-200"></div>
+                      <Link
+                        as="a" 
+                        method="delete" 
+                        href={route('cart.destroy', {
+                          cart: id
+                        })}
+                      >
+                        <IconButton size="sm" variant="gradient" className="h-6 w-6" color="red">
+                          <TrashIcon className="h-4 w-4" />
+                        </IconButton>
+                      </Link>
                     </div>
                   </td>
                 </tr>
