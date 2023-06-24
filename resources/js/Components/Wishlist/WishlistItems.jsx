@@ -92,7 +92,7 @@ const WishlistItems = ({ items }) => {
       <div className="flex flex-col space-y-6 lg:hidden">
         {
           items.map(item =>
-            <WishlistItem item={item} />
+            <WishlistItem key={item.id} item={item} />
           )
         }
       </div>
