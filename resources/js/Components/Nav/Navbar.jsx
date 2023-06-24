@@ -281,8 +281,8 @@ const TopNav = () => {
                 </IconButton>
               </Badge>
             </Link>
-            <Link href="#">
-              <Badge content="5" placement="top-end" color="deep-orange" className={`w-6 h-6 ${auth.user.wishlist === 0 && 'hidden'}`}>
+            <Link href={route('wishlist.index')}>
+              <Badge content={auth.user.wishlist} placement="top-end" color="deep-orange" className={`w-6 h-6 ${auth.user.wishlist === 0 && 'hidden'}`}>
                 <IconButton variant="text" color="red">
                   <HeartIcon className="h-6 w-6" />
                 </IconButton>
