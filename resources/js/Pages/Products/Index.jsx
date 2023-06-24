@@ -42,7 +42,7 @@ const Index = () => {
         <div className="grid grid-cols-2  gap-3 lg:grid-cols-6 lg:w-3/4">
           {
             products.map(product =>
-              <Product product={product} />
+              <Product key={product.id} product={product} />
             )
           }
         </div>
