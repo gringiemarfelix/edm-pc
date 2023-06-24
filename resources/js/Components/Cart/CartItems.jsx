@@ -133,7 +133,7 @@ const CartItems = ({ items }) => {
       <div className="flex flex-col space-y-6 lg:hidden">
         {
           items.map(item =>
-            <CartItem item={item} />
+            <CartItem key={item.id} item={item} />
           )
         }
       </div>
