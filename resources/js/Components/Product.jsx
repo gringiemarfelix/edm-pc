@@ -8,7 +8,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import {
   StarIcon as OutlineStarIcon,
   HeartIcon as OutlineHeartIcon
@@ -20,6 +20,8 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Product = ({ product }) => {
+  const { auth } = usePage().props
+
   return (
     <Card className="transition-shadow duration-300 hover:shadow-lg">
       <Link href="#product">
@@ -94,7 +96,7 @@ const Product = ({ product }) => {
               theme: "colored",
             })
           }}
-          preserveScroll
+          preserveScroll={auth.user}
         >
           <Button
             ripple={false}
@@ -140,7 +142,7 @@ const Product = ({ product }) => {
               theme: "colored",
             })
           }}
-          preserveScroll
+          preserveScroll={auth.user}
         >
           <IconButton variant="gradient" color="red" className="group transition-transform duration-300 active:scale-125">
             <OutlineHeartIcon 
