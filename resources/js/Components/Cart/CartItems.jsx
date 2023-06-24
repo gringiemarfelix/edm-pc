@@ -58,7 +58,7 @@ const CartItems = ({ items }) => {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    <div className="float-right flex items-center">
+                    <div className="float-right flex space-x-3 items-center">
                       <div className="relative">
                         <div className="flex items-center space-x-3 w-fit border p-1 rounded-xl">
                           <Link
