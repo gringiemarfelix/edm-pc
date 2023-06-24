@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::name('products.')->controller(ProductController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/products/{id}', 'show')->name('show');
+});
+
+Route::name('cart.')->prefix('cart')->controller(CartController::class)->group(function () {
+    Route::get('', 'index')->name('index');
+    Route::post('', 'store')->name('store');
+    Route::put('{cart}', 'update')->name('update');
+    Route::delete('{cart}', 'destroy')->name('destroy');
 });
 
 Route::middleware('auth')->group(function () {
