@@ -15,15 +15,30 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $user = auth()->user();
+        $wishlist = [];
+
         $request->validate([
             'search' => 'string|nullable',
             'page' => 'integer',
             'per_page' => 'integer'
         ]);
 
+        if($user){
+            $wishlist = $user->wishlist()->get()->pluck('product_id')->toArray();
+        }
+
+        $products = Product::get();
+
+        $products->transform(function ($product) use ($wishlist) {
+            $product->wishlisted = in_array($product->id, $wishlist);
+
+            return $product;
+        });
+
         $data = [
             'payments' => $this->getPaymentMethods(),
-            'products' => Product::get()
+            'products' => $products
         ];
 
         return Inertia::render('Products/Index', $data);
