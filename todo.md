@@ -2,7 +2,7 @@ Front
 - [x] Home
 - [x] Login
 - [x] Register
-- [] Cart
+- [x] Cart
 - [] Wishlist
 - [] Account/Profile
     - [] Account
