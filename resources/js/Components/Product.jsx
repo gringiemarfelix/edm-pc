@@ -77,7 +77,7 @@ const Product = ({ product }) => {
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
-              draggable: true,
+              draggable: false,
               progress: undefined,
               theme: "colored",
             })
@@ -89,7 +89,7 @@ const Product = ({ product }) => {
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
-              draggable: true,
+              draggable: false,
               progress: undefined,
               theme: "colored",
             })
@@ -105,9 +105,49 @@ const Product = ({ product }) => {
             Add to Cart
           </Button>
         </Link>
-        <Link href="#wish">
+        <Link 
+          as="div"
+          method={!product.wishlisted ? 'post' : 'delete'}
+          href={route('wishlist.store', {
+            product: product.id
+          })} 
+          onSuccess={(page) => {
+            const message = !product.wishlisted ? 
+              `Added ${product.name} to wishlist`
+              :
+              `Removed ${product.name} from wishlist`
+
+            toast.success(message, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+            })
+          }}
+          onError={errors => {
+            toast.error(errors.product_id, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+            })
+          }}
+          preserveScroll
+        >
           <IconButton variant="gradient" color="red" className="group transition-transform duration-300 active:scale-125">
-            <OutlineHeartIcon className="w-6 h-6 transition-all duration-300 fill-transparent group-hover:fill-white" />
+            <OutlineHeartIcon 
+              className={`w-6 h-6 transition-all duration-300 fill-transparent 
+                ${!product.wishlisted ? 'group-hover:fill-white' : 'fill-white group-hover:fill-transparent'}
+              `}
+            />
           </IconButton>
         </Link>
       </CardFooter>
