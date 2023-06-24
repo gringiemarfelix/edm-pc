@@ -66,10 +66,9 @@ const Product = ({ product }) => {
         <Link 
           as="div"
           method="post"
-          href={route('cart.store')} 
-          data={{
-            product_id: product.id
-          }}
+          href={route('cart.store', {
+            product: product.id
+          })} 
           className="grow"
           onSuccess={(page) => {
             toast.success(`Added ${product.name} to cart`, {

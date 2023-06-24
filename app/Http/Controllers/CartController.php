@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Product;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -31,26 +32,24 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCartRequest $request)
+    public function store(Product $product)
     {
-        $validator = $request->getValidatorInstance();
+        $validator = Validator::make([], []);
 
         $user = auth()->user();
         $message = "Added to cart successfully";
         $error = false;
-
-        $product = Product::findOrFail($request->product_id);
 
         if($product->stock == 0){
             $error = "{$product->name} is out of stock.";
             $validator->getMessageBag()->add('product_id', $error);
         }
 
-        $cart = $user->cart()->where('product_id', $request->product_id)->first();
+        $cart = $user->cart()->where('product_id', $product->id)->first();
 
         if(!$cart){
             $cart = $user->cart()->create([
-                'product_id' => $request->product_id
+                'product_id' => $product->id
             ]);
         }else{
             if($cart->quantity < $product->stock){

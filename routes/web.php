@@ -23,7 +23,7 @@ Route::name('products.')->controller(ProductController::class)->group(function (
 
 Route::name('cart.')->prefix('cart')->controller(CartController::class)->group(function () {
     Route::get('', 'index')->name('index');
-    Route::post('', 'store')->name('store');
+    Route::post('{product}', 'store')->name('store');
     Route::put('{cart}', 'update')->name('update');
     Route::delete('{cart}', 'destroy')->name('destroy');
 });
