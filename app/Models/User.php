@@ -46,7 +46,8 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'cart'
+        'cart',
+        'wishlist'
     ];
 
     // Relationships
@@ -61,10 +62,20 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class, 'user_id');
     }
 
+    public function wishlist(): HasMany
+    {
+        return $this->hasMany(Wishlist::class, 'user_id');
+    }
+
     // Attributes
 
     public function getCartAttribute(): int
     {
         return $this->cart()->sum('quantity');
+    }
+
+    public function getWishlistAttribute(): int
+    {
+        return $this->wishlist()->count();
     }
 }
