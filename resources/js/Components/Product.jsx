@@ -15,8 +15,9 @@ import {
 } from "@heroicons/react/24/outline";
 import {
   StarIcon,
-  HeartIcon
 } from "@heroicons/react/24/solid";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Product = ({ product }) => {
   return (
@@ -62,7 +63,40 @@ const Product = ({ product }) => {
         </Link>
       </CardBody>
       <CardFooter className="p-3 flex space-x-1 pt-0 lg:p-6">
-        <Link href="#add" className="grow">
+        <Link 
+          as="div"
+          method="post"
+          href={route('cart.store')} 
+          data={{
+            product_id: product.id
+          }}
+          className="grow"
+          onSuccess={(page) => {
+            toast.success(`Added ${product.name} to cart`, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            })
+          }}
+          onError={errors => {
+            toast.error(errors.product_id, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            })
+          }}
+          preserveScroll
+        >
           <Button
             ripple={false}
             fullWidth={false}
