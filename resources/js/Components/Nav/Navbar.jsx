@@ -274,16 +274,20 @@ const TopNav = () => {
         {
           auth.user ?
           <div className="hidden lg:flex space-x-3 justify-end basis-1/4">
-            <Badge content="5" placement="top-end">
-              <IconButton variant="text">
-                <ShoppingCartIcon className="h-6 w-6" />
-              </IconButton>
-            </Badge>
-            <Badge content="5" placement="top-end" color="deep-orange">
-              <IconButton variant="text" color="red">
-                <HeartIcon className="h-6 w-6" />
-              </IconButton>
-            </Badge>
+            <Link href={route('cart.index')}>
+              <Badge content={auth.user.cart} placement="top-end" className="w-6 h-6">
+                <IconButton variant="text">
+                  <ShoppingCartIcon className="h-6 w-6" />
+                </IconButton>
+              </Badge>
+            </Link>
+            <Link href="#">
+              <Badge content="5" placement="top-end" color="deep-orange" className="w-6 h-6">
+                <IconButton variant="text" color="red">
+                  <HeartIcon className="h-6 w-6" />
+                </IconButton>
+              </Badge>
+            </Link>
             <ProfileMenu />
           </div>
           :
