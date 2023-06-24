@@ -6,6 +6,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Policies\CartPolicy;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Wishlist;
+use App\Policies\WishlistPolicy;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,7 +19,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        Cart::class => CartPolicy::class
+        Cart::class => CartPolicy::class,
+        Wishlist::class => WishlistPolicy::class
     ];
 
     /**

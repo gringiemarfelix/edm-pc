@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,13 @@ Route::name('cart.')->prefix('cart')->controller(CartController::class)->group(f
     Route::post('{product}', 'store')->name('store');
     Route::put('{cart}', 'update')->name('update');
     Route::delete('{cart}', 'destroy')->name('destroy');
+});
+
+Route::name('wishlist.')->prefix('wishlist')->controller(WishlistController::class)->group(function () {
+    Route::get('', 'index')->name('index');
+    Route::post('', 'storeAll')->name('storeAll');
+    Route::post('{product}', 'store')->name('store');
+    Route::delete('{product}', 'destroy')->name('destroy');
 });
 
 Route::middleware('auth')->group(function () {
