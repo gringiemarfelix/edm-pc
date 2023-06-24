@@ -36,10 +36,10 @@ Route::name('wishlist.')->prefix('wishlist')->middleware('auth')->controller(Wis
     Route::delete('{product}', 'destroy')->name('destroy');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::name('profile.')->prefix('profile')->middleware('auth')->group(function () {
+    Route::get('', [ProfileController::class, 'edit'])->name('edit');
+    Route::patch('', [ProfileController::class, 'update'])->name('update');
+    Route::delete('', [ProfileController::class, 'destroy'])->name('destroy');
 });
 
 require __DIR__.'/auth.php';
