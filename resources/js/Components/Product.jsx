@@ -107,7 +107,7 @@ const Product = ({ product }) => {
           </Button>
         </Link>
         <Link href="#wish">
-          <IconButton variant="gradient" className="group transition-transform duration-300 active:scale-125">
+          <IconButton variant="gradient" color="red" className="group transition-transform duration-300 active:scale-125">
             <OutlineHeartIcon className="w-6 h-6 transition-all duration-300 fill-transparent group-hover:fill-white" />
           </IconButton>
         </Link>
