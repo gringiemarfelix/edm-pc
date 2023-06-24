@@ -1,5 +1,7 @@
 import Footer from "@/Components/Footer"
 import TopNav from "@/Components/Nav/Navbar"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = ({ children }) => {
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
@@ -16,6 +18,18 @@ const Layout = ({ children }) => {
         { children }
       </div>
       <Footer />
+      <ToastContainer 
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        theme="colored"
+        pauseOnFocusLoss
+        pauseOnHover
+        closeOnClick
+        draggable
+      />
     </div>
   )
 }
