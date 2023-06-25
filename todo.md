@@ -1,6 +1,7 @@
 Front
 - [x] Home
 - [x] Login
+    - [] Social Logins
 - [x] Register
 - [x] Cart
 - [] Wishlist
@@ -9,6 +10,7 @@ Front
     - [] Address
     - [] Orders
 - [] Product
+    - [] Share to Social
 - [] Search
 
 Back
