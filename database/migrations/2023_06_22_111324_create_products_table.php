@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('brand_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->double('price', 11, 2);
             $table->integer('stock');
