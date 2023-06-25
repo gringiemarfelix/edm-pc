@@ -65,11 +65,25 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $data = [
-            'product' => $product
-        ];
+        $user = auth()->user();
+        $wishlist = [];
 
-        return Inertia::render('Products/Show', $data);
+        if($user){
+            $wishlist = $user->wishlist()->get()->pluck('product_id')->toArray();
+        }
+
+        $product->wishlisted = in_array($product->id, $wishlist);
+
+        $product->load([
+            'category',
+            'brand',
+            'images'
+        ]);
+
+        return Inertia::render('Products/Show', [
+            'product' => $product,
+            'similar' => Product::get()
+        ]);
     }
 
     /**

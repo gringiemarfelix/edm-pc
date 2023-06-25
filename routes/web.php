@@ -19,7 +19,7 @@ use App\Http\Controllers\WishlistController;
 
 Route::name('products.')->controller(ProductController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/products/{id}', 'show')->name('show');
+    Route::get('/products/{product}', 'show')->name('show');
 });
 
 Route::name('cart.')->prefix('cart')->middleware('auth')->controller(CartController::class)->group(function () {
