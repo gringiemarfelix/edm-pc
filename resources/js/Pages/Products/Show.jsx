@@ -111,7 +111,7 @@ const Show = () => {
                 </Typography>
                 <hr className="my-3" />  
                 <Typography variant="h3" color="blue">
-                  P{product.price}
+                  P{product.price.toLocaleString('en-US')}
                 </Typography>
                 <div className="flex gap-3 my-3">
                   <Link 

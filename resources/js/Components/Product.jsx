@@ -40,12 +40,12 @@ const Product = ({ product }) => {
           </Typography>
         </Link>
         <Link href={route('products.show', { product: product.id })}>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col">
             <Typography color="blue-gray" className="font-medium truncate">
               {product.name}
             </Typography>
-            <Typography color="blue-gray" className="font-medium">
-              P{product.price}
+            <Typography variant="small" color="blue" className="font-medium">
+              P{product.price.toLocaleString('en-US')}
             </Typography>
           </div>
           <div className="flex items-center gap-1">
