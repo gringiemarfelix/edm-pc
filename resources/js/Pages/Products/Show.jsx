@@ -46,13 +46,12 @@ const Show = () => {
       >
         <div className="flex flex-col space-y-3 w-full lg:w-3/4">
           <Card>
-            <CardBody className="p-3">
+            <CardBody className="p-3 overflow-x-scroll lg:overflow-auto">
               <Breadcrumbs 
                 className="bg-transparent" 
                 separator={
                   <ChevronRightIcon className="w-4 h-4 text-blue-gray-500" strokeWidth={2.5} />
                 } 
-                fullWidth
               >
                 <Link 
                   href={route('products.show', {
@@ -273,7 +272,7 @@ const Show = () => {
             </CardBody>
           </Card>
           <Card>
-            <CardBody>
+            <CardBody className="p-3 lg:p-6">
               <Typography variant="h5" color="blue-gray">Similar Items</Typography>
               <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
                 {
