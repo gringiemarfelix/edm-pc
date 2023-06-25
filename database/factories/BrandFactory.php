@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,11 @@ class BrandFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->words(2, true);
+
         return [
-            'name' => fake()->words(2, true),
+            'name' => $name,
+            'slug' => Str::slug($name),
             'logo' => fake()->file(public_path('storage'), public_path('storage\test'))
         ];
     }
