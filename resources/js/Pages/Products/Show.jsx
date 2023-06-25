@@ -20,6 +20,21 @@ const Show = () => {
   const images = product.images.map(image => image.file)
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
 
+  const [isMobile, setIsMobile] = useState(false)
+
+  const handleResize = () => {
+    if (window.innerWidth < 720) {
+        setIsMobile(true)
+    } else {
+        setIsMobile(false)
+    }
+  }
+  
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+  })
+
   return (
     <Layout>
       <Head title={product.name} />
@@ -226,9 +241,9 @@ const Show = () => {
             </CardBody>
             <hr className="mx-6" />
             <CardBody>
-              <Tabs value="overview" orientation="vertical">
+              <Tabs value="overview" orientation={!isMobile ? 'vertical' : 'horizontal'} className="flex-col lg:flex-row">
                 <TabsHeader 
-                  className="w-40 shadow-inner sticky top-0" 
+                  className="flex-row lg:flex-col lg:w-40 shadow-inner sticky top-0" 
                   indicatorProps={{
                     className: 'bg-gradient-to-tr from-blue-600 to-blue-400'
                   }}
@@ -237,13 +252,13 @@ const Show = () => {
                     Overview
                   </Tab>
                   <Tab value="description" className="transition-all duration-500" activeClassName="font-medium text-gray-50">
-                    Description
+                    Specifications
                   </Tab>
                   <Tab value="reviews" className="transition-all duration-500" activeClassName="font-medium text-gray-50">
                     Reviews
                   </Tab>
                 </TabsHeader>
-                <TabsBody className="bg-blue-gray-50 shadow-inner rounded-lg ml-3">
+                <TabsBody className="bg-blue-gray-50 shadow-inner rounded-lg my-3 lg:ml-3 lg:my-0">
                   <TabPanel value="overview" className="py-2 text-blue-gray-900">
                     Overview
                   </TabPanel>
