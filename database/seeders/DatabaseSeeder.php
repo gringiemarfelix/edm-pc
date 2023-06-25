@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
+use App\Models\ProductImage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +21,15 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        $products = [];
+
         for ($i = 0; $i < 4; $i++) { 
-            Product::factory()->create();
+            $products[] = Product::factory()
+                                ->has(ProductImage::factory(6, [
+                                        'file' => ""
+                                    ])
+                                , 'images')
+                                ->create();
         }
     }
 }
