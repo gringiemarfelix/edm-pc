@@ -144,7 +144,7 @@ const Product = ({ product }) => {
           }}
           preserveScroll={auth.user}
         >
-          <IconButton variant="gradient" color="red" className="group transition-transform duration-300 active:scale-125">
+          <IconButton variant="gradient" color="red" className="group transition-transform duration-50 hover:shadow hover:scale-110 focus:shadow focus:scale-110 active:scale-125">
             <OutlineHeartIcon 
               className={`w-6 h-6 transition-all duration-300 fill-transparent 
                 ${!product.wishlisted ? 'group-hover:fill-white' : 'fill-white group-hover:fill-transparent'}
