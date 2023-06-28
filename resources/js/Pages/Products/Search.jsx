@@ -199,6 +199,12 @@ const Search = () => {
                   <Product key={product.id} product={product} />
                 )
               }
+              {
+                products.data.length == 0 &&
+                <div className="col-span-12 flex items-center justify-center">
+                  <Typography variant="paragraph" color="gray">No results found.</Typography>
+                </div>
+              }
             </CardBody>
             <CardFooter className="flex justify-center">
               <Pagination products={products} />
