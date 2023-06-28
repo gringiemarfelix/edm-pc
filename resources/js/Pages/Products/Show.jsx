@@ -274,7 +274,7 @@ const Show = () => {
           <Card>
             <CardBody className="p-3 lg:p-6">
               <Typography variant="h5" color="blue-gray">Similar Items</Typography>
-              <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
+              <div className="grid grid-cols-2 gap-1 lg:gap-3 lg:grid-cols-6">
                 {
                   similar.map(product =>
                     <Product key={product.id} product={product} />

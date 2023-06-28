@@ -19,6 +19,7 @@ use App\Http\Controllers\WishlistController;
 
 Route::name('products.')->controller(ProductController::class)->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/products/search', 'search')->name('search');
     Route::get('/products/{product}', 'show')->name('show');
 });
 

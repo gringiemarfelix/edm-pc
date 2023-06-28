@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
@@ -42,6 +44,57 @@ class ProductController extends Controller
         ];
 
         return Inertia::render('Products/Index', $data);
+    }
+
+    public function search(Request $request)
+    {   
+        $request->validate([
+            'search' => 'string|nullable',
+            'page' => 'integer|nullable',
+            'per_page' => 'integer|nullable',
+        ]);
+
+        $page = $request->input('page', 1);
+        $per_page = $request->input('per_page', 20);
+
+        $categories = Category::where('name', 'LIKE', "%{$request->search}%")->get();
+        $brands = Brand::where('name', 'LIKE', "%{$request->search}%")->get();
+
+        $products = Product::where('name', 'LIKE', "%{$request->search}%");
+
+        if($request->filled('price')){
+            $products->where('price', '<=', $request->price);
+        }
+
+        if($request->filled('categories')){
+            $products->whereIn('category_id', $request->categories);
+        }
+        
+        if($request->filled('brands')){
+            $products->whereIn('brand_id', $request->brands);
+        }
+
+        if($request->filled('sort')){
+            if($request->sort == 'high'){
+                $products->orderBy('price', 'desc');
+            }else if($request->sort == 'low'){
+                $products->orderBy('price', 'asc');
+            }else{
+                $products->orderBy('name', 'asc');
+            }
+        }
+
+        $products = $products->paginate($per_page)->withQueryString();
+
+        return Inertia::render('Products/Search', [
+            'query' => $request->query(),
+            'page' => $page,
+            'categories' => $categories,
+            'brands' => $brands,
+            'products' => $products,
+            'price_min' => ceil(Product::where('name', 'LIKE', "%{$request->search}%")->min('price') / 100) * 100,
+            'price_max' => ceil(Product::where('name', 'LIKE', "%{$request->search}%")->max('price') / 100) * 100,
+        ]);
     }
 
     /**

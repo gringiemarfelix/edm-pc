@@ -37,6 +37,7 @@ import DisplayIcon from "../Icons/DisplayIcon";
 import CaseIcon from "../Icons/CaseIcon";
 import FanIcon from "../Icons/FanIcon";
 import ProfileMenu from "./ProfileMenu";
+import SearchForm from "../SearchForm";
  
 const colors = {
   blue: "bg-blue-50 text-blue-500 fill-blue-500 stroke-blue-500",
@@ -189,7 +190,7 @@ function NavListMenu() {
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:items-center lg:p-1">
-      <Input label="Search" icon={<MagnifyingGlassIcon />} containerProps={{ className: 'block my-3 lg:my-0 lg:mx-3 lg:hidden' }} />
+      <SearchForm containerProps={{ className: 'block my-3 lg:my-0 lg:mx-3 lg:hidden' }} />
       <Link href={route('products.index')}>
         <Typography
           as="div"
@@ -266,7 +267,7 @@ const TopNav = () => {
               </span>
             </Typography>
           </Link>
-          <Input label="Search" icon={<MagnifyingGlassIcon />} containerProps={{ className: 'hidden my-3 lg:my-0 lg:mx-0 lg:inline-block min-w-[100px] max-w-[100px] transition-all duration-300 focus-within:max-w-xs' }} className="" />
+          <SearchForm containerProps={{ className: 'hidden my-3 lg:my-0 lg:mx-0 lg:inline-block min-w-[100px] max-w-[100px] transition-all duration-300 focus-within:max-w-xs' }} />
         </div>
         <div className="hidden lg:flex justify-center basis-2/4">
           <NavList />
