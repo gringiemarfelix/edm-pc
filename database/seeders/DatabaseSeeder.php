@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $products = [];
 
-        for ($i = 0; $i < 4; $i++) { 
+        for ($i = 1; $i <= 5; $i++) { 
             $products[] = Product::factory()
                                 ->has(ProductImage::factory(6, [
                                         'file' => ""
