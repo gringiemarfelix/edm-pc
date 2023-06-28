@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Brand;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -35,9 +38,31 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'search' => 'string|nullable',
+            'page' => 'integer|nullable',
+            'per_page' => 'integer|nullable',
+        ]);
+
+        $page = $request->input('page', 1);
+        $per_page = $request->input('per_page', 20);
+
+        $products = $category->products()->paginate($per_page);
+
+        $brands = $category->products->pluck('category_id')->toArray();
+        $brands = Brand::whereIn('id', $brands)->get();
+
+        return Inertia::render('Products/Search', [
+            'query' => $request->query(),
+            'page' => $page,
+            'categories' => [],
+            'brands' => $brands,
+            'products' => $products,
+            'price_min' => ceil($category->products()->min('price') / 100) * 100,
+            'price_max' => ceil($category->products()->max('price') / 100) * 100,
+        ]);
     }
 
     /**

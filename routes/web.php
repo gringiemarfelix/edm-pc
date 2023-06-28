@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
@@ -26,6 +27,10 @@ Route::name('products.')->controller(ProductController::class)->group(function (
 
 Route::name('brands.')->controller(BrandController::class)->group(function () {
     Route::get('/brands/{brand:slug}', 'show')->name('show');
+});
+
+Route::name('categories.')->controller(CategoryController::class)->group(function () {
+    Route::get('/categories/{category:slug}', 'show')->name('show');
 });
 
 Route::name('cart.')->prefix('cart')->middleware('auth')->controller(CartController::class)->group(function () {

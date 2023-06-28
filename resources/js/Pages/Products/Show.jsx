@@ -54,16 +54,14 @@ const Show = () => {
                 } 
               >
                 <Link 
-                  href={route('products.show', {
-                    product: product.id
-                  })}
+                  href={route('products.search')}
                   className="opacity-60"
                 >
                   Products
                 </Link>
                 <Link 
-                  href={route('products.show', {
-                    product: product.id
+                  href={route('categories.show', {
+                    category: product.category.slug
                   })}
                   className="opacity-60"
                 >
