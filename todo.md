@@ -4,13 +4,14 @@ Front
     - [] Social Logins
 - [x] Register
 - [x] Cart
-- [] Wishlist
+- [x] Wishlist
 - [] Account/Profile
     - [] Account
     - [] Address
     - [] Orders
-- [] Product
-    - [] Share to Social
+- [x] Product
+    - [x] Share to Social
+    - [] Reviews 
 - [] Search
 
 Back
