@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Brand;
+use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 
@@ -35,9 +38,31 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Brand $brand)
+    public function show(Request $request, Brand $brand)
     {
-        //
+        $request->validate([
+            'search' => 'string|nullable',
+            'page' => 'integer|nullable',
+            'per_page' => 'integer|nullable',
+        ]);
+
+        $page = $request->input('page', 1);
+        $per_page = $request->input('per_page', 20);
+
+        $products = $brand->products()->paginate($per_page);
+
+        $categories = $brand->products->pluck('category_id')->toArray();
+        $categories = Category::whereIn('id', $categories)->get();
+
+        return Inertia::render('Products/Search', [
+            'query' => $request->query(),
+            'page' => $page,
+            'categories' => $categories,
+            'brands' => [],
+            'products' => $products,
+            'price_min' => ceil($brand->products()->min('price') / 100) * 100,
+            'price_max' => ceil($brand->products()->max('price') / 100) * 100,
+        ]);
     }
 
     /**

@@ -34,7 +34,7 @@ const Product = ({ product }) => {
         </CardHeader>
       </Link>
       <CardBody className="p-3 lg:p-6">
-        <Link href="#test">
+        <Link href={route('brands.show', { brand: product.brand.slug })}>
           <Typography variant="small" color="blue-gray" className="text-gray-700">
             {product.brand.name}
           </Typography>

@@ -47,7 +47,7 @@ class ProductController extends Controller
     }
 
     public function search(Request $request)
-    {   
+    {
         $request->validate([
             'search' => 'string|nullable',
             'page' => 'integer|nullable',

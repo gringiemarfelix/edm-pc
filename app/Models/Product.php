@@ -13,7 +13,7 @@ class Product extends Model
     use HasFactory;
 
     protected $with = [
-        'brand:id,name',
+        'brand',
         'image'
     ];
 

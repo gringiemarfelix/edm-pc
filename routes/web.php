@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
@@ -21,6 +22,10 @@ Route::name('products.')->controller(ProductController::class)->group(function (
     Route::get('/', 'index')->name('index');
     Route::get('/products/search', 'search')->name('search');
     Route::get('/products/{product}', 'show')->name('show');
+});
+
+Route::name('brands.')->controller(BrandController::class)->group(function () {
+    Route::get('/brands/{brand:slug}', 'show')->name('show');
 });
 
 Route::name('cart.')->prefix('cart')->middleware('auth')->controller(CartController::class)->group(function () {
