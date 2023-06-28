@@ -70,8 +70,8 @@ const Show = () => {
                   {product.category.name}
                 </Link>
                 <Link 
-                  href={route('products.show', {
-                    product: product.id
+                  href={route('brands.show', {
+                    brand: product.brand.slug
                   })}
                   className="opacity-60"
                 >
@@ -108,9 +108,15 @@ const Show = () => {
                 </Carousel>
               </div>
               <div className="grow">
-                <Typography variant="paragraph" color="gray" className="leading-tight">
-                  {product.brand.name}
-                </Typography>
+                <Link 
+                  href={route('brands.show', {
+                    brand: product.brand.slug
+                  })}
+                >
+                  <Typography variant="paragraph" color="gray" className="leading-tight">
+                    {product.brand.name}
+                  </Typography>
+                </Link>
                 <Typography variant="h3" color="blue-gray" className="leading-tight mb-1">
                   {product.name}
                 </Typography>
