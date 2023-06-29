@@ -2,13 +2,16 @@ Front
 - [x] Home
 - [x] Login
     - [] Social Logins
+    - [x] 2FA 
 - [x] Register
 - [x] Cart
 - [x] Wishlist
 - [] Account/Profile
-    - [] Account
+    - [x] Account
+    - [x] Security
     - [] Address
     - [] Orders
+    - [] Refunds
 - [x] Product
     - [x] Share to Social
     - [] Reviews 
@@ -24,9 +27,10 @@ Back
 Feature
 - [] Socialite (Facebook, Twitter, Google)
 - [] PayMongo
-- [] Lalamove
 - [] Geocoder (For verifying address)
-- [] 2FA - Fortify
+- [] Lalamove
+- [] Pusher?
+- [x] 2FA - Fortify
 
 https://www.npmjs.com/package/react-google-places-autocomplete
 https://github.com/alexpechkarev/google-maps
