@@ -30,7 +30,7 @@ const profileMenuItems = [
     label: "Edit Profile",
     icon: Cog6ToothIcon,
     method: 'get',
-    route: route('products.index')
+    route: route('profile.edit')
   },
   {
     label: "Orders",
