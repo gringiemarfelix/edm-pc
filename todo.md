@@ -9,13 +9,15 @@ Front
 - [] Account/Profile
     - [x] Account
     - [x] Security
-    - [] Address
+    - [x] Address
     - [] Orders
     - [] Refunds
 - [x] Product
     - [x] Share to Social
     - [] Reviews 
-- [] Search
+- [x] Search
+    - [x] Category
+    - [x] Brands
 
 Back
 - [] Categories
@@ -27,7 +29,7 @@ Back
 Feature
 - [] Socialite (Facebook, Twitter, Google)
 - [] PayMongo
-- [] Geocoder (For verifying address)
+- [x] Geocoder (For verifying address)
 - [] Lalamove
 - [] Pusher?
 - [x] 2FA - Fortify
