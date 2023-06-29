@@ -8,7 +8,7 @@ export default function UpdateProfileInformation() {
     useForm({
       name: user.name,
       email: user.email,
-      phone: user.phone
+      phone: user.phone ?? ""
     });
 
   const submit = (e) => {
