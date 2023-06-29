@@ -1,27 +1,122 @@
 import CartItems from "@/Components/Cart/CartItems"
 import Layout from "@/Layouts/Layout"
-import { Head, usePage } from "@inertiajs/react"
-import { Button, Card, CardBody, CardFooter, Radio, Typography } from "@material-tailwind/react"
-import { useState } from "react"
+import { Head, Link, usePage, useForm } from "@inertiajs/react"
+import { Alert, Button, Card, CardBody, CardFooter, Radio, Typography, Select, Option, Spinner } from "@material-tailwind/react"
+import { InformationCircleIcon } from "@heroicons/react/24/outline"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const Index = () => {
-  const { items } = usePage().props
+  const { auth, items, errors } = usePage().props
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
-  const [delivery, setDelivery] = useState('lalamove')
-  const [pay, setPay] = useState('links')
+  
+  const [estimating, setEstimating] = useState(false)
+  const [estimations, setEstimations] = useState({
+    motorcycle: 0.00,
+    car: 0.00,
+  })
+  const { data, setData, post, processing, reset } = useForm({
+    address: auth.user.addresses.length ? auth.user.addresses[0].address : "",
+    delivery: "lalamove",
+    pay: "links",
+  });
+
+  useEffect(() => {
+    if(data.address){
+      setEstimating(true)
+      getQuotation()
+    }
+  }, [data.address])
+
+  const submit = (e) => {
+    e.preventDefault();
+    return
+    post(route("cart.checkout"), {
+      onSuccess: () => {
+        toast.success('Address added successfully.', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        })
+      }
+    })
+  };
+
+  const getQuotation = async () => {
+    const find = auth.user.addresses.find(item => item.address == data.address)
+
+    await axios.get(route('cart.lalamove'), {
+      params: {
+        address_id: find.id
+      }
+    })
+    .then(({ data }) => 
+      setEstimations({
+        motorcycle: data.motorcycle.priceBreakdown.total,
+        car: data.car.priceBreakdown.total,
+      })
+    )
+    .finally(() => setEstimating(false))
+  }
 
   return (
     <Layout>
       <Head title="Cart" />
-      <div
+      <form
         style={{
           minHeight: `calc(90vh - ${navbarHeight}px)`
         }}
         className="w-full min-h-[inherit] flex justify-center items-center py-6"
+        onSubmit={submit}
       >
         <Card className="w-full lg:w-3/4">
           <CardBody>
             <Typography color="blue-gray" variant="h4">Cart</Typography>
+            {
+              Object.keys(errors).length > 0 &&
+              <div>
+                <Alert
+                  variant="gradient"
+                  color="red"
+                  icon={
+                    <InformationCircleIcon
+                      strokeWidth={2}
+                      className="h-6 w-6"
+                    />
+                  }
+                  className="mb-3"
+                >
+                  {
+                    Object.entries(errors).map(([key, value]) => 
+                      <p>{value}</p>
+                    )
+                  }
+                </Alert>
+                <div className="flex flex-col gap-3">
+                  {
+                    errors.phone &&
+                    <Link href={route('profile.edit')} className="w-fit">
+                      <Button variant="gradient" color="amber">
+                        Add Phone Number
+                      </Button>
+                    </Link>
+                  }
+                  {
+                    errors.address &&
+                    <Link href={route('profile.address')} className="w-fit">
+                      <Button variant="gradient" color="amber">
+                        Add Address
+                      </Button>
+                    </Link>
+                  }
+                </div>
+              </div>
+            }
             <div className="my-3">
               {
                 items.length ?
@@ -38,6 +133,28 @@ const Index = () => {
             <>
               <hr className="shadow" />
               <CardFooter>
+                <Typography color="blue-gray" variant="h6">Address:</Typography>
+                {
+                  auth.user.addresses.length > 0 ?
+                  <Select 
+                    label="Select Address"
+                    containerProps={{
+                      className: 'max-w-xl mb-3'
+                    }}
+                    onChange={e => setData('address', e)}
+                  >
+                    {
+                      auth.user.addresses.map((address, index) =>
+                        <Option key={address.id} value={address.address}>{address.address}</Option>
+                      )
+                    }
+                  </Select>
+                  :
+                  <Typography variant="paragraph" color="red">
+                    You do not have any address in your account.
+                  </Typography>
+                }
+
                 <Typography color="blue-gray" variant="h6">Delivery:</Typography>
                 <div className="flex flex-col gap-1 mb-3">
                   <Radio 
@@ -47,15 +164,24 @@ const Index = () => {
                       <div>
                         <Typography color="blue-gray" className="font-medium">Express via <span className="text-orange-500">Lalamove</span></Typography>
                         <Typography variant="small" color="gray" className="font-normal">
-                          Fee: P200.00
+                          Fee: {estimating && 'Estimating...'}
                         </Typography>
+                        {
+                          estimating ?
+                          <Spinner />
+                          :
+                          <ul className="text-sm ml-3 list-disc">
+                            <li>Car: P{estimations.car.toLocaleString()}</li>
+                            <li>Motorcycle: P{estimations.motorcycle.toLocaleString()}</li>
+                          </ul>
+                        }
                       </div>
                     }
                     containerProps={{
                       className: "-mt-5"
                     }}
-                    checked={delivery === 'lalamove'}
-                    onChange={() => setDelivery('lalamove')}
+                    checked={data.delivery === 'lalamove'}
+                    onChange={() => setData('delivery', 'lalamove')}
                   />
                   <Radio 
                     name="delivery"
@@ -71,10 +197,11 @@ const Index = () => {
                     containerProps={{
                       className: "-mt-5"
                     }}
-                    checked={delivery === 'standard'}
-                    onChange={() => setDelivery('standard')}
+                    checked={data.delivery === 'standard'}
+                    onChange={() => setData('delivery', 'standard')}
                   />
                 </div>
+
                 <Typography color="blue-gray" variant="h6">Pay via:</Typography>
                 <div className="flex flex-col gap-1 mb-3">
                   <Radio 
@@ -91,8 +218,8 @@ const Index = () => {
                     containerProps={{
                       className: "-mt-5"
                     }}
-                    checked={pay === 'links'}
-                    onChange={() => setPay('links')}
+                    checked={data.pay === 'links'}
+                    onChange={() => setData('pay', 'links')}
                   />
                   <Radio 
                     name="payment"
@@ -108,18 +235,19 @@ const Index = () => {
                     containerProps={{
                       className: "-mt-5"
                     }}
-                    checked={pay === 'checkout'}
-                    onChange={() => setPay('checkout')}
+                    checked={data.pay === 'checkout'}
+                    onChange={() => setData('pay', 'checkout')}
                   />
                 </div>
-                <Button>
+
+                <Button type="submit" variant="gradient" color="blue">
                   Checkout
                 </Button>
               </CardFooter>
             </>
           }
         </Card>
-      </div>
+      </form>
     </Layout>
   )
 }

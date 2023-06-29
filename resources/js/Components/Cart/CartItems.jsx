@@ -4,12 +4,21 @@ import {
   MinusIcon,
   TrashIcon
 } from "@heroicons/react/24/outline";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import CartItem from "./CartItem";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const TABLE_HEAD = ["Product", "Price", "Quantity"];
 
 const CartItems = ({ items }) => {
+  const { subtotal } = usePage().props
+  const [total, setTotal] = useState(0)
+
+  useEffect(() => {
+    setTotal(subtotal + 200.50)
+  }, [subtotal])
+
   return (
     <div>
       <table className="hidden lg:table w-full min-w-max table-auto text-left">
@@ -20,6 +29,7 @@ const CartItems = ({ items }) => {
                 key={head} 
                 className={`border-b border-blue-50 p-4
                   ${index == 0 && 'rounded-s-lg'}
+                  ${index == 1 && 'text-end'}
                   ${index == TABLE_HEAD.length - 1 && 'rounded-e-lg text-right'}
                 `}
               >
@@ -52,7 +62,7 @@ const CartItems = ({ items }) => {
                       {product.name}
                     </Typography>
                   </td>
-                  <td className={classes}>
+                  <td className={classes + ' text-end'}>
                     <Typography variant="small" color="blue-gray" className="font-normal">
                       P{product.price.toLocaleString()}
                     </Typography>
@@ -112,7 +122,7 @@ const CartItems = ({ items }) => {
                       </div>
                       <div className="w-px min-h-[1em] self-stretch bg-gray-200"></div>
                       <Link
-                        as="a" 
+                        as="div" 
                         method="delete" 
                         href={route('cart.destroy', {
                           cart: id
@@ -129,6 +139,24 @@ const CartItems = ({ items }) => {
             })
           }
         </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan={2} className="text-end">
+              <span className="font-medium text-blue-gray-900 text-sm">
+                Subtotal: <span className="font-normal">P{subtotal.toLocaleString()}</span>
+              </span>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colSpan={2} className="text-end">
+              <span className="font-bold text-blue-gray-900 text-sm">
+                Total: <span className="font-normal">P{total.toLocaleString()}</span>
+              </span>
+            </td>
+            <td></td>
+          </tr>
+        </tfoot>
       </table>
       <div className="flex flex-col space-y-6 lg:hidden">
         {
