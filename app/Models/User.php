@@ -48,6 +48,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $with = [
+        'mainAddress'
+    ];
+
     protected $appends = [
         'cart',
         'wishlist'

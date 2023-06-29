@@ -121,13 +121,20 @@ const Edit = () => {
                       </Typography>
                     </div>
                   </div>
-                  <Typography variant="h5" color="blue-gray">
+                  <Typography variant="h6" color="blue-gray">
                     Main Address
                   </Typography>
-                  <Typography variant="paragraph" color="blue-gray" className="flex items-center gap-1">
-                    <HomeIcon className="h-5 w-5 text-blue-500" strokeWidth={2.5}/>
-                    Test adress teatgadkgjadkgjadl
-                  </Typography>
+                  {
+                    auth.user.mainAddress ?
+                    <Typography variant="paragraph" color="blue-gray" className="flex items-center gap-1">
+                      <HomeIcon className="h-5 w-5 text-blue-500" strokeWidth={2.5}/>
+                      {auth.user.mainAddress}
+                    </Typography>
+                    :
+                    <Typography variant="paragraph" color="gray">
+                      No address added yet
+                    </Typography>
+                  }
                 </TabPanel>
                 <TabPanel value="edit" className="py-2 text-blue-gray-900">
                   <UpdateProfileInformation />
