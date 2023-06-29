@@ -16,4 +16,21 @@ class UserAddress extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    
+    // Helpers
+
+    /**
+     * Convert to Lalamove Payload
+     *
+     * @return array
+     */
+    public function toLalamove(){
+        return [
+            'coordinates' => [
+                'lat' => (string) $this->latitude,
+                'lng' => (string) $this->longitude,
+            ],
+            'address' => $this->address
+        ];
+    }
 }
