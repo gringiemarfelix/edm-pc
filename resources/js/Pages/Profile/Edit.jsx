@@ -14,12 +14,15 @@ import UpdateProfileInformation from "./Partials/UpdateProfileInformation";
 import UpdatePassword from "./Partials/UpdatePassword";
 import DeleteUser from "./Partials/DeleteUser";
 import TwoFactor from "./Partials/TwoFactor";
+import AddAddress from "@/Components/Forms/AddAddress";
+import AddressList from "@/Components/AddressList";
 
 const Edit = () => {
   const { auth, active } = usePage().props
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
 
   const [isMobile, setIsMobile] = useState(false)
+  const [addingAddress, setAddingAddress] = useState(false)
 
   const handleResize = () => {
     if (window.innerWidth < 720) {
@@ -33,6 +36,9 @@ const Edit = () => {
   useEffect(() => {
     window.addEventListener("resize", handleResize)
   })
+
+  const openAddressModal = () => setAddingAddress(true)
+  const closeAddressModal = () => setAddingAddress(false)
 
   return (
     <Layout>
@@ -134,7 +140,11 @@ const Edit = () => {
                   <TwoFactor />
                 </TabPanel>
                 <TabPanel value="address" className="py-2 text-blue-gray-900">
-                  Address
+                  <AddressList />
+                  <Button variant="gradient" color="blue" onClick={openAddressModal} className="my-6">
+                    Add Address
+                  </Button>
+                  <AddAddress addingAddress={addingAddress} closeModal={closeAddressModal} />
                 </TabPanel>
                 <TabPanel value="orders" className="py-2 text-blue-gray-900">
                   Orders
