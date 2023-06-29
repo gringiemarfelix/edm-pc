@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ff14fda389923fb0b08cd1140b8d5a2",
+    "content-hash": "eb45ae7abaafe5b76cc3155d991a444b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -535,6 +535,53 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "foodkit/lalamove-php-api",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/foodkit/lalamove-php-api.git",
+                "reference": "9a0bdccc596b594f4a89c4b104c9eb2e10281596"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/foodkit/lalamove-php-api/zipball/9a0bdccc596b594f4a89c4b104c9eb2e10281596",
+                "reference": "9a0bdccc596b594f4a89c4b104c9eb2e10281596",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.4.2",
+                "nesbot/carbon": "^2.57.0",
+                "php": "^8.0",
+                "psr/log": "^1.1 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lalamove\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Corey Mcmahon",
+                    "email": "corey@foodkit.io"
+                }
+            ],
+            "description": "PHP client for the Lalamove API",
+            "support": {
+                "issues": "https://github.com/foodkit/lalamove-php-api/issues",
+                "source": "https://github.com/foodkit/lalamove-php-api/tree/4.0.0"
+            },
+            "time": "2023-02-15T09:32:48+00:00"
         },
         {
             "name": "fruitcake/php-cors",
