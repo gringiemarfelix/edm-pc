@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -67,6 +68,16 @@ class User extends Authenticatable
     public function wishlist(): HasMany
     {
         return $this->hasMany(Wishlist::class, 'user_id');
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(UserAddress::class, 'user_id');
+    }
+
+    public function mainAddress(): HasOne
+    {
+        return $this->hasOne(UserAddress::class, 'user_id')->where('main', 1);
     }
 
     // Attributes

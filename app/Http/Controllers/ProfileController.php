@@ -42,8 +42,15 @@ class ProfileController extends Controller
                 $active = null;
         }
 
+        $user = auth()->user();
+        $user->load([
+            'addresses' => function ($query) {
+                $query->orderBy('main', 'desc');
+            }
+        ]);
+
         return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'mustVerifyEmail' => $user instanceof MustVerifyEmail,
             'status' => session('status'),
             'confirmed_password' => $request->session()->get('auth.password_confirmed_at'),
             'active' => $active

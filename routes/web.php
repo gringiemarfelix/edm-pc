@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\WishlistController;
 
 /*
@@ -56,6 +57,13 @@ Route::name('profile.')->prefix('profile')->middleware('auth')->controller(Profi
     Route::get('refunds', 'edit')->name('refunds');
     Route::patch('', 'update')->name('update');
     Route::delete('', 'destroy')->name('destroy');
+});
+
+Route::name('address.')->prefix('profile/address/edit')->middleware('auth')->controller(UserAddressController::class)->group(function () {
+    Route::post('', 'store')->name('store');
+    Route::get('', 'index')->name('index');
+    Route::patch('{address}', 'update')->name('update');
+    Route::delete('{address}', 'destroy')->name('destroy');
 });
 
 require __DIR__.'/auth.php';
