@@ -18,10 +18,35 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $active = null;
+        switch($request->route()->getName()){
+            case 'profile.index':
+                $active = 'profile';
+                break;
+            case 'profile.edit':
+                $active = 'edit';
+                break;
+            case 'profile.security':
+                $active = 'security';
+                break;
+            case 'profile.address':
+                $active = 'address';
+                break;
+            case 'profile.orders':
+                $active = 'orders';
+                break;
+            case 'profile.refunds':
+                $active = 'refunds';
+                break;
+            default:
+                $active = null;
+        }
+
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
             'confirmed_password' => $request->session()->get('auth.password_confirmed_at'),
+            'active' => $active
         ]);
     }
 

@@ -24,7 +24,7 @@ const profileMenuItems = [
     label: "My Profile",
     icon: UserCircleIcon,
     method: 'get',
-    route: route('products.index')
+    route: route('profile.index')
   },
   {
     label: "Edit Profile",
@@ -36,7 +36,7 @@ const profileMenuItems = [
     label: "Orders",
     icon: TruckIcon,
     method: 'get',
-    route: route('products.index')
+    route: route('profile.orders')
   },
   {
     label: "Help",

@@ -48,7 +48,12 @@ Route::name('wishlist.')->prefix('wishlist')->middleware('auth')->controller(Wis
 });
 
 Route::name('profile.')->prefix('profile')->middleware('auth')->controller(ProfileController::class)->group(function () {
-    Route::get('', 'edit')->name('edit');
+    Route::get('', 'edit')->name('index');
+    Route::get('edit', 'edit')->name('edit');
+    Route::get('security', 'edit')->name('security');
+    Route::get('address', 'edit')->name('address');
+    Route::get('orders', 'edit')->name('orders');
+    Route::get('refunds', 'edit')->name('refunds');
     Route::patch('', 'update')->name('update');
     Route::delete('', 'destroy')->name('destroy');
 });
