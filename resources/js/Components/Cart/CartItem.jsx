@@ -19,6 +19,9 @@ const CartItem = ({ item }) => {
           <Typography variant="paragraph" color="blue-gray" className="font-normal">
             {item.product.name}
           </Typography>
+          <Typography variant="small" color="blue-gray" className="font-normal">
+            P{item.product.price.toLocaleString()}
+          </Typography>
           <div className="flex space-x-3 items-center mt-6">
             <div className="relative w-fit">
               <div className="flex items-center space-x-3 w-fit border p-1 rounded-xl">
