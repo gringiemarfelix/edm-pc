@@ -54,7 +54,7 @@ const CartItems = ({ items }) => {
                   </td>
                   <td className={classes}>
                     <Typography variant="small" color="blue-gray" className="font-normal">
-                      {product.price}
+                      P{product.price.toLocaleString()}
                     </Typography>
                   </td>
                   <td className={classes}>
