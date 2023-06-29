@@ -45,7 +45,7 @@ const CartItems = ({ items }) => {
                   <td className={classes + ' flex items-center space-x-3'}>
                     <img
                       className="w-24 h-24 rounded-lg shadow shadow-blue-gray-900/50"
-                      src={product.image ?? 'https://placehold.co/600x600'}
+                      src={product.image.file == "" ? 'https://placehold.co/600x600' : null}
                       alt="nature image"
                     />
                     <Typography variant="paragraph" color="blue-gray" className="font-normal">

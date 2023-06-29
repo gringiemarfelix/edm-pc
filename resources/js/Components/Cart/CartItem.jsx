@@ -11,8 +11,8 @@ const CartItem = ({ item }) => {
     <div className="flex flex-col">
       <div className="flex space-x-3">
         <img
-          className="w-24 h-24 rounded-lg shadow shadow-blue-gray-900/50"
-          src={item.product.image ?? 'https://placehold.co/600x600'}
+          className="w-24 h-24 rounded-lg shadow shadow-blue-gray-900/50 shrink-0"
+          src={item.product.image.file == "" ? 'https://placehold.co/600x600' : ''}
           alt="nature image"
         />
         <div className="flex flex-col w-full">
