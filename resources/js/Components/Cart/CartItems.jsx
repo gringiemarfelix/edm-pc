@@ -164,6 +164,15 @@ const CartItems = ({ items }) => {
             <CartItem key={item.id} item={item} />
           )
         }
+        <div>
+          <Typography variant="h6" color="blue-gray" className="font-medium">
+            Subtotal: <span className="font-normal">P{subtotal.toLocaleString()}</span>
+          </Typography>
+          <hr className="my-1"/>
+          <Typography variant="h6" color="blue-gray">
+            Total: <span className="font-normal">P{total.toLocaleString()}</span>
+          </Typography>
+        </div>
       </div>
     </div>
   )
