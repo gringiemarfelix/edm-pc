@@ -100,7 +100,7 @@ const Index = () => {
         className="w-full min-h-[inherit] flex justify-center items-center py-6"
         onSubmit={submit}
       >
-        <Card className="w-full lg:w-3/4">
+        <Card className="w-full lg:w-3/4 relative">
           <CardBody>
             <Typography color="blue-gray" variant="h4">Cart</Typography>
             {
@@ -307,6 +307,17 @@ const Index = () => {
                 </Button>
               </CardFooter>
             </>
+          }
+          {
+            processing &&
+            <div className="absolute w-full h-full flex justify-center items-center bg-black/25 rounded-xl">
+              <div className="flex flex-col items-center justify-center gap-3">
+                <Spinner className="w-24 h-24" />
+                <Typography variant="paragraph" color="white" className="text-lg">
+                  Processing checkout
+                </Typography>
+              </div>
+            </div>
           }
         </Card>
       </form>
