@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 const Index = () => {
-  const { auth, items, default_address, errors } = usePage().props
+  const { auth, items, default_address, ships_from, errors } = usePage().props
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
 
   const [estimating, setEstimating] = useState(false)
@@ -155,6 +155,9 @@ const Index = () => {
             <>
               <hr className="shadow" />
               <CardFooter>
+                <Typography color="blue-gray" variant="h6">Ships from:</Typography>
+                <Typography color="gray" variant="small" className="mb-3">{ships_from}</Typography>
+                
                 <Typography color="blue-gray" variant="h6" className="mb-3">Address:</Typography>
                 {
                   auth.user.addresses.length > 0 ?
