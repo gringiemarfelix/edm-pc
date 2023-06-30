@@ -84,6 +84,16 @@ class User extends Authenticatable
         return $this->hasOne(UserAddress::class, 'user_id')->where('main', 1);
     }
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'user_id');
+    }
+
     // Attributes
 
     public function getCartAttribute(): int
