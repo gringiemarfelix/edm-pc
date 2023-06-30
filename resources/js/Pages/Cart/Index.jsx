@@ -22,6 +22,7 @@ const Index = () => {
   const [deliveryFee, setDeliveryFee] = useState(100.00)
   const { data, setData, post, processing, reset } = useForm({
     address: default_address.address ?? (auth.user.addresses.length ? auth.user.addresses[0].address : ""),
+    address_id: default_address.id ?? (auth.user.addresses.length ? auth.user.addresses[0].id : 0),
     delivery: "lalamove",
     pay: "links",
     lalamove: 'motorcycle'
@@ -48,7 +49,10 @@ const Index = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    return
+
+    const find = auth.user.addresses.find(item => item.address == data.address)
+    setData('address_id', find.id)
+
     post(route("cart.checkout"), {
       onSuccess: () => {
         toast.success('Address added successfully.', {
@@ -115,7 +119,7 @@ const Index = () => {
                 >
                   {
                     Object.entries(errors).map(([key, value]) => 
-                      <p>{value}</p>
+                      <p key={key}>{value}</p>
                     )
                   }
                 </Alert>

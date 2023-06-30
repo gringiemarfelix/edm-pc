@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckoutRequest;
 use App\Models\Cart;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Lalamove\Client\V3\Client as Lalamove;
 use Lalamove\Requests\V3\Item;
 use Lalamove\Requests\V3\Quotation;
+use Lalamove\Requests\V3\Order;
+use Lalamove\Requests\V3\Contact;
 
 class CartController extends Controller
 {
@@ -38,7 +41,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function checkout()
+    public function checkout(CheckoutRequest $request)
     {
         $validator = Validator::make([], []);
         $errors = false;
@@ -63,10 +66,65 @@ class CartController extends Controller
         if($errors){
             $response->withErrors($validator);
         }else{
+            if($request->delivery == 'lalamove'){
+                $lalamoveOrder = $this->createLalamoveOrder($request);
+            }else{
+                $standardOrder = $this->createStandardOrder($request);
+            }
+
             $response->with('message', 'Checkout success');
         }
 
         return $response;
+    }
+
+    private function createLalamoveOrder(CheckoutRequest $request)
+    {
+        $user = auth()->user();
+        $address = $user->addresses()->where('id', $request->address_id)->first()->toLalamove();
+
+        $lalamove = app(Lalamove::class);
+        
+        // Build Items
+        $item = new Item($user->cart, 'MORE_THAN_3KG', ['OFFICE_ITEM'], ['FRAGILE', 'KEEP_UPRIGHT']);
+
+        // Build Stops
+        $stops = [
+            config('branches.main'),
+            $address,
+        ];
+
+        // Build Quotation
+        $quotation = new Quotation;
+
+        if($request->lalamove == 'motorcycle'){
+            $quotation->serviceType = Quotation::SERVICE_TYPE_MOTORCYCLE;
+        }else{
+            $quotation->serviceType = Quotation::SERVICE_TYPE_SEDAN;
+        }
+
+        $quotation->language = 'en_PH';
+        $quotation->setScheduleAt(now()->addMinute());
+        $quotation->setItem($item);
+        $quotation->addStop($stops);
+
+        $quotationResponse = $lalamove->quotations()->create($quotation);
+
+        // Build Order
+        $sender = new Contact('EDM PC', '+639123456789', $quotationResponse->stops[0]->stopId);
+        $receiver = new Contact($user->name, "+63{$user->phone}", $quotationResponse->stops[1]->stopId);
+        $order = new Order($quotationResponse->quotationId, $sender, [$receiver]);
+
+        $orderResponse = $lalamove->orders()->create($order);
+
+        $details = $lalamove->orders()->details($orderResponse->orderId);
+
+        dd($details);
+    }
+
+    private function createStandardOrder(CheckoutRequest $request)
+    {
+        
     }
 
     public function lalamove(Request $request, Lalamove $lalamove)
