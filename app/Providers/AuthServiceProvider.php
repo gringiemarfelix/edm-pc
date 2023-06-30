@@ -2,17 +2,19 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\Policies\CartPolicy;
 use App\Models\Cart;
 use App\Models\User;
-use App\Models\UserAddress;
+use App\Models\Order;
 use App\Models\Wishlist;
+use App\Models\UserAddress;
+use App\Policies\CartPolicy;
+use App\Policies\OrderPolicy;
 use App\Policies\PaymentPolicy;
-use App\Policies\UserAddressPolicy;
 use App\Policies\WishlistPolicy;
+use App\Policies\UserAddressPolicy;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Wishlist::class => WishlistPolicy::class,
         UserAddress::class => UserAddressPolicy::class,
         Payment::class => PaymentPolicy::class,
+        Order::class => OrderPolicy::class,
     ];
 
     /**
