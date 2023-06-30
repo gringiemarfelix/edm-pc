@@ -168,7 +168,7 @@ const Index = () => {
                         </Typography>
                         {
                           estimating ?
-                          <Spinner />
+                          <Spinner className="h-8 w-8" />
                           :
                           <ul className="text-sm ml-3 list-disc">
                             <li>Car: P{estimations.car.toLocaleString()}</li>
