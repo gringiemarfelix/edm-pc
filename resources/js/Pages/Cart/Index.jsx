@@ -21,8 +21,8 @@ const Index = () => {
   })
   const [deliveryFee, setDeliveryFee] = useState(100.00)
   const { data, setData, post, processing, reset } = useForm({
-    address: default_address.address ?? (auth.user.addresses.length ? auth.user.addresses[0].address : ""),
-    address_id: default_address.id ?? (auth.user.addresses.length ? auth.user.addresses[0].id : 0),
+    address: default_address?.address ?? (auth.user.addresses.length ? auth.user.addresses[0].address : ""),
+    address_id: default_address?.id ?? (auth.user.addresses.length ? auth.user.addresses[0].id : 0),
     delivery: "lalamove",
     pay: "links",
     lalamove: 'motorcycle'
