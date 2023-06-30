@@ -29,12 +29,21 @@ Back
 
 Feature
 - [] Socialite (Facebook, Twitter, Google)
-- [] PayMongo
+- [x] PayMongo
 - [x] Geocoder (For verifying address)
-- [] Lalamove
+- [x] Lalamove
 - [] Pusher?
 - [x] 2FA - Fortify
 
 https://www.npmjs.com/package/react-google-places-autocomplete
 https://github.com/alexpechkarev/google-maps
 https://github.com/foodkit/lalamove-php-api
+
+Order Status
+- PENDING_PAYMENT
+- PLACED
+- PREPARING
+- DELIVERING
+- COMPLETE
+- FAILED
+- CANCELLED
