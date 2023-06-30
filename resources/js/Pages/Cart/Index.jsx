@@ -133,7 +133,7 @@ const Index = () => {
             <>
               <hr className="shadow" />
               <CardFooter>
-                <Typography color="blue-gray" variant="h6">Address:</Typography>
+                <Typography color="blue-gray" variant="h6" className="mb-3">Address:</Typography>
                 {
                   auth.user.addresses.length > 0 ?
                   <Select 
