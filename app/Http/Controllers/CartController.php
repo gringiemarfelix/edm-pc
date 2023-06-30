@@ -6,19 +6,27 @@ use App\Http\Requests\CheckoutRequest;
 use App\Models\Cart;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Lalamove\Client\V3\Client as Lalamove;
+use Lalamove\Client\V3\Client as LalamoveClient;
 use Lalamove\Requests\V3\Item;
 use Lalamove\Requests\V3\Quotation;
 use Lalamove\Requests\V3\Order;
 use Lalamove\Requests\V3\Contact;
+use Lalamove\Responses\V3\OrderResponse;
+use Lalamove\Responses\V3\QuotationResponse;
+use Luigel\Paymongo\Facades\Paymongo;
 
 class CartController extends Controller
 {
+    private $lalamove;
+
+    public function __construct(LalamoveClient $lalamove) {
+        $this->lalamove = $lalamove;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -66,11 +74,84 @@ class CartController extends Controller
         if($errors){
             $response->withErrors($validator);
         }else{
-            if($request->delivery == 'lalamove'){
-                $lalamoveOrder = $this->createLalamoveOrder($request);
-            }else{
-                $standardOrder = $this->createStandardOrder($request);
+            $user = auth()->user();
+            $cartItems = $user->cart()->get();
+            
+            $order = $user->orders()->create();
+
+            if($request->delivery === 'lalamove'){
+                $quotationResponse = $this->createLalamoveQuotation($request);
+                $order->lalamove()->create([
+                    'quotation' => $quotationResponse->quotationId
+                ]);
+
+                $order->delivery = 'lalamove';
+                $order->save();
             }
+
+            foreach($cartItems as $cartItem){
+                $order->items()->create([
+                    'product_id' => $cartItem->product_id,
+                    'quantity' => $cartItem->quantity,
+                    'price' => $cartItem->product->price,
+                    'total' => $cartItem->quantity * $cartItem->product->price,
+                ]);
+                $cartItem->delete();
+            }
+
+            if($request->pay == 'links'){
+                $payment = Paymongo::link()->create([
+                    'amount' => 100.00,
+                    'description' => "Payment for {$order->id}",
+                    'remarks' => 'edm-test'
+                ]);
+            }else{
+                $items = [];
+                foreach($order->items as $item){
+                    $items[] = [
+                        'amount' => intval($item->price * 100),
+                        'currency' => 'PHP',
+                        'description' => $item->product->brand->name,
+                        'name' => $item->product->name,
+                        'images' => $item->product->images->pluck('file')->toArray(),
+                        'quantity' => $item->quantity
+                    ];
+                }
+                $payment = Paymongo::checkout()->create([
+                    'cancel_url' => route('products.index'),
+                    'billing' => [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'phone' => $user->phone,
+                    ],
+                    'description' => "Payment for {$order->id}",
+                    'line_items' => $items,
+                    'payment_method_types' => [
+                        'atome',
+                        'billease',
+                        'card',
+                        'dob',
+                        'dob_ubp',
+                        'gcash',
+                        'grab_pay', 
+                        'paymaya'
+                    ],
+                    'success_url' => route('cart.checkout.success'),
+                    'statement_descriptor' => config('app.name'),
+                ]);
+            }
+
+            $payment = $user->payments()->create([
+                'id' => $payment->id,
+                'type' => $payment->type,
+                'url' => $payment->checkout_url
+            ]);
+            $payment = $payment->fresh();
+
+            $order->payment_id = $payment->id;
+            $order->save();
+
+            return Inertia::location($payment->url);
 
             $response->with('message', 'Checkout success');
         }
@@ -78,13 +159,11 @@ class CartController extends Controller
         return $response;
     }
 
-    private function createLalamoveOrder(CheckoutRequest $request)
+    private function createLalamoveQuotation(CheckoutRequest $request): QuotationResponse
     {
         $user = auth()->user();
         $address = $user->addresses()->where('id', $request->address_id)->first()->toLalamove();
 
-        $lalamove = app(Lalamove::class);
-        
         // Build Items
         $item = new Item($user->cart, 'MORE_THAN_3KG', ['OFFICE_ITEM'], ['FRAGILE', 'KEEP_UPRIGHT']);
 
@@ -108,18 +187,19 @@ class CartController extends Controller
         $quotation->setItem($item);
         $quotation->addStop($stops);
 
-        $quotationResponse = $lalamove->quotations()->create($quotation);
+        return $this->lalamove->quotations()->create($quotation);
+    }
+
+    private function createLalamoveOrder(CheckoutRequest $request, QuotationResponse $quotationResponse): OrderResponse
+    {
+        $user = auth()->user();
 
         // Build Order
         $sender = new Contact('EDM PC', '+639123456789', $quotationResponse->stops[0]->stopId);
         $receiver = new Contact($user->name, "+63{$user->phone}", $quotationResponse->stops[1]->stopId);
         $order = new Order($quotationResponse->quotationId, $sender, [$receiver]);
 
-        $orderResponse = $lalamove->orders()->create($order);
-
-        $details = $lalamove->orders()->details($orderResponse->orderId);
-
-        dd($details);
+        return $this->lalamove->orders()->create($order);
     }
 
     private function createStandardOrder(CheckoutRequest $request)
@@ -127,7 +207,7 @@ class CartController extends Controller
         
     }
 
-    public function lalamove(Request $request, Lalamove $lalamove)
+    public function lalamove(Request $request)
     {
         $request->validate([
             'address_id' => 'required|exists:user_addresses,id'
@@ -153,8 +233,8 @@ class CartController extends Controller
         $car = clone $quotation;
         $car->serviceType = Quotation::SERVICE_TYPE_SEDAN;
 
-        $motorcycle = $lalamove->quotations()->create($quotation);
-        $car = $lalamove->quotations()->create($car);
+        $motorcycle = $this->lalamove->quotations()->create($quotation);
+        $car = $this->lalamove->quotations()->create($car);
 
         return response()->json([
             'motorcycle' => $motorcycle,
