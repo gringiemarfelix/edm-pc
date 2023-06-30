@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('cart-has-items', function (User $user) {
-            return $user->cart()->count() > 1
+            return $user->cart()->count() > 0
                     ? Response::allow() 
                     : Response::deny();
         });
