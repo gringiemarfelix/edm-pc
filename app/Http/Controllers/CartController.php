@@ -33,7 +33,8 @@ class CartController extends Controller
         return Inertia::render('Cart/Index', [
             'items' => $cart,
             'subtotal' => $subtotal,
-            'ships_from' => config('branches.main.address')
+            'ships_from' => config('branches.main.address'),
+            'default_address' => $user->addresses->where('main', 1)->first() ?? $user->addresses->sortByDesc('id')->first()
         ]);
     }
 
@@ -65,7 +66,7 @@ class CartController extends Controller
             $response->with('message', 'Checkout success');
         }
 
-        return back();
+        return $response;
     }
 
     public function lalamove(Request $request, Lalamove $lalamove)

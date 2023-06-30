@@ -7,16 +7,16 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 const Index = () => {
-  const { auth, items, errors } = usePage().props
+  const { auth, items, default_address, errors } = usePage().props
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
-  
+
   const [estimating, setEstimating] = useState(false)
   const [estimations, setEstimations] = useState({
     motorcycle: 0.00,
     car: 0.00,
   })
   const { data, setData, post, processing, reset } = useForm({
-    address: auth.user.addresses.length ? auth.user.addresses[0].address : "",
+    address: default_address.address ?? (auth.user.addresses.length ? auth.user.addresses[0].address : ""),
     delivery: "lalamove",
     pay: "links",
   });
@@ -142,6 +142,7 @@ const Index = () => {
                       className: 'max-w-xl mb-3'
                     }}
                     onChange={e => setData('address', e)}
+                    value={data.address}
                   >
                     {
                       auth.user.addresses.map((address, index) =>
