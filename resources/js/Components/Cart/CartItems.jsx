@@ -11,13 +11,13 @@ import { useEffect } from "react";
 
 const TABLE_HEAD = ["Product", "Price", "Quantity"];
 
-const CartItems = ({ items }) => {
+const CartItems = ({ items, delivery }) => {
   const { subtotal } = usePage().props
   const [total, setTotal] = useState(0)
 
   useEffect(() => {
-    setTotal(subtotal + 200.50)
-  }, [subtotal])
+    setTotal(subtotal + delivery)
+  }, [subtotal, delivery])
 
   return (
     <div>
@@ -64,7 +64,7 @@ const CartItems = ({ items }) => {
                   </td>
                   <td className={classes + ' text-end'}>
                     <Typography variant="small" color="blue-gray" className="font-normal">
-                      P{product.price.toLocaleString()}
+                      P{product.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -143,7 +143,15 @@ const CartItems = ({ items }) => {
           <tr>
             <td colSpan={2} className="text-end">
               <span className="font-medium text-blue-gray-900 text-sm">
-                Subtotal: <span className="font-normal">P{subtotal.toLocaleString()}</span>
+                Subtotal: <span className="font-normal">P{subtotal.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+              </span>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colSpan={2} className="text-end">
+              <span className="font-medium text-blue-gray-900 text-sm">
+                Delivery: <span className="font-normal">P{delivery.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
               </span>
             </td>
             <td></td>
@@ -151,7 +159,7 @@ const CartItems = ({ items }) => {
           <tr>
             <td colSpan={2} className="text-end">
               <span className="font-bold text-blue-gray-900 text-sm">
-                Total: <span className="font-normal">P{total.toLocaleString()}</span>
+                Total: <span className="font-normal">P{total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
               </span>
             </td>
             <td></td>
@@ -166,11 +174,14 @@ const CartItems = ({ items }) => {
         }
         <div>
           <Typography variant="h6" color="blue-gray" className="font-medium">
-            Subtotal: <span className="font-normal">P{subtotal.toLocaleString()}</span>
+            Subtotal: <span className="font-normal">P{subtotal.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
           </Typography>
           <hr className="my-1"/>
           <Typography variant="h6" color="blue-gray">
-            Total: <span className="font-normal">P{total.toLocaleString()}</span>
+            Delivery: <span className="font-normal">P{delivery.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+          </Typography>
+          <Typography variant="h6" color="blue-gray">
+            Total: <span className="font-normal">P{total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
           </Typography>
         </div>
       </div>
