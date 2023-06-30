@@ -210,7 +210,7 @@ const Index = () => {
                           id="lalamove-motorcycle"
                           label={
                             <div>
-                              {`Motorcycle: P${estimations.motorcycle.toLocaleString()}`}
+                              {`Motorcycle: P${parseFloat(estimations.motorcycle).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                               <DeliveryBreakdownPopover breakdown={estimations.breakdowns.motorcycle} />
                             </div>
                           }
@@ -222,7 +222,7 @@ const Index = () => {
                           id="lalamove-car"
                           label={
                             <div>
-                              {`Car: P${estimations.car.toLocaleString()}`}
+                              {`Car: P${parseFloat(estimations.car).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                               <DeliveryBreakdownPopover breakdown={estimations.breakdowns.car} />
                             </div>
                           }
