@@ -339,6 +339,7 @@ const DeliveryBreakdownPopover = ({ breakdown }) => {
       <PopoverContent>
         <Typography variant="h6" color="blue-gray">Base: <span className="font-normal">P{parseFloat(breakdown.base).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span></Typography>
         <Typography variant="h6" color="blue-gray">Distance: <span className="font-normal">P{parseFloat(breakdown.extraMileage).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span></Typography>
+        <hr className="my-1" />
         <Typography variant="h6" color="blue-gray">Total: <span className="font-normal">P{parseFloat(breakdown.total).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span></Typography>
       </PopoverContent>
     </Popover>
