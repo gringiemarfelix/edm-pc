@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProductImage extends Model
 {
     use HasFactory;
+
+    public function getFileAttribute($file)
+    {
+        return asset("storage/{$file}");
+    }
 }
