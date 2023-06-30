@@ -325,7 +325,7 @@ const DeliveryBreakdownPopover = ({ breakdown }) => {
       placement="right"
     >
       <PopoverHandler>
-        <IconButton variant="gradient" color="orange" size="sm" className="ml-3">
+        <IconButton variant="text" color="orange" size="sm" className="ml-1">
           <InformationCircleIcon className="h-6 w-6" />
         </IconButton>
       </PopoverHandler>
