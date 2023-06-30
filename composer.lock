@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb45ae7abaafe5b76cc3155d991a444b",
+    "content-hash": "249d7ea8b6c98778c2a8ca4e4c51cf24",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2046,6 +2046,76 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "luigel/laravel-paymongo",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/luigel/laravel-paymongo.git",
+                "reference": "1c826daebb3fca1248327a34e35c89bcae72f912"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/luigel/laravel-paymongo/zipball/1c826daebb3fca1248327a34e35c89bcae72f912",
+                "reference": "1c826daebb3fca1248327a34e35c89bcae72f912",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "illuminate/support": "^8.0|^9.0|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "pestphp/pest": "^1.20",
+                "pestphp/pest-plugin-parallel": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Luigel\\Paymongo\\PaymongoServiceProvider"
+                    ],
+                    "aliases": {
+                        "Paymongo": "Luigel\\Paymongo\\Facades\\Paymongo"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Luigel\\Paymongo\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rigel Kent Carbonel",
+                    "email": "rigel20.kent@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A laravel wrapper for Paymongo API",
+            "homepage": "https://github.com/luigel/laravel-paymongo",
+            "keywords": [
+                "credit-cards",
+                "debit-cards",
+                "gcash",
+                "grabcar",
+                "laravel",
+                "laravel-paymongo",
+                "luigel",
+                "payment-gateway",
+                "paymongo"
+            ],
+            "support": {
+                "issues": "https://github.com/luigel/laravel-paymongo/issues",
+                "source": "https://github.com/luigel/laravel-paymongo/tree/v2.4.0"
+            },
+            "time": "2023-05-22T04:08:03+00:00"
         },
         {
             "name": "monolog/monolog",
