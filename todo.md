@@ -5,6 +5,7 @@ Front
     - [x] 2FA 
 - [x] Register
 - [x] Cart
+    - [x] Add Delivery to Total
 - [x] Wishlist
 - [] Account/Profile
     - [x] Account
@@ -21,7 +22,7 @@ Front
 
 Back
 - [] Categories
-- [] Brands 
+- [] Brands
 - [] Products
 - [] Orders
 - [] Refunds
