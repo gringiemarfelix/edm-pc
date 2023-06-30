@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\UserAddress;
 use App\Models\Wishlist;
+use App\Policies\PaymentPolicy;
 use App\Policies\UserAddressPolicy;
 use App\Policies\WishlistPolicy;
 use Illuminate\Auth\Access\Response;
@@ -23,7 +24,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Cart::class => CartPolicy::class,
         Wishlist::class => WishlistPolicy::class,
-        UserAddress::class => UserAddressPolicy::class
+        UserAddress::class => UserAddressPolicy::class,
+        Payment::class => PaymentPolicy::class,
     ];
 
     /**
