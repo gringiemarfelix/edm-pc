@@ -94,6 +94,11 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class, 'user_id');
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class, 'user_id');
+    }
+
     // Attributes
 
     public function getCartAttribute(): int
