@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserAddressController;
+use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\WishlistController;
 
 /*
@@ -71,6 +72,11 @@ Route::name('address.')->prefix('profile/address/edit')->middleware('auth')->con
     Route::get('', 'index')->name('index');
     Route::patch('{address}', 'update')->name('update');
     Route::delete('{address}', 'destroy')->name('destroy');
+});
+
+Route::name('webhooks.')->prefix('webhooks')->controller(WebhookController::class)->group(function () {
+    Route::get('paymongo', 'paymongo')->name('paymongo');
+    Route::get('lalamove', 'lalamove')->name('lalamove');
 });
 
 require __DIR__.'/auth.php';
