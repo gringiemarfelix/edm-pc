@@ -41,7 +41,7 @@ Route::name('categories.')->controller(CategoryController::class)->group(functio
 Route::name('cart.')->prefix('cart')->middleware('auth')->controller(CartController::class)->group(function () {
     // Checkout
     Route::post('checkout', 'checkout')->name('checkout');
-    Route::get('checkout/success', 'checkoutSuccess')->name('checkout.success');
+    Route::get('checkout/success', 'success')->name('checkout.success');
 
     // Lalamove
     Route::get('lalamove', 'lalamove')->name('lalamove');
