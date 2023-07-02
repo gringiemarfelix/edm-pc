@@ -25,7 +25,7 @@ class UpdatePromotionRequest extends FormRequest
             'product_id' => ['integer', 'exists:products,id'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'image' => ['image', 'size:8192'],
+            'image' => ['image', 'max:8192'],
         ];
     }
 }

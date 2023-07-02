@@ -25,7 +25,7 @@ class StorePromotionRequest extends FormRequest
             'product_id' => ['integer', 'exists:products,id'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'image' => ['required', 'image', 'size:8192'],
+            'image' => ['required', 'image', 'max:8192'],
         ];
     }
 }
