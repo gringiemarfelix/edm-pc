@@ -86,6 +86,7 @@ class CartController extends Controller
                 ]);
 
                 $order->delivery = 'lalamove';
+                $order->delivery_fee = floatval($quotationResponse->priceBreakdown->total);
                 $order->save();
             }
 
