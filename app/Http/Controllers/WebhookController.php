@@ -63,6 +63,10 @@ class WebhookController extends Controller
         
         $event = json_decode(json_encode($request->all()));
 
+        if($event->eventType == 'WALLET_BALANCE_CHANGED'){
+            return response('OK');
+        }
+
         try {
             $orderRecord = Lalamove::findByOrder($event->data->order->orderId)->first()->order()->first();
     
