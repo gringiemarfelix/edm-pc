@@ -44,6 +44,7 @@ Route::name('cart.')->prefix('cart')->middleware('auth')->controller(CartControl
     Route::get('lalamove', 'lalamove')->name('lalamove');
 
     Route::get('', 'index')->name('index');
+    Route::get('success', 'success')->name('success');
     Route::post('{product}', 'store')->name('store');
     Route::put('{cart}', 'update')->name('update');
     Route::delete('{cart}', 'destroy')->name('destroy');

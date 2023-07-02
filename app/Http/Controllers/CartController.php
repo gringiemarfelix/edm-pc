@@ -309,4 +309,9 @@ class CartController extends Controller
 
         return back();
     }
+
+    public function success()
+    {
+        return Inertia::render('Cart/Success');
+    }
 }
