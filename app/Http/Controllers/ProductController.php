@@ -116,7 +116,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(Request $request, Product $product)
     {
         $user = auth()->user();
         $wishlist = [];
@@ -132,6 +132,10 @@ class ProductController extends Controller
             'brand',
             'images'
         ]);
+
+        if($request->wantsJson()){
+            return response()->json($product);
+        }
 
         return Inertia::render('Products/Show', [
             'product' => $product,
