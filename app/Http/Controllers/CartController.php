@@ -102,9 +102,9 @@ class CartController extends Controller
 
             if($request->pay == 'links'){
                 $payment = Paymongo::link()->create([
-                    'amount' => 100.00,
+                    'amount' => intval($order->total * 100),
                     'description' => "Payment for {$order->id}",
-                    'remarks' => 'edm-test'
+                    'remarks' => "Payment for {$order->id}"
                 ]);
             }else{
                 $items = [];
@@ -142,17 +142,17 @@ class CartController extends Controller
                 ]);
             }
 
-            $payment = $user->payments()->create([
+            $paymentRecord = $user->payments()->create([
                 'id' => $payment->id,
                 'type' => $payment->type,
                 'url' => $payment->checkout_url
             ]);
-            $payment = $payment->fresh();
+            $paymentRecord = $user->payments()->find($payment->id);
 
-            $order->payment_id = $payment->id;
+            $order->payment_id = $paymentRecord->id;
             $order->save();
 
-            return Inertia::location($payment->url);
+            return Inertia::location($paymentRecord->url);
 
             $response->with('message', 'Checkout success');
         }
