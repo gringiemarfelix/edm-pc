@@ -18,6 +18,7 @@ import {
   TruckIcon,
   ReceiptRefundIcon,
   PowerIcon,
+  FilmIcon
 } from "@heroicons/react/24/solid";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
@@ -86,6 +87,14 @@ const Content = () => {
               <PresentationChartBarIcon className="h-5 w-5" />
             </ListItemPrefix>
             Dashboard
+          </ListItem>
+        </Link>
+        <Link href={route('admin.promotions.index')}>
+          <ListItem className={route().current('admin.promotions.*') ? 'bg-blue-500 text-gray-50 hover:bg-blue-500 hover:text-gray-100 hover:bg-opacity-100 hover:saturate-150' : undefined}>
+            <ListItemPrefix>
+              <FilmIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            Promotions
           </ListItem>
         </Link>
         <Link href={route('admin.categories.index')}>
