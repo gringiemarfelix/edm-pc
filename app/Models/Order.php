@@ -11,6 +11,20 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'created_at' => 'datetime:M d, Y - h:i:s A',
+        'updated_at' => 'datetime:M d, Y - h:i:s A',
+    ];
+
+    protected $with = [
+        'items'
+    ];
+
+    protected $appends = [
+        'items_count',
+        'total'
+    ];
+
     // Relationships
 
     public function lalamove(): HasOne
@@ -24,6 +38,18 @@ class Order extends Model
     }
 
     public function total(): float
+    {
+        return $this->items()->sum('total');
+    }
+
+    // Attributes
+
+    public function getItemsCountAttribute()
+    {
+        return $this->items()->count();
+    }
+
+    public function getTotalAttribute()
     {
         return $this->items()->sum('total');
     }
