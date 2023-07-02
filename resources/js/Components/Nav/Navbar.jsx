@@ -320,18 +320,40 @@ const TopNav = () => {
       </div>
       <Collapse open={openNav}>
         <NavList />
-        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Link href={route('login')}>
-            <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
-              Sign In
-            </Button>
-          </Link>
-          <Link href={route('register')}>
-            <Button variant="gradient" size="sm" fullWidth>
-              Sign Up
-            </Button>
-          </Link>
-        </div>
+        {
+          auth.user ?
+          <div className="flex space-x-3 basis-1/4 border-t py-3">
+            <ProfileMenu />
+            <Link href={route('cart.index')}>
+              <Badge content={auth.user.cart} placement="top-end" className={`w-6 h-6 ${auth.user.cart === 0 && 'hidden'}`}>
+                <IconButton variant="text">
+                  <ShoppingCartIcon className="h-6 w-6" />
+                </IconButton>
+              </Badge>
+            </Link>
+            <Link href={route('wishlist.index')}>
+              <Badge content={auth.user.wishlist} placement="top-end" color="deep-orange" className={`w-6 h-6 ${auth.user.wishlist === 0 && 'hidden'}`}>
+                <IconButton variant="text" color="red">
+                  <HeartIcon className="h-6 w-6" />
+                </IconButton>
+              </Badge>
+            </Link>
+          </div>
+          :
+          <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
+            
+            <Link href={route('login')}>
+              <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
+                Sign In
+              </Button>
+            </Link>
+            <Link href={route('register')}>
+              <Button variant="gradient" size="sm" fullWidth>
+                Sign Up
+              </Button>
+            </Link>
+          </div>
+        }
       </Collapse>
     </Navbar>
   );
