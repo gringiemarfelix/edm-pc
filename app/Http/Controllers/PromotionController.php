@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Promotion;
 use App\Http\Requests\StorePromotionRequest;
 use App\Http\Requests\UpdatePromotionRequest;
+use Inertia\Inertia;
 
 class PromotionController extends Controller
 {
@@ -13,7 +14,9 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Admin/Promotions/Index', [
+            'promotions' => Promotion::get()
+        ]);
     }
 
     /**
@@ -21,7 +24,7 @@ class PromotionController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Promotions/Create');
     }
 
     /**
@@ -29,7 +32,16 @@ class PromotionController extends Controller
      */
     public function store(StorePromotionRequest $request)
     {
-        //
+        $image = $request->file('image')->store('promotions', 'public');
+
+        Promotion::create([
+            'product_id' => $request->product_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $image,
+        ]);
+
+        return back();
     }
 
     /**
@@ -37,7 +49,7 @@ class PromotionController extends Controller
      */
     public function show(Promotion $promotion)
     {
-        //
+        return response('NULL', 403);
     }
 
     /**
@@ -45,7 +57,9 @@ class PromotionController extends Controller
      */
     public function edit(Promotion $promotion)
     {
-        //
+        return Inertia::render('Admin/Promotions/Edit', [
+            'promotion' => $promotion
+        ]);
     }
 
     /**
@@ -53,7 +67,20 @@ class PromotionController extends Controller
      */
     public function update(UpdatePromotionRequest $request, Promotion $promotion)
     {
-        //
+        $new = [
+            'product_id' => $request->product_id,
+            'title' => $request->title,
+            'description' => $request->description,
+        ];
+
+        if($request->file('image')){
+            $image = $request->file('image')->store('promotions', 'public');
+            $new['image'] = $image;
+        }
+
+        $promotion->update($new);
+
+        return back();
     }
 
     /**
@@ -61,6 +88,8 @@ class PromotionController extends Controller
      */
     public function destroy(Promotion $promotion)
     {
-        //
+        $promotion->delete();
+
+        return back();
     }
 }

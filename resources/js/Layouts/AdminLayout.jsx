@@ -4,7 +4,7 @@ const AdminLayout = ({ children }) => {
   return (
     <div>
       <AdminNav />
-      <div className="lg:ml-[20rem]">
+      <div className="lg:ml-[20rem] min-h-screen">
         { children }
       </div>
     </div>
