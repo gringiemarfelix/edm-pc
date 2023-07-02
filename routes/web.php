@@ -82,8 +82,8 @@ Route::name('address.')->prefix('profile/address/edit')->middleware('auth')->con
 });
 
 Route::name('webhooks.')->prefix('webhooks')->controller(WebhookController::class)->group(function () {
-    Route::get('paymongo', 'paymongo')->name('paymongo');
-    Route::get('lalamove', 'lalamove')->name('lalamove');
+    Route::post('paymongo', 'paymongo')->name('paymongo');
+    Route::post('lalamove', 'lalamove')->name('lalamove');
 });
 
 Route::name('admin.')->prefix('admin')->group(function () {
