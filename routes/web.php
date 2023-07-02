@@ -33,8 +33,8 @@ Route::name('products.')->controller(ProductController::class)->group(function (
 
 Route::name('products.reviews.')->prefix('products/reviews')->controller(ProductReviewController::class)->group(function () {
     Route::post('{product}', 'store')->name('store');
-    Route::put('{review}', 'update')->name('update');
-    Route::delete('{review}', 'destroy')->name('destroy');
+    Route::put('{productReview}', 'update')->name('update');
+    Route::delete('{productReview}', 'destroy')->name('destroy');
 });
 
 Route::name('brands.')->controller(BrandController::class)->group(function () {
