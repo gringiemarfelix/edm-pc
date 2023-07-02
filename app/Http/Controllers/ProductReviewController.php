@@ -15,7 +15,13 @@ class ProductReviewController extends Controller
      */
     public function store(ProductReviewRequest $request, Product $product)
     {
-        $product->reviews()->create($request->validated());
+        $user = auth()->user();
+
+        $input = array_merge($request->validated(), [
+            'user_id' => $user->id
+        ]);
+
+        $product->reviews()->create($input);
 
         return back();
     }
