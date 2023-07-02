@@ -1,5 +1,5 @@
 import { IconButton, Typography } from "@material-tailwind/react"
-import { TruckIcon } from "@heroicons/react/24/outline";
+import { TruckIcon, BanknotesIcon } from "@heroicons/react/24/outline";
 
 import OrderItems from "../OrderItems/OrderItems";
 import { useState } from "react";
@@ -43,9 +43,19 @@ const parseOrderStatus = (order) => {
   switch(order.status){
     case 'PENDING_PAYMENT':
       parsed = (
-        <span className="font-normal">
-          Pending Payment
-        </span>
+        <div className="flex items-center gap-1">
+          <span className="font-normal">
+            Pending Payment
+          </span>
+          <a 
+            href={order.payment.url}
+            target="_blank"
+          >
+            <IconButton variant="text" color="green" size="sm">
+              <BanknotesIcon className="h-6 w-6" />
+            </IconButton>
+          </a>
+        </div>
       )
       break;
     case 'PLACED':

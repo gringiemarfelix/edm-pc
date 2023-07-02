@@ -19,7 +19,8 @@ class Order extends Model
 
     protected $with = [
         'items',
-        'lalamove'
+        'lalamove',
+        'payment'
     ];
 
     protected $appends = [
@@ -32,6 +33,11 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class, 'payment_id');
     }
 
     public function lalamove(): HasOne
