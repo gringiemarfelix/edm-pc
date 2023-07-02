@@ -18,4 +18,11 @@ class Promotion extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    // Attributes
+
+    public function getImageAttribute($image)
+    {
+        return asset("storage/{$image}");
+    }
 }
