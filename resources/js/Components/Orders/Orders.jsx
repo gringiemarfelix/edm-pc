@@ -146,28 +146,28 @@ const parseOrderStatus = (order) => {
       break;
     case 'COMPLETE':
       parsed = (
-        <Typography variant="small" color="blue-gray" className="font-normal">
-          Preparing Order
+        <Typography variant="small" color="green" className="font-normal">
+          Complete
         </Typography>
       )
       break;
     case 'FAILED':
       parsed = (
-        <Typography variant="small" color="blue-gray" className="font-normal text-red-500">
+        <Typography variant="small" color="red" className="font-normal">
           Failed
         </Typography>
       )
       break;
     case 'CANCELLED':
       parsed = (
-        <Typography variant="small" color="blue-gray" className="font-normal text-orange-900">
+        <Typography variant="small" color="amber" className="font-normal">
           Cancelled
         </Typography>
       )
       break;
     default:
       parsed = (
-        <Typography variant="small" color="blue-gray" className="font-normal">
+        <Typography variant="small" color="purple" className="font-normal">
           Unknown
         </Typography>
       )

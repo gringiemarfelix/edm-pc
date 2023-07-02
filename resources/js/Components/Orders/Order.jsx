@@ -95,7 +95,7 @@ const parseOrderStatus = (order) => {
     case 'COMPLETE':
       parsed = (
         <span className="font-normal">
-          Preparing Order
+          Complete
         </span>
       )
       break;
@@ -115,7 +115,7 @@ const parseOrderStatus = (order) => {
       break;
     default:
       parsed = (
-        <Typography variant="small" color="blue-gray" className="font-normal">
+        <Typography variant="small" color="purple" className="font-normal">
           Unknown
         </Typography>
       )
