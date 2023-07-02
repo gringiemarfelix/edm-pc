@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\UserAddressController;
 
@@ -92,30 +93,13 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
         return Inertia::render('Admin/Index');
     })->name('index');
 
-    Route::name('categories.')->prefix('categories')->controller(CategoryController::class)->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::post('create', 'create')->name('create');
-        Route::post('', 'store')->name('store');
-        Route::get('{category}/edit', 'edit')->name('edit');
-        Route::put('{category}', 'update')->name('update');
-        Route::delete('{category}', 'destroy')->name('destroy');
-    });
-    Route::name('brands.')->prefix('brands')->controller(BrandController::class)->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::post('create', 'create')->name('create');
-        Route::post('', 'store')->name('store');
-        Route::get('{brand}/edit', 'edit')->name('edit');
-        Route::put('{brand}', 'update')->name('update');
-        Route::delete('{brand}', 'destroy')->name('destroy');
-    });
-    Route::name('products.')->prefix('products')->controller(ProductController::class)->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::post('create', 'create')->name('create');
-        Route::post('', 'store')->name('store');
-        Route::get('{product}/edit', 'edit')->name('edit');
-        Route::put('{product}', 'update')->name('update');
-        Route::delete('{product}', 'destroy')->name('destroy');
-    });
+    Route::resources([
+        'promotions' => PromotionController::class,
+        'categories' => CategoryController::class,
+        'brands' => BrandController::class,
+        'products' => ProductController::class,
+    ]);
+    
     Route::name('orders.')->prefix('orders')->controller(OrderController::class)->group(function () {
         Route::get('', 'index')->name('index');
         Route::put('{order}', 'update')->name('update');
