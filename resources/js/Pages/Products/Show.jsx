@@ -168,9 +168,10 @@ const Show = () => {
                       variant="gradient"
                       color="blue"
                       className="flex items-center gap-3"
+                      disabled={product.stock == 0}
                     >
                       <ShoppingCartIcon className="h-6 w-6" />
-                      Add to Cart
+                      {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
                     </Button>
                   </Link>
                   <Link 
