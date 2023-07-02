@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\BrandController;
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\UserAddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +87,11 @@ Route::name('webhooks.')->prefix('webhooks')->controller(WebhookController::clas
     Route::post('lalamove', 'lalamove')->name('lalamove');
 });
 
-Route::name('admin.')->prefix('admin')->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('', function () {
+        return Inertia::render('Admin/Index');
+    })->name('index');
+
     Route::name('categories.')->prefix('categories')->controller(CategoryController::class)->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('create', 'create')->name('create');
@@ -114,6 +119,9 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::name('orders.')->prefix('orders')->controller(OrderController::class)->group(function () {
         Route::get('', 'index')->name('index');
         Route::put('{order}', 'update')->name('update');
+    });
+    Route::name('refunds.')->prefix('refunds')->controller(OrderController::class)->group(function () {
+        Route::get('', 'index')->name('index');
     });
 });
 
