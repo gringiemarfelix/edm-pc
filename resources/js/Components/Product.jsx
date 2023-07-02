@@ -103,8 +103,9 @@ const Product = ({ product }) => {
             fullWidth={false}
             color="gray"
             className="bg-blue-gray-900/10 text-blue-gray-900 w-full shadow-none transition-all duration-50 hover:shadow hover:scale-105 focus:shadow focus:scale-105 active:scale-100"
+            disabled={product.stock == 0}
           >
-            Add to Cart
+            {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
           </Button>
         </Link>
         <Link 
