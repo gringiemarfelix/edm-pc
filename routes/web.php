@@ -70,8 +70,8 @@ Route::name('profile.')->prefix('profile')->middleware('auth')->controller(Profi
 });
 
 Route::name('orders.')->prefix('orders')->controller(OrderController::class)->group(function () {
-    Route::get('{order}', 'show')->name('show')->can('view');
-    Route::get('{order}/items', 'items')->name('items')->can('view');
+    Route::get('{order}', 'show')->name('show');
+    Route::get('{order}/items', 'items')->name('items');
 });
 
 Route::name('address.')->prefix('profile/address/edit')->middleware('auth')->controller(UserAddressController::class)->group(function () {
