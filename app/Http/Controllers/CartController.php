@@ -102,7 +102,7 @@ class CartController extends Controller
 
             if($request->pay == 'links'){
                 $payment = Paymongo::link()->create([
-                    'amount' => intval($order->total * 100),
+                    'amount' => $order->total,
                     'description' => "Payment for {$order->id}",
                     'remarks' => "Payment for {$order->id}"
                 ]);
