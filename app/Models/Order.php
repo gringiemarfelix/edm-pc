@@ -2,20 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
     use HasFactory;
-
-    protected $casts = [
-        'created_at' => 'datetime:M d, Y - h:i:s A',
-        'updated_at' => 'datetime:M d, Y - h:i:s A',
-    ];
 
     protected $with = [
         'items',
@@ -27,6 +23,11 @@ class Order extends Model
         'items_count',
         'total'
     ];
+
+    protected function serializeDate(DateTimeInterface $date): string
+    {
+        return $date->format('M d, Y - h:i A');
+    }
 
     // Relationships
 
