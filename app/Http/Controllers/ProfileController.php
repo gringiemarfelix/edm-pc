@@ -46,6 +46,9 @@ class ProfileController extends Controller
         $user->load([
             'addresses' => function ($query) {
                 $query->orderBy('main', 'desc');
+            },
+            'orders' => function ($query) {
+                $query->orderBy('id', 'desc');
             }
         ]);
 
