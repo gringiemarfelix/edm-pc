@@ -57,8 +57,10 @@ class WebhookController extends Controller
         return response('OK');
     }
 
-    public function lalamove()
+    public function lalamove(Request $request)
     {
+        info(json_encode($request->all(), JSON_PRETTY_PRINT));
+
         return response('OK');
     }
 }
