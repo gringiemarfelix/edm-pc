@@ -48,6 +48,14 @@ class WebhookController extends Controller
             $lalamoveRecord->order = $orderResponse->orderId;
             $lalamoveRecord->share_link = $orderResponse->shareLink;
             $lalamoveRecord->save();
+
+            // Update Product Stocks
+            $items = $order->items;
+            foreach($items as $item){
+                $product = $item->product;
+                $product->decrement('stock', $item->quantity);
+                $product->save();
+            }
         } catch (\Throwable $th) {
             info('Something went wrong with Paymongo Webhook', [
                 'payload' => json_encode($request->all(), JSON_PRETTY_PRINT)
