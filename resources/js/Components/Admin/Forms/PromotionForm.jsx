@@ -23,7 +23,7 @@ const PromotionForm = ({ promotion }) => {
       return () => URL.revokeObjectURL(objectUrl)
     }
 
-    if(data.image == undefined){
+    if(data.image == undefined && promotion){
       setPreview(promotion.image)
     }
   }, [data.image])
