@@ -32,7 +32,7 @@ Route::name('products.')->controller(ProductController::class)->group(function (
 });
 
 Route::name('products.reviews.')->prefix('products/reviews')->controller(ProductReviewController::class)->group(function () {
-    Route::post('', 'store')->name('store');
+    Route::post('{product}', 'store')->name('store');
     Route::put('{review}', 'update')->name('update');
     Route::delete('{review}', 'destroy')->name('destroy');
 });
