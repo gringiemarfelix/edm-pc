@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('payment_id')->references('id')->on('payments')->nullable()->constrained();
             $table->string('status')->default('PENDING_PAYMENT');
             $table->string('delivery')->default('standard');
+            $table->double('delivery_fee', 11, 2)->default(100.00);
             $table->timestamps();
         });
     }
