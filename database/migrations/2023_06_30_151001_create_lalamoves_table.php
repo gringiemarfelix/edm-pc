@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('quotation')->nullable();
             $table->string('order')->nullable();
+            $table->string('share_link')->nullable();
             $table->timestamps();
         });
     }
