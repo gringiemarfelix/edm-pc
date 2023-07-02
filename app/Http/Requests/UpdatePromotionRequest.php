@@ -22,6 +22,7 @@ class UpdatePromotionRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'product_id' => ['integer', 'exists:products,id'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
             'image' => ['image', 'size:8192'],

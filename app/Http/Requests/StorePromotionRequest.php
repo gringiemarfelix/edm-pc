@@ -22,6 +22,7 @@ class StorePromotionRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'product_id' => ['integer', 'exists:products,id'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
             'image' => ['required', 'image', 'size:8192'],
