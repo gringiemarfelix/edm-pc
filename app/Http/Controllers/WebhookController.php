@@ -73,7 +73,7 @@ class WebhookController extends Controller
             }else if($event->eventType == 'ORDER_STATUS_CHANGED'){
                 $status = $event->data->order->status;
 
-                if($status == 'ASSIGNING_DRIVER'){
+                if(in_array($status, ['ASSIGNING_DRIVER', 'ON_GOING'])){
                     $orderRecord->status = 'PREPARING';
                 }else if($status == 'PICKED_UP'){
                     $orderRecord->status = 'DELIVERING';
