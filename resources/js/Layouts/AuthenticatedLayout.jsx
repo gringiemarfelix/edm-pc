@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
+import ApplicationLogo from '@/Components/Breeze/ApplicationLogo';
+import Dropdown from '@/Components/Breeze/Dropdown';
 import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import ResponsiveNavLink from '@/Components/Breeze/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
 export default function Authenticated({ user, header, children }) {
