@@ -4,15 +4,22 @@ import {
   DialogHeader,
   DialogBody,
   Spinner,
+  Button,
 } from "@material-tailwind/react";
+import { StarIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import OrderItem from "./OrderItem";
+import ReviewForm from "../Forms/ReviewForm";
 
 const TABLE_HEAD = ["Product", "Quantity", "Price", "Total"];
 
 const OrderItems = ({ viewing, closeModal, order }) => {
   const [loading, setLoading] = useState(true)
   const [items, setItems] = useState([])
+  const [reviewing, setReviewing] = useState({
+    product: null,
+    open: false
+  })
 
   useEffect(() => {
     if(!viewing && !order){
@@ -43,6 +50,20 @@ const OrderItems = ({ viewing, closeModal, order }) => {
     })
     .finally(() => {
       setLoading(false)
+    })
+  }
+
+  const openReview = (product) => {
+    setReviewing({
+      product: product,
+      open: true
+    })
+  }
+
+  const closeReview = () => {
+    setReviewing({
+      product: null,
+      open: false
     })
   }
 
@@ -90,9 +111,15 @@ const OrderItems = ({ viewing, closeModal, order }) => {
                           src={item.product.image.file == "" ? 'https://placehold.co/600x600' : null}
                           alt={item.product.name + ' image'}
                         />
-                        <Typography variant="paragraph" color="blue-gray" className="font-normal">
-                          {item.product.name}
-                        </Typography>
+                        <div>
+                          <Typography variant="paragraph" color="blue-gray" className="font-normal">
+                            {item.product.name}
+                          </Typography>
+                          <Button variant="text" color="amber" size="sm" className="flex items-center gap-3 text-xs" onClick={() => openReview(item.product)}>
+                            <StarIcon className="h-4 w-4" />
+                            {item.product.reviews.length == 0 ? 'Review' : 'Reviewed'}
+                          </Button>
+                        </div>
                       </td>
                       <td className={classes}>
                         <Typography variant="paragraph" color="blue-gray" className="font-normal">
@@ -167,6 +194,7 @@ const OrderItems = ({ viewing, closeModal, order }) => {
             </div>
           }
         </div>
+        <ReviewForm reviewing={reviewing.open} closeModal={closeReview} product={reviewing.product} />
       </DialogBody>
     </Dialog>
   )

@@ -18,6 +18,14 @@ class OrderController extends Controller
     public function items(Order $order)
     {
         Gate::authorize('view', $order);
+
+        $user = auth()->user();
+
+        $order->load([
+            'items.product.reviews' => function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            }
+        ]);
         
         return response()->json($order->items);
     }
