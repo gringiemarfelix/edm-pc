@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\UserAddressController;
@@ -28,6 +29,12 @@ Route::name('products.')->controller(ProductController::class)->group(function (
     Route::get('/', 'index')->name('index');
     Route::get('/products/search', 'search')->name('search');
     Route::get('/products/{product}', 'show')->name('show');
+});
+
+Route::name('products.reviews.')->prefix('products/reviews')->controller(ProductReviewController::class)->group(function () {
+    Route::post('', 'store')->name('store');
+    Route::put('{review}', 'update')->name('update');
+    Route::delete('{review}', 'destroy')->name('destroy');
 });
 
 Route::name('brands.')->controller(BrandController::class)->group(function () {
