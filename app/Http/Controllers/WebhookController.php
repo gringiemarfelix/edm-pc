@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Lalamove;
 use Illuminate\Http\Request;
-use App\Http\Requests\PaymongoRequest;
-use Lalamove\Client\V3\Client as LalamoveClient;
-use Lalamove\Requests\V3\Quotation;
 use Lalamove\Requests\V3\Order;
 use Lalamove\Requests\V3\Contact;
+use App\Http\Requests\PaymongoRequest;
+use Lalamove\Client\V3\Client as LalamoveClient;
 
 class WebhookController extends Controller
 {
@@ -60,6 +60,41 @@ class WebhookController extends Controller
     public function lalamove(Request $request)
     {
         info(json_encode($request->all(), JSON_PRETTY_PRINT));
+        
+        $event = json_decode(json_encode($request->all()));
+
+        try {
+            $orderRecord = Lalamove::findByOrder($event->data->order->orderId)->first()->order;
+    
+            if($event->eventType == 'ASSIGNING_DRIVER'){
+                $orderRecord->status = 'PREPARING';
+            }else if($event->eventType == 'DRIVER_ASSIGNED'){
+                $orderRecord->status = 'DELIVERING';
+            }else if($event->eventType == 'ORDER_STATUS_CHANGED'){
+                $status = $event->data->order->status;
+                
+                if($status == 'PICKED_UP'){
+                    $orderRecord->status = 'DELIVERING';
+                }else if($status == 'COMPLETED'){
+                    $orderRecord->status = 'COMPLETE';
+                }else{
+                    info('LALAMOVE WEBHOOK: status [else]', [
+                        'status' => $status
+                    ]);
+                }
+            }else{
+                info('LALAMOVE WEBHOOK: eventType [else]', [
+                    'event' => $event
+                ]);
+            }
+    
+            $orderRecord->save();
+        } catch (\Throwable $th) {
+            info('Something went wrong with Lalamove webhook', [
+                'payload' => $event,
+                'error' => $th
+            ]);
+        }
 
         return response('OK');
     }
