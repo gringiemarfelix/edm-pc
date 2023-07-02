@@ -16,6 +16,7 @@ import DeleteUser from "./Partials/DeleteUser";
 import TwoFactor from "./Partials/TwoFactor";
 import AddAddress from "@/Components/Forms/AddAddress";
 import AddressList from "@/Components/AddressList";
+import Orders from "@/Components/Orders/Orders";
 
 const Edit = () => {
   const { auth, active } = usePage().props
@@ -154,7 +155,7 @@ const Edit = () => {
                   <AddAddress addingAddress={addingAddress} closeModal={closeAddressModal} />
                 </TabPanel>
                 <TabPanel value="orders" className="py-2 text-blue-gray-900">
-                  Orders
+                  <Orders orders={auth.user.orders} />
                 </TabPanel>
                 <TabPanel value="refunds" className="py-2 text-blue-gray-900">
                   Refunds
