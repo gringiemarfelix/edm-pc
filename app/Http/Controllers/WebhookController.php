@@ -79,6 +79,8 @@ class WebhookController extends Controller
                     $orderRecord->status = 'DELIVERING';
                 }else if($status == 'COMPLETED'){
                     $orderRecord->status = 'COMPLETE';
+                }else if($status == 'REJECTED'){
+                    $orderRecord->status = 'FAILED';
                 }else{
                     info('LALAMOVE WEBHOOK: status [else]', [
                         'status' => $status
