@@ -22,7 +22,6 @@ class ProductReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => ['required', 'integer', 'exists:products,id'],
             'rating' => ['required', 'integer'],
             'review' => ['required', 'string'],
         ];

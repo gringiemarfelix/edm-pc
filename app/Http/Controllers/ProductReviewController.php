@@ -13,9 +13,8 @@ class ProductReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductReviewRequest $request)
+    public function store(ProductReviewRequest $request, Product $product)
     {
-        $product = Product::find($request->product_id);
         $product->reviews()->create($request->validated());
 
         return back();
