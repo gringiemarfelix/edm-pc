@@ -23,7 +23,10 @@ class PaymongoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'data.type' => ['string', Rule::in(['link', 'checkout_session'])]
+            'data' => ['required', 'array'],
+            'data.id' => ['required', 'string'],
+            'data.type' => ['required', 'string', Rule::in(['event'])],
+            'data.attributes' => ['required', 'array'],
         ];
     }
 }
