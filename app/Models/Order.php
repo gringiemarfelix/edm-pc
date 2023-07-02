@@ -18,7 +18,8 @@ class Order extends Model
     ];
 
     protected $with = [
-        'items'
+        'items',
+        'lalamove'
     ];
 
     protected $appends = [
