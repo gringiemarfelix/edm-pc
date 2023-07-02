@@ -149,16 +149,31 @@ const Edit = () => {
                 </TabPanel>
                 <TabPanel value="address" className="py-2 text-blue-gray-900">
                   <AddressList />
+                  {
+                    auth.user.addresses.length == 0 &&
+                    <div className="flex justify-center p-6">
+                      <Typography variant="paragraph" color="gray">No address found.</Typography>
+                    </div>
+                  }
                   <Button variant="gradient" color="blue" onClick={openAddressModal} className="my-6">
                     Add Address
                   </Button>
                   <AddAddress addingAddress={addingAddress} closeModal={closeAddressModal} />
                 </TabPanel>
                 <TabPanel value="orders" className="py-2 text-blue-gray-900">
-                  <Orders orders={auth.user.orders} />
+                  {
+                    auth.user.orders.length > 0 ?
+                    <Orders orders={auth.user.orders} />
+                    :
+                    <div className="flex justify-center p-6">
+                      <Typography variant="paragraph" color="gray">No orders found.</Typography>
+                    </div>
+                  }
                 </TabPanel>
                 <TabPanel value="refunds" className="py-2 text-blue-gray-900">
-                  Refunds
+                  <div className="flex justify-center p-6">
+                    <Typography variant="paragraph" color="gray">No refunds found.</Typography>
+                  </div>
                 </TabPanel>
               </TabsBody>
             </CardBody>
