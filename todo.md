@@ -11,7 +11,7 @@ Front
     - [x] Account
     - [x] Security
     - [x] Address
-    - [] Orders
+    - [x] Orders
     - [] Refunds
 - [x] Product
     - [x] Share to Social
