@@ -54,11 +54,12 @@ class WebhookController extends Controller
             foreach($items as $item){
                 $product = $item->product;
                 $product->decrement('stock', $item->quantity);
-                $product->save();
+                info($product);
             }
         } catch (\Throwable $th) {
             info('Something went wrong with Paymongo Webhook', [
-                'payload' => json_encode($request->all(), JSON_PRETTY_PRINT)
+                'payload' => json_encode($request->all(), JSON_PRETTY_PRINT),
+                'error' => $th
             ]);
         }
 
