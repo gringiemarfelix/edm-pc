@@ -51,5 +51,7 @@ class AuthServiceProvider extends ServiceProvider
                     ? Response::allow() 
                     : Response::deny();
         });
+
+        $this->registerPolicies();
     }
 }
