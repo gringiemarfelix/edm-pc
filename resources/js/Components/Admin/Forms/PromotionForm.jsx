@@ -1,13 +1,13 @@
 import { useForm } from "@inertiajs/react";
-import { Button, Card, CardBody, CardFooter, CardHeader, Input, Typography, Progress } from "@material-tailwind/react"
-import { CloudArrowUpIcon, } from "@heroicons/react/24/solid";
+import { Alert, Button, Card, CardBody, CardFooter, CardHeader, Input, Typography, Progress } from "@material-tailwind/react"
+import { CloudArrowUpIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef, useState } from "react";
 
 const PromotionForm = ({ promotion }) => {
   const imagesInput = useRef()
 
   const [preview, setPreview] = useState(null)
-  const { data, setData, post, processing, errors, reset, progress } = useForm({
+  const { data, setData, post, processing, errors, reset, progress, recentlySuccessful } = useForm({
     title: promotion?.title ?? "",
     description: promotion?.description ?? "",
     image: undefined
@@ -51,6 +51,18 @@ const PromotionForm = ({ promotion }) => {
           <Typography variant="h6" color="blue-gray">
             Create Promotion
           </Typography>
+          <Alert
+            color="green"
+            icon={
+              <InformationCircleIcon
+                strokeWidth={2}
+                className="h-6 w-6"
+              />
+            }
+            open={recentlySuccessful}
+          >
+            {!promotion ? 'Created successfully' : 'Updated successfully'}
+          </Alert>
           {
             progress && (
               <Progress value={progress.percentage} size="lg" label=" " />
