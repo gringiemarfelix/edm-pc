@@ -22,9 +22,9 @@ const Order = ({ order }) => {
               View Items
             </Typography>
           </div>
-          <Typography variant="small" color="blue-gray" className="font-medium">
+          <div className="font-medium text-sm text-blue-gray-900">
             Status: {parseOrderStatus(order)}
-          </Typography>
+          </div>
           <Typography variant="small" color="blue-gray" className="font-medium">
             Items: <span className="font-normal">{order.items_count}</span>
           </Typography>
