@@ -1,5 +1,5 @@
 import { IconButton, Typography } from "@material-tailwind/react";
-import { ListBulletIcon } from "@heroicons/react/24/outline";
+import { TruckIcon, ListBulletIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import OrderItems from "../OrderItems/OrderItems";
 import Order from "./Order";
@@ -58,7 +58,7 @@ const Orders = ({ orders }) => {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    {parseOrderStatus(order.status)}
+                    {parseOrderStatus(order)}
                   </td>
                   <td className={classes + ' flex items-center gap-1'}>
                     {order.items_count}
@@ -90,13 +90,68 @@ const Orders = ({ orders }) => {
   )
 }
 
-const parseOrderStatus = (status) => {
+const parseOrderStatus = (order) => {
   let parsed = '';
-  switch(status){
+  switch(order.status){
     case 'PENDING_PAYMENT':
       parsed = (
         <Typography variant="small" color="blue-gray" className="font-normal">
           Pending Payment
+        </Typography>
+      )
+      break;
+    case 'PLACED':
+      parsed = (
+        <Typography variant="small" color="blue-gray" className="font-normal">
+          Order Placed
+        </Typography>
+      )
+      break;
+    case 'PREPARING':
+      parsed = (
+        <Typography variant="small" color="blue-gray" className="font-normal">
+          Preparing Order
+        </Typography>
+      )
+      break;
+    case 'DELIVERING':
+      parsed = (
+        <div className="flex items-center gap-1">
+          <Typography variant="small" color="blue-gray" className="font-normal">
+            On the way
+          </Typography>
+          {
+            order.delivery == 'lalamove' &&
+            <a 
+              href={order.lalamove.share_link}
+              target="_blank"
+            >
+              <IconButton variant="text" color="orange" size="sm">
+                <TruckIcon className="h-6 w-6" />
+              </IconButton>
+            </a>
+          }
+        </div>
+      )
+      break;
+    case 'COMPLETE':
+      parsed = (
+        <Typography variant="small" color="blue-gray" className="font-normal">
+          Preparing Order
+        </Typography>
+      )
+      break;
+    case 'FAILED':
+      parsed = (
+        <Typography variant="small" color="blue-gray" className="font-normal text-red-500">
+          Failed
+        </Typography>
+      )
+      break;
+    case 'CANCELLED':
+      parsed = (
+        <Typography variant="small" color="blue-gray" className="font-normal text-orange-900">
+          Cancelled
         </Typography>
       )
       break;
