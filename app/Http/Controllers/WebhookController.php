@@ -42,10 +42,11 @@ class WebhookController extends Controller
             $lalamoveOrder = new Order($quotationResponse->quotationId, $sender, [$receiver]);
     
             $orderResponse = $this->lalamove->orders()->create($lalamoveOrder);
-    
+
             // Save Order ID to Database
             $lalamoveRecord = $order->lalamove;
             $lalamoveRecord->order = $orderResponse->orderId;
+            $lalamoveRecord->share_link = $orderResponse->shareLink;
             $lalamoveRecord->save();
         } catch (\Throwable $th) {
             info('Something went wrong with Paymongo Webhook', [
