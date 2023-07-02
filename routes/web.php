@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserAddressController;
@@ -66,6 +67,11 @@ Route::name('profile.')->prefix('profile')->middleware('auth')->controller(Profi
     Route::get('refunds', 'edit')->name('refunds');
     Route::patch('', 'update')->name('update');
     Route::delete('', 'destroy')->name('destroy');
+});
+
+Route::name('orders.')->prefix('orders')->controller(OrderController::class)->group(function () {
+    Route::get('{order}', 'show')->name('show');
+    Route::get('{order}/items', 'items')->name('items');
 });
 
 Route::name('address.')->prefix('profile/address/edit')->middleware('auth')->controller(UserAddressController::class)->group(function () {
