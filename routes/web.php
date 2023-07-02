@@ -86,4 +86,35 @@ Route::name('webhooks.')->prefix('webhooks')->controller(WebhookController::clas
     Route::get('lalamove', 'lalamove')->name('lalamove');
 });
 
+Route::name('admin.')->prefix('admin')->group(function () {
+    Route::name('categories.')->prefix('categories')->controller(CategoryController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::post('create', 'create')->name('create');
+        Route::post('', 'store')->name('store');
+        Route::get('{category}/edit', 'edit')->name('edit');
+        Route::put('{category}', 'update')->name('update');
+        Route::delete('{category}', 'destroy')->name('destroy');
+    });
+    Route::name('brands.')->prefix('brands')->controller(BrandController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::post('create', 'create')->name('create');
+        Route::post('', 'store')->name('store');
+        Route::get('{brand}/edit', 'edit')->name('edit');
+        Route::put('{brand}', 'update')->name('update');
+        Route::delete('{brand}', 'destroy')->name('destroy');
+    });
+    Route::name('products.')->prefix('products')->controller(ProductController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::post('create', 'create')->name('create');
+        Route::post('', 'store')->name('store');
+        Route::get('{product}/edit', 'edit')->name('edit');
+        Route::put('{product}', 'update')->name('update');
+        Route::delete('{product}', 'destroy')->name('destroy');
+    });
+    Route::name('orders.')->prefix('orders')->controller(OrderController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::put('{order}', 'update')->name('update');
+    });
+});
+
 require __DIR__.'/auth.php';
