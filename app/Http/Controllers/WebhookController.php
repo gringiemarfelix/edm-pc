@@ -64,7 +64,7 @@ class WebhookController extends Controller
         $event = json_decode(json_encode($request->all()));
 
         try {
-            $orderRecord = Lalamove::findByOrder($event->data->order->orderId)->first()->order;
+            $orderRecord = Lalamove::findByOrder($event->data->order->orderId)->first()->order()->first;
     
             if($event->eventType == 'ASSIGNING_DRIVER'){
                 $orderRecord->status = 'PREPARING';
