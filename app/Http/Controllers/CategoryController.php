@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
-use App\Models\Brand;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Brand;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -16,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Admin/Categories/Index', [
+            'categories' => Category::withCount('products')->get()
+        ]);
     }
 
     /**
@@ -24,15 +26,24 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Categories/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $input = $request->validated();
+        if(!$request->slug){
+            $input = array_merge($request->validated(), [
+                'slug' => Str::slug($request->name)
+            ]);
+        }
+
+        Category::create($input);
+
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -70,15 +81,26 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return Inertia::render('Admin/Categories/Edit', [
+            'category' => $category
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $input = $request->validated();
+        if(!$request->slug){
+            $input = array_merge($request->validated(), [
+                'slug' => Str::slug($request->name)
+            ]);
+        }
+
+        $category->update($input);
+
+        return back();
     }
 
     /**
@@ -86,6 +108,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return back();
     }
 }
