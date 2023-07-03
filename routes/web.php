@@ -26,7 +26,7 @@ use App\Http\Controllers\UserAddressController;
 */
 
 Route::name('products.')->controller(ProductController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
+    Route::get('/', 'home')->name('index');
     Route::get('/products/search', 'search')->name('search');
     Route::get('/products/{product}', 'show')->name('show');
 });
@@ -102,6 +102,9 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
 
     Route::post('promotions/{promotion}', [PromotionController::class, 'update'])->name('promotions.update');
     Route::post('brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
+    Route::post('products/{product}', [ProductController::class, 'update'])->name('products.update');
+
+    Route::delete('products/{product}/images/{productImage}', [ProductController::class, 'destroyImage'])->name('products.images.destroy');
 
     Route::resources([
         'promotions' => PromotionController::class,

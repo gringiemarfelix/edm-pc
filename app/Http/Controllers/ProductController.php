@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
-use Inertia\Inertia;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
+    public function home(Request $request)
     {
         $user = auth()->user();
         $wishlist = [];
@@ -98,19 +96,50 @@ class ProductController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return Inertia::render('Admin/Products/Index', [
+            'products' => Product::with('category')->get()
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Products/Create', [
+            'categories' => Category::get(),
+            'brands' => Brand::get(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $input = $request->safe()->except(['images']);
+        if(!$request->slug){
+            $input = array_merge($request->safe()->except(['images']), [
+                'slug' => Str::slug($request->name)
+            ]);
+        }
+        $product = Product::create($input);
+
+        if(!is_null($request->file('images')) && count($request->file('images'))){
+            foreach($request->file('images') as $image){
+                $file = $image->store('products/images', 'public');
+                
+                $product->images()->create([
+                    'file' => $file
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -148,15 +177,37 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return Inertia::render('Admin/Products/Edit', [
+            'categories' => Category::get(),
+            'brands' => Brand::get(),
+            'product' => $product->load('images')
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $input = $request->safe()->except(['images']);
+        if(!$request->slug){
+            $input = array_merge($request->safe()->except(['images']), [
+                'slug' => Str::slug($request->name)
+            ]);
+        }
+        $product->update($input);
+
+        if(!is_null($request->file('images')) && count($request->file('images'))){
+            foreach($request->file('images') as $image){
+                $file = $image->store('products/images', 'public');
+                
+                $product->images()->create([
+                    'file' => $file
+                ]);
+            }
+        }
+
+        return back();
     }
 
     /**
@@ -164,7 +215,19 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return back();
+    }
+
+    /**
+     * Delete ProductImage
+     */
+    public function destroyImage(Product $product, ProductImage $productImage)
+    {
+        $productImage->delete();
+
+        return back();
     }
 
     private function getPaymentMethods()

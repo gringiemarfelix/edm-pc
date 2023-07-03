@@ -9,6 +9,10 @@ class ProductImage extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'file'
+    ];
+
     public function getFileAttribute($file)
     {
         return asset("storage/{$file}");
