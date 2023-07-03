@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->double('price', 11, 2);
-            $table->integer('stock');
+            $table->integer('stock')->default(0);
+            $table->integer('sold')->default(0);
             $table->timestamps();
         });
     }
