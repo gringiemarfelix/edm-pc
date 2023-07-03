@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/react"
 import { Avatar, Button, Card, Typography, } from "@material-tailwind/react"
 import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-const TABLE_HEAD = ["Name", "Brand", "Category", "Stock", ""];
+const TABLE_HEAD = ["Name", "Brand", "Category", "Price", "Stock", "Sold",  ""];
 
 const Index = ({ products }) => {
   return (
@@ -65,6 +65,21 @@ const Index = ({ products }) => {
                       <td className="p-4">
                         <Typography variant="small" color="blue-gray" className="font-normal">
                           {product.brand.name}
+                        </Typography>
+                      </td>
+                      <td className="p-4">
+                        <Typography variant="small" color="blue-gray" className="font-normal">
+                          P{product.price.toLocaleString('en-US')}
+                        </Typography>
+                      </td>
+                      <td className="p-4">
+                        <Typography variant="small" color="blue-gray" className="font-normal">
+                          {product.stock}
+                        </Typography>
+                      </td>
+                      <td className="p-4">
+                        <Typography variant="small" color="blue-gray" className="font-normal">
+                          {product.sold}
                         </Typography>
                       </td>
                       <td className="p-4">
