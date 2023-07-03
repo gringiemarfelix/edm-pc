@@ -79,6 +79,8 @@ Route::name('profile.')->prefix('profile')->middleware('auth')->controller(Profi
 });
 
 Route::name('orders.')->prefix('orders')->controller(OrderController::class)->group(function () {
+    Route::get('pending', 'pendingCount')->name('pending_count');
+    
     Route::get('{order}', 'show')->name('show');
     Route::get('{order}/items', 'items')->name('items');
 });

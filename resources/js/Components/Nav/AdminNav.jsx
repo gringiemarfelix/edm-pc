@@ -21,7 +21,7 @@ import {
   FilmIcon
 } from "@heroicons/react/24/solid";
 import { Link } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
  
 const AdminNav = () => {
   const [open, setOpen] = useState(false)
@@ -73,6 +73,17 @@ const AdminNav = () => {
 }
 
 const Content = () => {
+  const [pendingCount, setPendingCount] = useState(0)
+
+  useEffect(() => {
+    getPendingOrders()
+  }, [])
+
+  const getPendingOrders = async () => {
+    await axios.get(route('orders.pending_count'))
+    .then(({ data }) => setPendingCount(data))
+  }
+
   return (
     <Card className="h-full w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
@@ -127,9 +138,12 @@ const Content = () => {
               <TruckIcon className="h-5 w-5" />
             </ListItemPrefix>
             Orders
-            <ListItemSuffix>
-              <Chip value={14} size="sm" variant="ghost" color="blue" className="rounded-full" />
-            </ListItemSuffix>
+            {
+              pendingCount > 0 &&
+              <ListItemSuffix>
+                <Chip value={pendingCount} size="sm" variant="ghost" color="blue" className="rounded-full" />
+              </ListItemSuffix>
+            }
           </ListItem>
         </Link>
         <Link href={route('admin.refunds.index')}>

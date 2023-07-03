@@ -29,4 +29,13 @@ class OrderController extends Controller
         
         return response()->json($order->items);
     }
+
+    public function pendingCount()
+    {
+        return Order::whereIn('status', [
+            'PLACED',
+            'PREPARING',
+            'DELIVERING',
+        ])->count();
+    }
 }
