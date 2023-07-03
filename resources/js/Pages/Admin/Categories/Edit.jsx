@@ -2,7 +2,7 @@ import AdminLayout from "@/Layouts/AdminLayout"
 import { Head } from "@inertiajs/react"
 import CategoryForm from "@/Components/Admin/Forms/CategoryForm"
 
-const Create = ({ category }) => {
+const Edit = ({ category }) => {
   return (
     <AdminLayout>
       <Head title="Edit Category" />
@@ -13,4 +13,4 @@ const Create = ({ category }) => {
   )
 }
 
-export default Create
+export default Edit
