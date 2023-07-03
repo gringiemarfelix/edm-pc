@@ -24,7 +24,7 @@ const Product = ({ product }) => {
 
   return (
     <Card className="transition-shadow duration-300 hover:shadow-lg">
-      <Link href={route('products.show', { product: product.id })}>
+      <Link href={route('products.show', { product: product.slug })}>
         <CardHeader shadow={false} floated={false} className="mt-2 mx-2 lg:mt-4 lg:mx-4 h-48">
           <img 
             src={product.image?.file ?? "https://placehold.co/600x400"}
@@ -39,7 +39,7 @@ const Product = ({ product }) => {
             {product.brand.name}
           </Typography>
         </Link>
-        <Link href={route('products.show', { product: product.id })}>
+        <Link href={route('products.show', { product: product.slug })}>
           <div className="flex flex-col">
             <Typography color="blue-gray" className="font-medium truncate">
               {product.name}

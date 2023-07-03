@@ -28,7 +28,7 @@ use App\Http\Controllers\UserAddressController;
 Route::name('products.')->controller(ProductController::class)->group(function () {
     Route::get('/', 'home')->name('index');
     Route::get('/products/search', 'search')->name('search');
-    Route::get('/products/{product}', 'show')->name('show');
+    Route::get('/products/{product:slug}', 'show')->name('show');
 });
 
 Route::name('products.reviews.')->prefix('products/reviews')->controller(ProductReviewController::class)->group(function () {
