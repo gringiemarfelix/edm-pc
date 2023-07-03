@@ -50,13 +50,14 @@ const Product = ({ product }) => {
           </div>
           <div className="flex items-center gap-1">
             <Rating 
-              value={4} 
+              value={product.rating ? parseInt(product.rating) : 0}
               ratedIcon={<StarIcon className="w-4 h-4 cursor-default"/>}
               unratedIcon={<OutlineStarIcon className="w-4 h-4 cursor-default" />}
+              count={5}
               readonly 
             />
             <Typography color="blue-gray" className="font-medium text-sm">
-              {product.rating} <span className="text-gray-500 text-xs align-middle">({product.rating_count})</span>
+              {product.rating ? parseFloat(product.rating).toFixed(1) : 0} <span className="text-gray-500 text-xs align-middle">({product.rating_count})</span>
             </Typography>
           </div>
           <Typography variant="small" color="blue-gray" className="text-gray-700 text-xs">
