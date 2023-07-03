@@ -90,7 +90,12 @@ const Show = () => {
               <div className="flex flex-col gap-4" id="carouselContainer">
                 <Carousel
                   className="rounded-xl max-w-sm shadow-md"
-                  navigation={CarouselNavigation}
+                  navigation={({ ...props }) => (
+                    <CarouselNavigation 
+                      images={images} 
+                      {...props} 
+                    />
+                  )}
                   loop
                 >
                   {
@@ -294,7 +299,7 @@ const Show = () => {
   )
 }
 
-const CarouselNavigation = ({ setActiveIndex, activeIndex, length }) => {
+const CarouselNavigation = ({ setActiveIndex, activeIndex, length, images }) => {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -321,7 +326,7 @@ const CarouselNavigation = ({ setActiveIndex, activeIndex, length }) => {
         <img
           key={i}
           id={`image-${i}`}
-          src={"https://placehold.co/600x400"}
+          src={images[i]}
           className={`cursor-pointer transition-all duration-300 max-w-[10rem] rounded
             ${activeIndex === i ? "bg-white opacity-100 shadow" : "bg-white/50 opacity-75"}
           `}
