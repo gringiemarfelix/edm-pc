@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ApplicationLogo from '@/Components/Breeze/ApplicationLogo';
 import Dropdown from '@/Components/Breeze/Dropdown';
-import NavLink from '@/Components/NavLink';
+import NavLink from '@/Components/Breeze/NavLink';
 import ResponsiveNavLink from '@/Components/Breeze/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
