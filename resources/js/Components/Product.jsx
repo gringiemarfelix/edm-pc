@@ -56,11 +56,11 @@ const Product = ({ product }) => {
               readonly 
             />
             <Typography color="blue-gray" className="font-medium text-sm">
-              4.0 <span className="text-gray-500 text-xs align-middle">(2)</span>
+              {product.rating} <span className="text-gray-500 text-xs align-middle">({product.rating_count})</span>
             </Typography>
           </div>
           <Typography variant="small" color="blue-gray" className="text-gray-700 text-xs">
-            0 sold
+            {product.sold} sold
           </Typography>
         </Link>
       </CardBody>
