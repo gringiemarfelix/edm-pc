@@ -124,11 +124,14 @@ const Show = () => {
                   {product.name}
                 </Typography>
                 <div className="flex items-center mb-3">
-                  <Rating value={4} readonly />
+                  <Rating value={product.rating ? parseInt(product.rating) : 0} readonly />
                   <small className="text-blue-gray-900 font-medium text-sm ml-1">
-                    4.0 <span className="text-gray-500 text-xs">(22)</span>
+                    {product.rating ? parseFloat(product.rating).toFixed(1) : 0} <span className="text-gray-500 text-xs">({product.rating_count})</span>
                   </small>
                 </div>
+                <Typography variant="small" color="blue-gray" className="font-medium">
+                  {product.sold} <span className="text-gray-500">sold</span>
+                </Typography>
                 <Typography variant="paragraph" color={product.stock !== 0 ? 'green' : 'red'}>
                   {product.stock !== 0 ? 'Available' : 'Out of Stock'}
                 </Typography>
