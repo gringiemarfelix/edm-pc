@@ -21,10 +21,10 @@ Front
     - [x] Brands
 
 Back
-- [] Categories
-- [] Brands
-- [] Products
-- [] Orders
+- [x] Categories
+- [x] Brands
+- [x] Products
+- [x] Orders
 - [] Refunds
 
 Feature
