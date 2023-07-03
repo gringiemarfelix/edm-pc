@@ -7,7 +7,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 const Index = ({ promotions }) => {
   return (
     <AdminLayout>
-      <Head title="Dashboard" />
+      <Head title="Promotions" />
       <div className="h-full w-full">
         <div className="flex w-fit gap-3 p-6">
           <Typography variant="h4">
