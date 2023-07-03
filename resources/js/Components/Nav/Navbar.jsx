@@ -56,12 +56,18 @@ const navListMenuItems = [
     icon: CpuIcon,
     title: "CPU",
     description: "Central Processing Unit",
+    href: route('categories.show', {
+      category: "cpu"
+    })
   },
   {
     color: "orange",
     icon: MotherboardIcon,
     title: "Motherboard",
     description: "Your machine's backbone for components.",
+    href: route('categories.show', {
+      category: "motherboard"
+    })
   },
   {
     color: "green",
@@ -79,36 +85,54 @@ const navListMenuItems = [
       </div>
     ),
     description: "Graphics Processing Unit",
+    href: route('categories.show', {
+      category: "gpu"
+    })
   },
   {
     color: "blue-gray",
     icon: RamIcon,
     title: "RAM",
     description: "Random Access Memory",
+    href: route('categories.show', {
+      category: "ram"
+    })
   },
   {
     color: "purple",
     icon: HardDriveIcon,
     title: "Storage",
     description: "Your data storage.",
+    href: route('categories.show', {
+      category: "storage"
+    })
   },
   {
     color: "teal",
     icon: DisplayIcon,
     title: "Display",
     description: "Your monitor of choice.",
+    href: route('categories.show', {
+      category: "display"
+    })
   },
   {
     color: "cyan",
     icon: CaseIcon,
     title: "Case",
     description: "The housing for your components.",
+    href: route('categories.show', {
+      category: "case"
+    })
   },
   {
     color: "pink",
     icon: FanIcon,
     title: "Fans",
     description: "Your cooling setup.",
+    href: route('categories.show', {
+      category: "fans"
+    })
   },
 ];
  
@@ -117,8 +141,8 @@ function NavListMenu() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
  
   const renderItems = navListMenuItems.map(
-    ({ icon, title, description, color }, key) => (
-      <a href="#" key={key}>
+    ({ icon, title, description, color, href }, key) => (
+      <a href={href} key={key}>
         <MenuItem className="flex items-center gap-3 rounded-lg">
           <div className={`rounded-lg p-5 ${colors[color]}`}>
             {React.createElement(icon, {
@@ -211,30 +235,38 @@ function NavList() {
         </Typography>
       </Link>
       <NavListMenu />
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-normal"
+      <Link
+        href={route('categories.show', {
+          category: "laptop"
+        })}
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          <AiOutlineLaptop />
-          Laptops
-        </ListItem>
-      </Typography>
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-normal"
+        <Typography
+          variant="small"
+          color="blue-gray"
+          className="font-normal"
+        >
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            <AiOutlineLaptop />
+            Laptops
+          </ListItem>
+        </Typography>
+      </Link>
+      <Link
+        href={route('categories.show', {
+          category: "desktop"
+        })}
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          <AiOutlineDesktop />
-          Desktops
-        </ListItem>
-      </Typography>
+        <Typography
+          variant="small"
+          color="blue-gray"
+          className="font-normal"
+        >
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            <AiOutlineDesktop />
+            Desktops
+          </ListItem>
+        </Typography>
+      </Link>
     </List>
   );
 }
