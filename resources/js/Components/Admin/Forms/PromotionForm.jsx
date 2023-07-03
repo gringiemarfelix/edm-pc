@@ -49,7 +49,7 @@ const PromotionForm = ({ promotion }) => {
       <Card>
         <CardHeader className="shadow-none p-6" floated={false}>
           <Typography variant="h6" color="blue-gray">
-            Create Promotion
+            {!promotion ? 'Create' : 'Edit'} Promotion
           </Typography>
           <Alert
             color="green"
