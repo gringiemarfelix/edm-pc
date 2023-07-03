@@ -8,7 +8,7 @@ const TABLE_HEAD = ["Name", "Products", ""];
 const Index = ({ categories }) => {
   return (
     <AdminLayout>
-      <Head title="Dashboard" />
+      <Head title="Categories" />
       <div className="h-full w-full">
         <div className="flex w-fit gap-3 p-6">
           <Typography variant="h4">
