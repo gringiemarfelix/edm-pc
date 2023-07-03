@@ -119,8 +119,10 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
         Route::get('', 'index')->name('index');
         Route::put('{order}', 'update')->name('update');
     });
-    Route::name('refunds.')->prefix('refunds')->controller(OrderController::class)->group(function () {
-        Route::get('', 'index')->name('index');
+    Route::name('refunds.')->prefix('refunds')->group(function () {
+        Route::get('', function () {
+            return Inertia::render('Admin/Refunds/Index');
+        })->name('index');
     });
 });
 
