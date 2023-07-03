@@ -3,7 +3,7 @@ import { Typography, Button } from "@material-tailwind/react"
 import { StarIcon } from "@heroicons/react/24/solid";
 import ReviewForm from "../Forms/ReviewForm";
 
-const OrderItem = ({ item }) => {
+const OrderItem = ({ item, status }) => {
   const [reviewing, setReviewing] = useState({
     product: null,
     open: false
@@ -32,10 +32,13 @@ const OrderItem = ({ item }) => {
             src={item.product.image.file == "" ? 'https://placehold.co/600x600' : ''}
             alt="nature image"
           />
-          <Button variant="text" color="amber" size="sm" className="flex items-center gap-3 text-xs mt-3" onClick={() => openReview(item.product)}>
-            <StarIcon className="h-4 w-4" />
-            {item.product.reviews.length == 0 ? 'Review' : 'Reviewed'}
-          </Button>
+          {
+            status === 'COMPLETE' &&
+            <Button variant="text" color="amber" size="sm" className="flex items-center gap-3 text-xs mt-3" onClick={() => openReview(item.product)}>
+              <StarIcon className="h-4 w-4" />
+              {item.product.reviews.length == 0 ? 'Review' : 'Reviewed'}
+            </Button>
+          }
         </div>
         <div className="flex flex-col w-full">
           <Typography variant="paragraph" color="blue-gray" className="font-normal mb-3">

@@ -115,10 +115,13 @@ const OrderItems = ({ viewing, closeModal, order }) => {
                           <Typography variant="paragraph" color="blue-gray" className="font-normal">
                             {item.product.name}
                           </Typography>
-                          <Button variant="text" color="amber" size="sm" className="flex items-center gap-3 text-xs" onClick={() => openReview(item.product)}>
-                            <StarIcon className="h-4 w-4" />
-                            {item.product.reviews.length == 0 ? 'Review' : 'Reviewed'}
-                          </Button>
+                          {
+                            order?.status === 'COMPLETE' &&
+                            <Button variant="text" color="amber" size="sm" className="flex items-center gap-3 text-xs" onClick={() => openReview(item.product)}>
+                              <StarIcon className="h-4 w-4" />
+                              {item.product.reviews.length == 0 ? 'Review' : 'Reviewed'}
+                            </Button>
+                          }
                         </div>
                       </td>
                       <td className={classes}>
@@ -176,7 +179,7 @@ const OrderItems = ({ viewing, closeModal, order }) => {
         <div className="flex flex-col divide-y lg:hidden">
           {
             items.map(item =>
-              <OrderItem key={item.id} item={item} />
+              <OrderItem key={item.id} item={item} status={order?.status} />
             )
           }
           {
