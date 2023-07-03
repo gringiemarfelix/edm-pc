@@ -16,7 +16,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Admin/Brands/Index', [
+            'brands' => Brand::withCount('products')->get()
+        ]);
     }
 
     /**
@@ -24,7 +26,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Brands/Create');
     }
 
     /**
@@ -32,7 +34,15 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        //
+        $logo = $request->file('logo')->store('brands', 'public');
+
+        $input = array_merge($request->validated(), [
+            'logo' => $logo
+        ]);
+
+        Brand::create($input);
+
+        return redirect()->route('admin.brands.index');
     }
 
     /**
@@ -70,7 +80,9 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return Inertia::render('Admin/Brands/Edit', [
+            'brand' => $brand
+        ]);
     }
 
     /**
@@ -78,7 +90,19 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $input = $request->validated();
+
+        if($request->file('logo')){
+            $logo = $request->file('logo')->store('brands', 'public');
+    
+            $input = array_merge($request->validated(), [
+                'logo' => $logo
+            ]);
+        }
+
+        $brand->update($input);
+
+        return back();
     }
 
     /**
@@ -86,6 +110,8 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+
+        return back();
     }
 }
