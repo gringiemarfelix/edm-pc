@@ -77,7 +77,7 @@ const Show = () => {
                 </Link>
                 <Link 
                   href={route('products.show', {
-                    product: product.id
+                    product: product.slug
                   })}
                 >
                   {product.name}
