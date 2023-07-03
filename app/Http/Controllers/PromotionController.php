@@ -41,7 +41,7 @@ class PromotionController extends Controller
             'image' => $image,
         ]);
 
-        return back();
+        return redirect()->route('admin.promotions.index');
     }
 
     /**
