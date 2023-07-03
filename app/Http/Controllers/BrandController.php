@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
@@ -39,6 +40,12 @@ class BrandController extends Controller
         $input = array_merge($request->validated(), [
             'logo' => $logo
         ]);
+        
+        if(!$request->slug){
+            $input = array_merge($input, [
+                'slug' => Str::slug($request->name)
+            ]);
+        }
 
         Brand::create($input);
 
@@ -97,6 +104,12 @@ class BrandController extends Controller
     
             $input = array_merge($request->validated(), [
                 'logo' => $logo
+            ]);
+        }
+        
+        if(!$request->slug){
+            $input = array_merge($input, [
+                'slug' => Str::slug($request->name)
             ]);
         }
 
