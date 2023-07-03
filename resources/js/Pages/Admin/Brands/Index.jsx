@@ -50,6 +50,7 @@ const Index = ({ brands }) => {
                             alt={brand.name + ' image'}
                             size="md"
                             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                            variant="rounded"
                           />
                           <Typography variant="small" color="blue-gray" className="font-normal">
                             {brand.name}
