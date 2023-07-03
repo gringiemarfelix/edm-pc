@@ -2,7 +2,6 @@ import AdminLayout from "@/Layouts/AdminLayout"
 import { Head, Link } from "@inertiajs/react"
 import { Button, Card, Typography, } from "@material-tailwind/react"
 import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
-import Category from "@/Components/Admin/Category";
 
 const TABLE_HEAD = ["Name", "Products", ""];
 
