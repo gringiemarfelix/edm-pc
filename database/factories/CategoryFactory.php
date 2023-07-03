@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class CategoryFactory extends Factory
         
         return [
             'name' => $word,
-            'slug' => strtolower($word)
+            'slug' => Str::slug($word)
         ];
     }
 }
