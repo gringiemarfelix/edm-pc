@@ -19,6 +19,11 @@ class Product extends Model
         'image'
     ];
 
+    protected $appends = [
+        'rating',
+        'rating_count'
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -42,5 +47,17 @@ class Product extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(ProductReview::class);
+    }
+
+    // Attributes
+
+    public function getRatingAttribute()
+    {
+        return $this->reviews()->avg('rating');
+    }
+
+    public function getRatingCountAttribute()
+    {
+        return $this->reviews()->count();
     }
 }
