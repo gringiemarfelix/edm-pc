@@ -100,7 +100,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
         return Inertia::render('Admin/Index');
     })->name('index');
 
-    Route::post('promotions/{promotion}', [PromotionController::class, 'update'])->name('promotion.update');
+    Route::post('promotions/{promotion}', [PromotionController::class, 'update'])->name('promotions.update');
+    Route::post('brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
 
     Route::resources([
         'promotions' => PromotionController::class,
