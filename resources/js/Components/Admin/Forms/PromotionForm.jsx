@@ -47,7 +47,7 @@ const PromotionForm = ({ promotion }) => {
   return (
     <form className="min-w-[50%] max-w-xl" onSubmit={submit}>
       <Card>
-        <CardHeader className="shadow-none p-6" floated={false}>
+        <CardHeader className="shadow-none p-6 m-0" floated={false}>
           <Typography variant="h6" color="blue-gray">
             {!promotion ? 'Create' : 'Edit'} Promotion
           </Typography>
