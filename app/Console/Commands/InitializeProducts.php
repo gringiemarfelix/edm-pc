@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductImage;
 use Illuminate\Console\Command;
 
 class InitializeProducts extends Command
@@ -34,7 +35,13 @@ class InitializeProducts extends Command
             Product::factory(5, [
                 'category_id' => $category->id
             ])
-            ->has(Brand::factory(), 'brand')
+            ->has(Brand::factory()->state(function () {
+                return ['logo'];
+            }), 'brand')
+            ->has(ProductImage::factory(6)->state(function () {
+                return ['file' => ''];
+            })
+            , 'images')
             ->create();
         }
 
