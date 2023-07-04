@@ -28,6 +28,7 @@ class ProductRequest extends FormRequest
             'price' => ['required', 'decimal:2'],
             'stock' => ['required', 'integer', 'min:0'],
             'slug' => ['string', 'nullable'],
+            'overview' => ['required', 'string'],
             'description' => ['required', 'string'],
             'images' => ['array'],
             'images.*' => ['image', 'max:8192']
