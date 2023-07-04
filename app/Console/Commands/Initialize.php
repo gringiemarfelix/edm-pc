@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Category;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
@@ -31,8 +32,28 @@ class Initialize extends Command
         Artisan::call('init:products');
         Artisan::call('init:reviews');
 
+        $this->cleanupCategories();
+
         $this->info('Initialization Success.');
 
         return 0;
+    }
+
+    private function cleanupCategories()
+    {
+        $categories = [
+            'CPU',
+            'Motherboard',
+            'GPU',
+            'RAM',
+            'Storage',
+            'Display',
+            'Case',
+            'Fans',
+            'Laptops',
+            'Desktops',
+        ];
+
+        Category::whereNotIn('name', $categories)->delete();
     }
 }
