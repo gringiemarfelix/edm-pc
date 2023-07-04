@@ -28,6 +28,7 @@ class Initialize extends Command
     {
         Artisan::call('init:admin');
         Artisan::call('init:categories');
+        Artisan::call('init:products');
         Artisan::call('init:reviews');
 
         $this->info('Initialization Success.');
