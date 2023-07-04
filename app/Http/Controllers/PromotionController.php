@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\OptimizeImage;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\Promotion;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePromotionRequest;
 use App\Http\Requests\UpdatePromotionRequest;
 
@@ -43,6 +46,8 @@ class PromotionController extends Controller
             'description' => $request->description,
             'image' => $image,
         ]);
+
+        OptimizeImage::optimize($image);
 
         return redirect()->route('admin.promotions.index');
     }

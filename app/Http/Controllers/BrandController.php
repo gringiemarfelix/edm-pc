@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\OptimizeImage;
 use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Category;
@@ -36,6 +37,7 @@ class BrandController extends Controller
     public function store(StoreBrandRequest $request)
     {
         $logo = $request->file('logo')->store('brands', 'public');
+        OptimizeImage::optimize($logo, 'logo');
 
         $input = array_merge($request->validated(), [
             'logo' => $logo
@@ -105,6 +107,8 @@ class BrandController extends Controller
             $input = array_merge($request->validated(), [
                 'logo' => $logo
             ]);
+
+            OptimizeImage::optimize($logo, 'logo');
         }
         
         if(!$request->slug){

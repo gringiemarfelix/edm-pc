@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\OptimizeImage;
 use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Product;
@@ -130,6 +131,8 @@ class ProductController extends Controller
                 $product->images()->create([
                     'file' => $file
                 ]);
+
+                OptimizeImage::optimize($file, 'sm');
             }
         }
 
@@ -226,6 +229,8 @@ class ProductController extends Controller
                 $product->images()->create([
                     'file' => $file
                 ]);
+
+                OptimizeImage::optimize($file, 'sm');
             }
         }
 
