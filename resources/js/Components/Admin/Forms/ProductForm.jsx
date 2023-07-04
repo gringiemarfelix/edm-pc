@@ -100,7 +100,7 @@ const ProductForm = ({ product }) => {
               size="lg" 
               label="Category"
               onChange={e => setData('category_id', e)}
-              value={data.category_id}
+              value={data.category_id.toString()}
             >
               {
                 categories.map(category =>
@@ -123,7 +123,7 @@ const ProductForm = ({ product }) => {
               size="lg" 
               label="Brand"
               onChange={e => setData('brand_id', e)}
-              value={data.brand_id}
+              value={data.brand_id.toString()}
             >
               {
                 brands.map(brand =>
