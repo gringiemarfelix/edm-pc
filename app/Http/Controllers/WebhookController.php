@@ -54,7 +54,7 @@ class WebhookController extends Controller
             foreach($items as $item){
                 $product = $item->product;
                 $product->decrement('stock', $item->quantity);
-                info($product);
+                $product->increment('sold', $item->quantity);
             }
         } catch (\Throwable $th) {
             info('Something went wrong with Paymongo Webhook', [
