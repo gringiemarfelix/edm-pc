@@ -437,7 +437,7 @@ const Show = () => {
                       </CardBody>
                     </Card>
                     <Card className="lg:grow">
-                      <CardBody>
+                      <CardBody className="flex flex-col gap-3">
                         {
                           product.reviews.map(review =>
                             <Review review={review} />
