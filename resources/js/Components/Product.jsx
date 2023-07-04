@@ -30,6 +30,7 @@ const Product = ({ product }) => {
             src={product.image?.file ?? "https://placehold.co/600x400"}
             alt={product.name}
             className="w-full h-full object-cover object-center"
+            loading="lazy"
           />
         </CardHeader>
       </Link>
