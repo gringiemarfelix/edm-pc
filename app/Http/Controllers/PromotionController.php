@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Product;
 use App\Models\Promotion;
 use App\Http\Requests\StorePromotionRequest;
 use App\Http\Requests\UpdatePromotionRequest;
-use Inertia\Inertia;
 
 class PromotionController extends Controller
 {
@@ -24,7 +25,9 @@ class PromotionController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Promotions/Create');
+        return Inertia::render('Admin/Promotions/Create', [
+            'products' => Product::latest()->get()
+        ]);
     }
 
     /**
@@ -58,7 +61,8 @@ class PromotionController extends Controller
     public function edit(Promotion $promotion)
     {
         return Inertia::render('Admin/Promotions/Edit', [
-            'promotion' => $promotion
+            'promotion' => $promotion,
+            'products' => Product::latest()->get()
         ]);
     }
 
