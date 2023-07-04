@@ -216,7 +216,10 @@ function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:items-center lg:p-1">
       <SearchForm containerProps={{ className: 'block my-3 lg:my-0 lg:mx-3 lg:hidden' }} />
-      <Link href={route('products.index')}>
+      <Link 
+        href={route('products.index')}
+        className="text-sm text-blue-gray-900"
+      >
         <Typography
           as="div"
           variant="small"
@@ -240,33 +243,23 @@ function NavList() {
         href={route('categories.show', {
           category: "laptop"
         })}
+        className="text-sm text-blue-gray-900"
       >
-        <Typography
-          variant="small"
-          color="blue-gray"
-          className="font-normal"
-        >
-          <ListItem className="flex items-center gap-2 py-2 pr-4">
-            <AiOutlineLaptop />
-            Laptops
-          </ListItem>
-        </Typography>
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          <AiOutlineLaptop />
+          Laptops
+        </ListItem>
       </Link>
       <Link
         href={route('categories.show', {
           category: "desktop"
         })}
+        className="text-sm text-blue-gray-900"
       >
-        <Typography
-          variant="small"
-          color="blue-gray"
-          className="font-normal"
-        >
-          <ListItem className="flex items-center gap-2 py-2 pr-4">
-            <AiOutlineDesktop />
-            Desktops
-          </ListItem>
-        </Typography>
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          <AiOutlineDesktop />
+          Desktops
+        </ListItem>
       </Link>
     </List>
   );
@@ -289,6 +282,7 @@ const TopNav = () => {
         <div className="flex items-center basis-1/4">
           <Link href={route('products.index')}>
             <Typography
+              as="div"
               variant="h6"
               className="mr-4 cursor-pointer flex items-center py-1.5 lg:ml-2"
             >
