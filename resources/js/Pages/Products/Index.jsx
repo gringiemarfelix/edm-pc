@@ -5,8 +5,10 @@ import { Head, usePage } from "@inertiajs/react"
 import { Typography } from "@material-tailwind/react"
 
 const Index = () => {
-  const { payments, products } = usePage().props
+  const { payments, new_products, top_rated, top_selling } = usePage().props
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
+
+  console.log(top_rated)
 
   return (
     <Layout>
@@ -41,14 +43,33 @@ const Index = () => {
         <Typography variant="h1" className="text-center mb-3 text-4xl lg:text-5xl">New Products</Typography>
         <div className="grid grid-cols-2  gap-3 lg:grid-cols-6 lg:w-3/4">
           {
-            products.map(product =>
+            new_products.map(product =>
               <Product key={product.id} product={product} />
             )
           }
         </div>
       </div>
-      <Typography variant="h1" className="text-center my-3 text-4xl lg:text-5xl">Top-Rated Products</Typography>
-      <Typography variant="h1" className="text-center my-3 text-4xl lg:text-5xl">Top-Selling Products</Typography>
+      <div className="text-gray-900 flex flex-col items-center py-3">
+        <Typography variant="h1" className="text-center mb-3 text-4xl lg:text-5xl">Top-Rated Products</Typography>
+        <div className="grid grid-cols-2  gap-3 lg:grid-cols-6 lg:w-3/4">
+          {
+            top_rated.map(product =>
+              <Product key={product.id} product={product} />
+            )
+          }
+        </div>
+      </div>
+      <div className="text-gray-900 flex flex-col items-center py-3">
+        <Typography variant="h1" className="text-center mb-3 text-4xl lg:text-5xl">Top-Selling Products</Typography>
+        <div className="grid grid-cols-2  gap-3 lg:grid-cols-6 lg:w-3/4">
+          {
+            top_selling.map(product =>
+              <Product key={product.id} product={product} />
+            )
+          }
+        </div>
+      </div>
+      <div className="py-6"></div>
     </Layout>
   )
 }
