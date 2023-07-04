@@ -85,6 +85,8 @@ class PromotionController extends Controller
         if($request->file('image')){
             $image = $request->file('image')->store('promotions', 'public');
             $new['image'] = $image;
+
+            OptimizeImage::optimize($image);
         }
 
         $promotion->update($new);
