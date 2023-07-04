@@ -1,9 +1,10 @@
-import { useForm } from "@inertiajs/react";
-import { Alert, Button, Card, CardBody, CardFooter, CardHeader, Input, Typography, Progress } from "@material-tailwind/react"
+import { useForm, usePage } from "@inertiajs/react";
+import { Alert, Button, Card, CardBody, CardFooter, CardHeader, Input, Typography, Progress, Select, Option } from "@material-tailwind/react"
 import { CloudArrowUpIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef, useState } from "react";
 
 const PromotionForm = ({ promotion }) => {
+  const { products } = usePage().props
   const imagesInput = useRef()
 
   const [preview, setPreview] = useState(null)
@@ -78,6 +79,18 @@ const PromotionForm = ({ promotion }) => {
                 className="shadow rounded-lg max-w-xs"
               />
             }
+          </div>
+          <div>
+            <Select 
+              label="Product (Optional)"
+              value={promotion.product_id}
+            >
+              {
+                products.map(product =>
+                  <Option key={product.id} value={product.id.toString()}>{product.name}</Option>
+                )
+              }
+            </Select>
           </div>
           <div>
             <Input
