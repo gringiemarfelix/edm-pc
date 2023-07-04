@@ -105,7 +105,7 @@ const Show = () => {
                     images.map((image, index) =>
                       <img
                         key={index}
-                        src={image == "" ? "https://placehold.co/600x400" : image}
+                        src={!image ? "https://placehold.co/600x400" : image}
                         alt="image 1"
                         className="h-full w-full object-cover"
                       />
@@ -495,7 +495,7 @@ const CarouselNavigation = ({ setActiveIndex, activeIndex, length, images }) => 
         <img
           key={i}
           id={`image-${i}`}
-          src={images[i]}
+          src={images[i] ?? `https://placehold.co/600x400`}
           className={`cursor-pointer transition-all duration-300 max-w-[10rem] rounded
             ${activeIndex === i ? "bg-white opacity-100 shadow" : "bg-white/50 opacity-75"}
           `}

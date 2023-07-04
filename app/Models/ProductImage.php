@@ -15,6 +15,8 @@ class ProductImage extends Model
 
     public function getFileAttribute($file)
     {
-        return asset("storage/{$file}");
+        if($file){
+            return asset("storage/{$file}");
+        }
     }
 }
