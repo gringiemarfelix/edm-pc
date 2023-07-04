@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Brand;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\BrandController;
@@ -9,10 +13,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductReviewController;
-use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserAddressController;
+use App\Http\Controllers\ProductReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +103,12 @@ Route::name('webhooks.')->prefix('webhooks')->controller(WebhookController::clas
 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('', function () {
-        return Inertia::render('Admin/Index');
+        return Inertia::render('Admin/Index', [
+            'users' => User::count(),
+            'orders' => Order::count(),
+            'products' => Product::count(),
+            'brands' => Brand::count()
+        ]);
     })->name('index');
 
     Route::post('promotions/{promotion}', [PromotionController::class, 'update'])->name('promotions.update');

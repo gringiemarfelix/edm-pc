@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react"
 import { Card, CardBody, Typography } from "@material-tailwind/react"
 import { UserCircleIcon, TruckIcon, Squares2X2Icon, ShoppingBagIcon } from "@heroicons/react/24/solid";
 
-const Index = () => {
+const Index = ({ users, orders, products, brands }) => {
   return (
     <AdminLayout>
       <Head title="Dashboard" />
@@ -15,7 +15,7 @@ const Index = () => {
                 Users
               </Typography>
               <Typography variant="h3" color="blue-gray">
-                0
+                {users}
               </Typography>
             </div>
             <div className="rounded-lg p-3 bg-blue-50 h-fit">
@@ -30,7 +30,7 @@ const Index = () => {
                 Orders
               </Typography>
               <Typography variant="h3" color="blue-gray">
-                0
+                {orders}
               </Typography>
             </div>
             <div className="rounded-lg p-3 bg-purple-50 h-fit">
@@ -45,7 +45,7 @@ const Index = () => {
                 Products
               </Typography>
               <Typography variant="h3" color="blue-gray">
-                0
+                {products}
               </Typography>
             </div>
             <div className="rounded-lg p-3 bg-teal-50 h-fit">
@@ -60,7 +60,7 @@ const Index = () => {
                 Brands
               </Typography>
               <Typography variant="h3" color="blue-gray">
-                0
+                {brands}
               </Typography>
             </div>
             <div className="rounded-lg p-3 bg-deep-orange-50 h-fit">
