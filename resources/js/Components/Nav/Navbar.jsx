@@ -25,7 +25,8 @@ import {
   CpuChipIcon,
   MagnifyingGlassIcon,
   ShoppingCartIcon,
-  HeartIcon
+  HeartIcon,
+  KeyIcon
 } from "@heroicons/react/24/outline";
 import { AiOutlineLaptop, AiOutlineDesktop } from "react-icons/ai"
 import CpuIcon from "../Icons/CpuIcon";
@@ -307,6 +308,11 @@ const TopNav = () => {
         {
           auth.user ?
           <div className="hidden lg:flex space-x-3 justify-end basis-1/4">
+            <Link href={route('admin.index')}>
+              <IconButton variant="text" color="deep-orange">
+                <KeyIcon className="h-6 w-6" />
+              </IconButton>
+            </Link>
             <Link href={route('cart.index')}>
               <Badge content={auth.user.cart} placement="top-end" className={`w-6 h-6 ${auth.user.cart === 0 && 'hidden'}`}>
                 <IconButton variant="text">
@@ -356,6 +362,11 @@ const TopNav = () => {
           auth.user ?
           <div className="flex space-x-3 basis-1/4 border-t py-3">
             <ProfileMenu />
+            <Link href={route('admin.index')}>
+              <IconButton variant="text" color="deep-orange">
+                <KeyIcon className="h-6 w-6" />
+              </IconButton>
+            </Link>
             <Link href={route('cart.index')}>
               <Badge content={auth.user.cart} placement="top-end" className={`w-6 h-6 ${auth.user.cart === 0 && 'hidden'}`}>
                 <IconButton variant="text">
