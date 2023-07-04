@@ -35,7 +35,6 @@ const Show = () => {
   // create an event listener
   useEffect(() => {
     window.addEventListener("resize", handleResize)
-    console.log(route().params.filter == '5')
   }, [])
 
   return (

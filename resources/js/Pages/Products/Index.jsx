@@ -8,8 +8,6 @@ const Index = () => {
   const { payments, new_products, top_rated, top_selling } = usePage().props
   const navbarHeight = document.getElementById('navbar')?.offsetHeight
 
-  console.log(top_rated)
-
   return (
     <Layout>
       <Head title="Home" />

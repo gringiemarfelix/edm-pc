@@ -63,9 +63,6 @@ const TwoFactor = () => {
   const disableTwoFactor = () => {
     destroy(route('two-factor.disable'), {
       preserveScroll: true,
-      onSuccess: () => {
-        console.log('Disabled')
-      },
       onFinish: () => closeModal(),
     })
   }
