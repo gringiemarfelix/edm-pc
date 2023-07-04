@@ -9,6 +9,7 @@ const PromotionForm = ({ promotion }) => {
 
   const [preview, setPreview] = useState(null)
   const { data, setData, post, processing, errors, reset, progress, recentlySuccessful } = useForm({
+    product_id: promotion?.product_id ?? "",
     title: promotion?.title ?? "",
     description: promotion?.description ?? "",
     image: undefined
@@ -84,6 +85,7 @@ const PromotionForm = ({ promotion }) => {
             <Select 
               label="Product (Optional)"
               value={promotion?.product_id}
+              onChange={e => setData('product_id', e)}
             >
               {
                 products.map(product =>
