@@ -72,5 +72,9 @@ class InitializeCategories extends Command
         foreach($categories as $category){
             Category::firstOrCreate($category);
         }
+
+        $this->info('Categories Initialization Complete');
+
+        return 0;
     }
 }
