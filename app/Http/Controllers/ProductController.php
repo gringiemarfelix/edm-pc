@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use App\Models\Promotion;
 
 class ProductController extends Controller
 {
@@ -17,12 +18,6 @@ class ProductController extends Controller
     {
         $user = auth()->user();
         $wishlist = [];
-
-        $request->validate([
-            'search' => 'string|nullable',
-            'page' => 'integer',
-            'per_page' => 'integer'
-        ]);
 
         if($user){
             $wishlist = $user->wishlist()->get()->pluck('product_id')->toArray();
@@ -36,12 +31,11 @@ class ProductController extends Controller
             return $product;
         });
 
-        $data = [
+        return Inertia::render('Products/Index', [
+            'promotions' => Promotion::latest()->get(),
             'payments' => $this->getPaymentMethods(),
             'products' => $products
-        ];
-
-        return Inertia::render('Products/Index', $data);
+        ]);
     }
 
     public function search(Request $request)
