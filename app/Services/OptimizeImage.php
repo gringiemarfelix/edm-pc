@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class OptimizeImage
 {
-    public function optimize(string $image, string $size = null) {
+    public function optimize(string $image, string $size = null, int $quality = 50) {
         $file = Storage::get($image);
         $intervention = Image::make($file);
 
@@ -29,6 +29,6 @@ class OptimizeImage
             });
         }
 
-        $intervention->save(storage_path("app/public/$image"), 50);
+        $intervention->save(storage_path("app/public/$image"), $quality);
     }
 }
