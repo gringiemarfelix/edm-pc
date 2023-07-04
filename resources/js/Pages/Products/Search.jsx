@@ -14,7 +14,7 @@ const Search = () => {
   const [init, setInit] = useState(false)
   const [open, setOpen] = useState(true)
   const [filters, setFilters] = useState({
-    price: price_max / 2,
+    price: query.price ?? undefined,
     categories: query.categories ?? [],
     brands: query.brands ?? [],
   })
@@ -112,7 +112,7 @@ const Search = () => {
                         Price
                       </Typography>
                       <Typography className="font-medium" variant="paragraph" color="blue">
-                        P{parseFloat(filters.price).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        {filters.price ? 'P' + parseFloat(filters.price).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}
                       </Typography>
                     </div>
                     <Slider 
