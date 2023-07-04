@@ -1,4 +1,4 @@
-import { IconButton, Typography } from "@material-tailwind/react";
+import { IconButton, Typography, Tooltip } from "@material-tailwind/react";
 import { TruckIcon, BanknotesIcon, ListBulletIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import OrderItems from "../OrderItems/OrderItems";
@@ -62,9 +62,11 @@ const Orders = ({ orders }) => {
                   </td>
                   <td className={classes + ' flex items-center gap-1'}>
                     {order.items_count}
-                    <IconButton variant="text" size="sm" onClick={() => openModal(order)}>
-                      <ListBulletIcon className="h-6 w-6" />
-                    </IconButton>
+                    <Tooltip content="View Items">
+                      <IconButton variant="text" size="sm" onClick={() => openModal(order)}>
+                        <ListBulletIcon className="h-6 w-6" />
+                      </IconButton>
+                    </Tooltip>
                   </td>
                   <td className={classes + ' text-end'}>
                     P{(order.total + order.delivery_fee).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
@@ -99,14 +101,16 @@ const parseOrderStatus = (order) => {
           <Typography variant="small" color="blue-gray" className="font-normal">
             Pending Payment
           </Typography>
-          <a 
-            href={order.payment.url}
-            target="_blank"
-          >
-            <IconButton variant="text" color="green" size="sm">
-              <BanknotesIcon className="h-6 w-6" />
-            </IconButton>
-          </a>
+          <Tooltip content="Continue Payment">
+            <a 
+              href={order.payment.url}
+              target="_blank"
+            >
+              <IconButton variant="text" color="green" size="sm">
+                <BanknotesIcon className="h-6 w-6" />
+              </IconButton>
+            </a>
+          </Tooltip>
         </div>
       )
       break;
@@ -132,14 +136,16 @@ const parseOrderStatus = (order) => {
           </Typography>
           {
             order.delivery == 'lalamove' &&
-            <a 
-              href={order.lalamove.share_link}
-              target="_blank"
-            >
-              <IconButton variant="text" color="orange" size="sm">
-                <TruckIcon className="h-6 w-6" />
-              </IconButton>
-            </a>
+            <Tooltip content="Track Order">
+              <a 
+                href={order.lalamove.share_link}
+                target="_blank"
+              >
+                <IconButton variant="text" color="orange" size="sm">
+                  <TruckIcon className="h-6 w-6" />
+                </IconButton>
+              </a>
+            </Tooltip>
           }
         </div>
       )
