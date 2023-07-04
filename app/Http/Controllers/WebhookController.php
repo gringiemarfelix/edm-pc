@@ -94,9 +94,8 @@ class WebhookController extends Controller
                     $orderRecord->status = 'COMPLETE';
                 }else if($status == 'REJECTED'){
                     $orderRecord->status = 'FAILED';
-                    $order = $orderRecord->order;
-                    $order->user->refund()->create([
-                        'order_id' => $order->id,
+                    $orderRecord->order->user->refund()->create([
+                        'order_id' => $orderRecord->id,
                         'status' => 'COMPLETE'
                     ]);
                 }else{
