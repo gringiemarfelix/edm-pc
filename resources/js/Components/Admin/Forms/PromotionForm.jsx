@@ -83,7 +83,7 @@ const PromotionForm = ({ promotion }) => {
           <div>
             <Select 
               label="Product (Optional)"
-              value={promotion.product_id}
+              value={promotion?.product_id}
             >
               {
                 products.map(product =>
