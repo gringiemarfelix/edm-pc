@@ -20,7 +20,7 @@ const Index = ({ promotions }) => {
             </Button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
           {
             promotions.map(promotion =>
               <Promotion key={promotion.id} promotion={promotion} />
