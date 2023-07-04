@@ -13,7 +13,7 @@ const Index = () => {
       <Head title="Home" />
       <div
         style={{
-          height: `calc(90vh - ${navbarHeight}px)`
+          height: navbarHeight ? `calc(90vh - ${navbarHeight}px)` : `100vh`
         }}
       >
         <CustomCarousel />
@@ -28,7 +28,7 @@ const Index = () => {
                 <div className="flex justify-center items-center space-x-3">
                   {
                     payment.items.map(item =>
-                      <img key={item} className="h-12 w-12 rounded-xl shadow-md" src={item} />
+                      <img key={item} className="h-12 w-12 rounded-xl shadow-md" src={item} alt={item} />
                     )
                   }
                 </div>
