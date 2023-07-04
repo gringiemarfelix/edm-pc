@@ -22,7 +22,7 @@ const Index = ({ categories }) => {
           </Link>
         </div>
         <div className="lg:m-6">
-          <Card className="overflow-scroll h-full w-full">
+          <Card className="overflow-scroll lg:overflow-visible h-full w-full">
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
