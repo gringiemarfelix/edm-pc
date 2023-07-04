@@ -24,7 +24,11 @@ class OrderPolicy
      */
     public function view(User $user, Order $order): bool
     {
-        return $user->id === $order->user_id;
+        $adminRole = Role::where('name', 'Admin')->first();
+
+        $admin = $user->roles()->where('role_id', $adminRole->id)->exists();
+
+        return $user->id === $order->user_id || $admin;
     }
 
     /**
