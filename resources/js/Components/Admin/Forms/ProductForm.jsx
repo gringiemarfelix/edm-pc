@@ -161,6 +161,23 @@ const ProductForm = ({ product }) => {
           <div>
             <Input
               type="text"
+              label="Slug (Optional)"
+              value={data.slug}
+              onChange={(e) => setData("slug", e.target.value)}
+            />
+            {errors.slug && (
+              <Typography
+                variant="small"
+                color="red"
+                className="flex items-center gap-1 font-normal"
+              >
+                {errors.slug}
+              </Typography>
+            )}
+          </div>
+          <div>
+            <Input
+              type="text"
               label="Price"
               value={data.price}
               onChange={(e) => setData("price", e.target.value)}
@@ -189,23 +206,6 @@ const ProductForm = ({ product }) => {
                 className="flex items-center gap-1 font-normal"
               >
                 {errors.stock}
-              </Typography>
-            )}
-          </div>
-          <div>
-            <Input
-              type="text"
-              label="Slug (Optional)"
-              value={data.slug}
-              onChange={(e) => setData("slug", e.target.value)}
-            />
-            {errors.slug && (
-              <Typography
-                variant="small"
-                color="red"
-                className="flex items-center gap-1 font-normal"
-              >
-                {errors.slug}
               </Typography>
             )}
           </div>
