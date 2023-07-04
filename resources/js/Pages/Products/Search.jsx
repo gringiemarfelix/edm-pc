@@ -132,7 +132,7 @@ const Search = () => {
                       </Typography>
                     </div>
                   </div>
-                  <div>
+                  <div className={!categories.length > 0 ? 'hidden' : ''}>
                     <Typography className="font-medium" variant="paragraph" color="blue-gray">
                       Category
                     </Typography>
@@ -151,7 +151,7 @@ const Search = () => {
                       }
                     </div>
                   </div>
-                  <div>
+                  <div className={!brands.length > 0 ? 'hidden' : ''}>
                     <Typography className="font-medium" variant="paragraph" color="blue-gray">
                       Brand
                     </Typography>
