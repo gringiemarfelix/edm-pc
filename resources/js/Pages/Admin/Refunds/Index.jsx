@@ -1,9 +1,9 @@
 import AdminLayout from "@/Layouts/AdminLayout"
 import { Head } from "@inertiajs/react"
-import { Card, Typography, } from "@material-tailwind/react"
+import { Avatar, Card, Typography, Select, Option } from "@material-tailwind/react"
 import { router } from "@inertiajs/react";
 
-const TABLE_HEAD = ["#", "Order #", "User", "Reason", ""];
+const TABLE_HEAD = ["#", "Order #", "User", "Reason", "Status", ""];
 
 const Index = ({ refunds }) => {
   const updateRefundStatus = (refund, status) => {
@@ -27,7 +27,7 @@ const Index = ({ refunds }) => {
           </Typography>
         </div>
         <div className="lg:m-6 h-full">
-          <Card className="overflow-scroll w-full">
+          <Card className="overflow-scroll lg:overflow-auto w-full">
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
@@ -67,21 +67,6 @@ const Index = ({ refunds }) => {
                             alt={refund.user.name + ' image'}
                             size="md"
                             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
-                            variant="rounded"
-                          />
-                          <Typography variant="small" color="blue-gray" className="font-normal">
-                            {refund.user.name}
-                          </Typography>
-                        </div>
-                      </td>
-                      <td className="p-4">
-                        <div className="flex items-center gap-3">
-                          <Avatar
-                            src={`https://ui-avatars.com/api/?size=128&background=e3f2fd&name=${refund.user.name}`}
-                            alt={refund.user.name + ' image'}
-                            size="md"
-                            className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
-                            variant="rounded"
                           />
                           <Typography variant="small" color="blue-gray" className="font-normal">
                             {refund.user.name}
@@ -91,6 +76,11 @@ const Index = ({ refunds }) => {
                       <td className="p-4">
                         <Typography variant="small" color="blue-gray" className="font-normal">
                           {refund.reason}
+                        </Typography>
+                      </td>
+                      <td className="p-4">
+                        <Typography variant="small" color="blue-gray" className="font-normal">
+                          {refund.status}
                         </Typography>
                       </td>
                       <td className="p-4">
