@@ -11,7 +11,11 @@ class OptimizeImage
         $file = Storage::get($image);
         $intervention = Image::make($file);
 
-        if($size == 'sm'){
+        if($size == 'logo'){
+            $intervention->resize(64, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }else if($size == 'sm'){
             $intervention->resize(400, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
