@@ -195,7 +195,7 @@ class ProductController extends Controller
 
         return Inertia::render('Products/Show', [
             'product' => $product,
-            'similar' => Product::get()
+            'similar' => Product::where('name', 'LIKE', "%{$product->name}%")->get()
         ]);
     }
 
