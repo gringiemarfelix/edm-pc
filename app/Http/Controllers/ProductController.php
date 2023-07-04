@@ -95,10 +95,18 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $products = collect();
+
+        if($request->filled('search')){
+            $products = Product::with('category')->where('name', 'LIKE', "%{$request->search}%")->get();
+        }else{
+            $products = Product::with('category')->get();
+        }
+
         return Inertia::render('Admin/Products/Index', [
-            'products' => Product::with('category')->get()
+            'products' => $products
         ]);
     }
 

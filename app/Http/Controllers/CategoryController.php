@@ -14,10 +14,18 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $categories = collect();
+
+        if($request->filled('search')){
+            $categories = Category::withCount('products')->where('name', 'LIKE', "%{$request->search}%")->get();
+        }else{
+            $categories = Category::withCount('products')->get();
+        }
+
         return Inertia::render('Admin/Categories/Index', [
-            'categories' => Category::withCount('products')->get()
+            'categories' => $categories
         ]);
     }
 
