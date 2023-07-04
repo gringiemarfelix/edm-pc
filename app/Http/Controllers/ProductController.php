@@ -142,7 +142,7 @@ class ProductController extends Controller
                     'file' => $file
                 ]);
 
-                OptimizeImage::optimize($file, 'sm');
+                OptimizeImage::optimize($file, 'sm', 75);
             }
         }
 
@@ -240,7 +240,7 @@ class ProductController extends Controller
                     'file' => $file
                 ]);
 
-                OptimizeImage::optimize($file, 'sm');
+                OptimizeImage::optimize($file, 'sm', 75);
             }
         }
 
