@@ -17,6 +17,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\ProductReviewController;
+use App\Http\Controllers\RefundController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,16 +123,17 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
         'categories' => CategoryController::class,
         'brands' => BrandController::class,
         'products' => ProductController::class,
+        'refunds' => RefundController::class,
     ]);
     
     Route::name('orders.')->prefix('orders')->controller(OrderController::class)->group(function () {
         Route::get('', 'index')->name('index');
         Route::put('{order}', 'update')->name('update');
     });
-    Route::name('refunds.')->prefix('refunds')->group(function () {
-        Route::get('', function () {
-            return Inertia::render('Admin/Refunds/Index');
-        })->name('index');
+
+    Route::name('refunds.')->prefix('refunds')->controller(RefundController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::put('{refund}', 'update')->name('update');
     });
 });
 
