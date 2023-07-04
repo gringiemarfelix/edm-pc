@@ -275,7 +275,9 @@ const Show = () => {
                     Overview
                   </TabPanel>
                   <TabPanel value="description" className="py-2 text-blue-gray-900">
-                    { product.description }
+                    <Typography variant="paragraph" color="blue-gray" className="whitespace-pre-wrap">
+                      { product.description }
+                    </Typography>
                   </TabPanel>
                   <TabPanel value="reviews" className="py-2 text-blue-gray-900">
                     Reviews
