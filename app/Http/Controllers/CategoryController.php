@@ -62,7 +62,7 @@ class CategoryController extends Controller
 
         $products = $category->products()->paginate($per_page);
 
-        $brands = $category->products->pluck('category_id')->toArray();
+        $brands = $category->products->pluck('brand_id')->toArray();
         $brands = Brand::whereIn('id', $brands)->get();
 
         return Inertia::render('Products/Search', [
