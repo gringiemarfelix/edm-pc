@@ -31,7 +31,7 @@ class InitializeReviews extends Command
         $products = Product::get();
 
         foreach($products as $product){
-            User::factory(5)
+            User::factory(10)
             ->has(ProductReview::factory()
                             ->state(function () use ($product) {
                                 return ['product_id' => $product->id];
