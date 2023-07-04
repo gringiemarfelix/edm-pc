@@ -49,12 +49,12 @@ const CustomCarousel = () => {
                   {promotion.description}
                 </Typography>
                 {
-                  promotion.product_id &&
+                  promotion?.product?.slug &&
                   <div className="flex gap-2">
                     <Link
                       as="div"
                       href={route('cart.store', {
-                        product: promotion.product_id
+                        product: promotion?.product?.slug
                       })}
                       method="post"
                       onSuccess={() => {
@@ -67,7 +67,7 @@ const CustomCarousel = () => {
                     </Link>
                     <Link 
                       href={route('products.show', {
-                        product: promotion.product_id
+                        product: promotion?.product?.slug
                       })}
                     >
                       <Button size="lg" color="white" variant="text">

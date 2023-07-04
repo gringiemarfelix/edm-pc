@@ -33,7 +33,7 @@ class ProductController extends Controller
         });
 
         return Inertia::render('Products/Index', [
-            'promotions' => Promotion::latest()->get(),
+            'promotions' => Promotion::with('product')->latest()->get(),
             'payments' => $this->getPaymentMethods(),
             'new_products' => $products->sortBy('sold')->take(12)->values(),
             'top_rated' => $products->sortByDesc('rating')->take(12)->values(),
