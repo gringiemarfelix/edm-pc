@@ -108,7 +108,7 @@ const OrderItems = ({ viewing, closeModal, order }) => {
                       <td className={classes + ' flex items-center space-x-3'}>
                         <img
                           className="w-24 h-24 rounded-lg shadow shadow-blue-gray-900/50"
-                          src={item.product.image.file == "" ? 'https://placehold.co/600x600' : null}
+                          src={item.product.image.file == "" ? 'https://placehold.co/600x600' : item.product.image.file}
                           alt={item.product.name + ' image'}
                         />
                         <div>

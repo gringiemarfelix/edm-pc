@@ -29,7 +29,7 @@ const OrderItem = ({ item, status }) => {
         <div>
           <img
             className="w-24 h-24 rounded-lg shadow shadow-blue-gray-900/50 shrink-0"
-            src={item.product.image.file == "" ? 'https://placehold.co/600x600' : ''}
+            src={item.product.image.file == "" ? 'https://placehold.co/600x600' : item.product.image.file}
             alt="nature image"
           />
           {
