@@ -7,7 +7,7 @@ const TABLE_HEAD = ["#", "Order #", "User", "Reason", "Status", ""];
 
 const Index = ({ refunds }) => {
   const updateRefundStatus = (refund, status) => {
-    router.put(route('admin.refuds.update', {
+    router.put(route('admin.refunds.update', {
       refund: refund.id
     }), {
       status: status
@@ -27,7 +27,7 @@ const Index = ({ refunds }) => {
           </Typography>
         </div>
         <div className="lg:m-6 h-full">
-          <Card className="overflow-scroll lg:overflow-auto w-full">
+          <Card className="overflow-scroll lg:overflow-visible w-full">
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
