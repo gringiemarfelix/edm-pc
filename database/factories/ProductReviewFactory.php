@@ -18,7 +18,8 @@ class ProductReviewFactory extends Factory
     {
         return [
             'rating' => fake()->numberBetween(1, 5),
-            'review' => fake()->sentences(15, true)
+            'review' => fake()->sentences(5, true),
+            'created_at' => fake()->dateTimeBetween('-1 week', '+1 week')
         ];
     }
 }
