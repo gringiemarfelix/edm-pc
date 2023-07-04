@@ -143,7 +143,7 @@ function NavListMenu() {
  
   const renderItems = navListMenuItems.map(
     ({ icon, title, description, color, href }, key) => (
-      <a href={href} key={key}>
+      <Link href={href} key={key}>
         <MenuItem className="flex items-center gap-3 rounded-lg">
           <div className={`rounded-lg p-5 ${colors[color]}`}>
             {React.createElement(icon, {
@@ -164,7 +164,7 @@ function NavListMenu() {
             </Typography>
           </div>
         </MenuItem>
-      </a>
+      </Link>
     )
   );
  
