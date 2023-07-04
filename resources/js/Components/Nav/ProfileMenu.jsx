@@ -42,7 +42,7 @@ const profileMenuItems = [
     label: "Help",
     icon: QuestionMarkCircleIcon,
     method: 'get',
-    route: route('products.index')
+    route: route('help')
   },
   {
     label: "Sign Out",

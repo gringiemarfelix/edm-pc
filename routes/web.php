@@ -1,34 +1,28 @@
 <?php
 
-use App\Models\User;
 use Inertia\Inertia;
-use App\Models\Brand;
-use App\Models\Order;
-use App\Models\Product;
+use App\Models\{
+    User,
+    Brand,
+    Order,
+    Product,
+};
+use App\Http\Controllers\{
+    CartController,
+    BrandController,
+    OrderController,
+    ProductController,
+    ProfileController,
+    WebhookController,
+    CategoryController,
+    WishlistController,
+    PromotionController,
+    UserAddressController,
+    ProductReviewController,
+    RefundController,
+};
+use App\Http\Requests\HelpRequest;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WebhookController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\WishlistController;
-use App\Http\Controllers\PromotionController;
-use App\Http\Controllers\UserAddressController;
-use App\Http\Controllers\ProductReviewController;
-use App\Http\Controllers\RefundController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::name('products.')->controller(ProductController::class)->group(function () {
     Route::get('/', 'home')->name('index');
@@ -136,5 +130,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
         Route::put('{refund}', 'update')->name('update');
     });
 });
+
+Route::get('help', fn () => Inertia::render('Help'))->name('help');
+Route::post('help', fn (HelpRequest $request) => back())->name('help');
 
 require __DIR__.'/auth.php';
