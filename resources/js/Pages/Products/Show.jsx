@@ -8,12 +8,14 @@ import { Card, CardBody, Breadcrumbs, Carousel, Typography, Rating, Button, Icon
   Tab,
   TabPanel, 
 } from "@material-tailwind/react"
-import { ChevronRightIcon, ShoppingCartIcon, HeartIcon, } from "@heroicons/react/24/outline";
+import { ChevronRightIcon, ShoppingCartIcon, HeartIcon, StarIcon as StarIconOutline, CalendarDaysIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Product from "@/Components/Product";
 import { FacebookMessengerShareButton, FacebookShareButton, TwitterShareButton } from "react-share";
+import Review from "@/Components/Review";
 
 const Show = () => {
   const { auth, product, similar } = usePage().props
@@ -33,7 +35,8 @@ const Show = () => {
   // create an event listener
   useEffect(() => {
     window.addEventListener("resize", handleResize)
-  })
+    console.log(route().params.filter == '5')
+  }, [])
 
   return (
     <Layout>
@@ -279,8 +282,169 @@ const Show = () => {
                       { product.description }
                     </Typography>
                   </TabPanel>
-                  <TabPanel value="reviews" className="py-2 text-blue-gray-900">
-                    Reviews
+                  <TabPanel value="reviews" className="py-2 text-blue-gray-900 flex flex-col lg:flex-row gap-3">
+                    <Card>
+                      <CardBody className="flex flex-col gap-3">
+                        <Link
+                          href={route('products.show', {
+                            product: product.slug,
+                            filter: 'date'
+                          })}
+                          preserveState
+                          preserveScroll
+                        >
+                          <Button 
+                            variant="text" 
+                            color="blue-gray" 
+                            className={`hover:shadow-md hover:bg-transparent text-blue-gray-900
+                              ${route().params?.filter == 'date' ? 'shadow-md border' : 'border border-transparent'}
+                            `}
+                            fullWidth
+                          >
+                            <div className="flex items-center gap-3">
+                              <CalendarDaysIcon className="h-6 w-6" />
+                              <Typography variant="h6" className="-mb-1 text-inherit font-medium">
+                                Date
+                              </Typography>
+                            </div>
+                          </Button>
+                        </Link>
+                        <Link
+                          href={route('products.show', {
+                            product: product.slug,
+                            filter: '5'
+                          })}
+                          preserveState
+                          preserveScroll
+                        >
+                          <Button 
+                            variant="text" 
+                            color="blue-gray" 
+                            className={`hover:shadow-md hover:bg-transparent 
+                              ${route().params?.filter == '5' ? 'shadow-md border' : 'border border-transparent'}
+                            `}
+                          >
+                            <div className="flex items-center gap-3">
+                              <Typography variant="h6" color="blue-gray" className="-mb-1">
+                                5
+                              </Typography>
+                              <div className="flex text-amber-500">
+                                {getStars(5).map(star => star)}
+                              </div>
+                            </div>
+                          </Button>
+                        </Link>
+                        <Link
+                          href={route('products.show', {
+                            product: product.slug,
+                            filter: '4'
+                          })}
+                          preserveState
+                          preserveScroll
+                        >
+                          <Button 
+                            variant="text" 
+                            color="blue-gray" 
+                            className={`hover:shadow-md hover:bg-transparent 
+                              ${route().params?.filter == '4' ? 'shadow-md border' : 'border border-transparent'}
+                            `}
+                          >
+                            <div className="flex items-center gap-3">
+                              <Typography variant="h6" color="blue-gray" className="-mb-1">
+                                4
+                              </Typography>
+                              <div className="flex text-amber-500">
+                                {getStars(4).map(star => star)}
+                              </div>
+                            </div>
+                          </Button>
+                        </Link>
+                        <Link
+                          href={route('products.show', {
+                            product: product.slug,
+                            filter: '3'
+                          })}
+                          preserveState
+                          preserveScroll
+                        >
+                          <Button 
+                            variant="text" 
+                            color="blue-gray" 
+                            className={`hover:shadow-md hover:bg-transparent 
+                              ${route().params?.filter == '3' ? 'shadow-md border' : 'border border-transparent'}
+                            `}
+                          >
+                            <div className="flex items-center gap-3">
+                              <Typography variant="h6" color="blue-gray" className="-mb-1">
+                                3
+                              </Typography>
+                              <div className="flex text-amber-500">
+                                {getStars(3).map(star => star)}
+                              </div>
+                            </div>
+                          </Button>
+                        </Link>
+                        <Link
+                          href={route('products.show', {
+                            product: product.slug,
+                            filter: '2'
+                          })}
+                          preserveState
+                          preserveScroll
+                        >
+                          <Button 
+                            variant="text" 
+                            color="blue-gray" 
+                            className={`hover:shadow-md hover:bg-transparent 
+                              ${route().params?.filter == '2' ? 'shadow-md border' : 'border border-transparent'}
+                            `}
+                          >
+                            <div className="flex items-center gap-3">
+                              <Typography variant="h6" color="blue-gray" className="-mb-1">
+                                2
+                              </Typography>
+                              <div className="flex text-amber-500">
+                                {getStars(2).map(star => star)}
+                              </div>
+                            </div>
+                          </Button>
+                        </Link>
+                        <Link
+                          href={route('products.show', {
+                            product: product.slug,
+                            filter: '1'
+                          })}
+                          preserveState
+                          preserveScroll
+                        >
+                          <Button 
+                            variant="text" 
+                            color="blue-gray" 
+                            className={`hover:shadow-md hover:bg-transparent 
+                              ${route().params?.filter == '1' ? 'shadow-md border' : 'border border-transparent'}
+                            `}
+                          >
+                            <div className="flex items-center gap-3">
+                              <Typography variant="h6" color="blue-gray" className="-mb-1">
+                                1
+                              </Typography>
+                              <div className="flex text-amber-500">
+                                {getStars(1).map(star => star)}
+                              </div>
+                            </div>
+                          </Button>
+                        </Link>
+                      </CardBody>
+                    </Card>
+                    <Card className="lg:grow">
+                      <CardBody>
+                        {
+                          product.reviews.map(review =>
+                            <Review review={review} />
+                          )
+                        }
+                      </CardBody>
+                    </Card>
                   </TabPanel>
                 </TabsBody>
               </Tabs>
@@ -340,6 +504,20 @@ const CarouselNavigation = ({ setActiveIndex, activeIndex, length, images }) => 
       ))}
     </div>
   , document.getElementById('carouselContainer'));
+}
+
+const getStars = (rating) => {
+  const stars = []
+
+  for (let index = 1; index <= 5; index++) {
+    if(index <= rating){
+      stars.push(<StarIcon className="h-5 w-5" />)
+    }else{
+      stars.push(<StarIconOutline className="h-5 w-5" />)
+    }
+  }
+
+  return stars
 }
 
 export default Show

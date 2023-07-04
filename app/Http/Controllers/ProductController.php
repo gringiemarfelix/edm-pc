@@ -159,7 +159,35 @@ class ProductController extends Controller
         $product->load([
             'category',
             'brand',
-            'images'
+            'images',
+            'reviews' => function ($query) use ($request) {
+                if($request->filled('filter')){
+                    switch($request->filter){
+                        case 'date':
+                            $query->orderBy('created_at', 'DESC');
+                            break;
+                        case '5':
+                            $query->where('rating', '5');
+                            break;
+                        case '4':
+                            $query->where('rating', '4');
+                            break;
+                        case '3':
+                            $query->where('rating', '3');
+                            break;
+                        case '2':
+                            $query->where('rating', '2');
+                            break;
+                        case '1':
+                            $query->where('rating', '1');
+                            break;
+                        default:
+                            $query->orderBy('created_at', 'DESC');
+                        }
+                }else{
+                    $query->orderBy('created_at', 'DESC');
+                }
+            }
         ]);
 
         if($request->wantsJson()){
