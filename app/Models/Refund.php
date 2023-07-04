@@ -11,9 +11,7 @@ class Refund extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'status'
-    ];
+    protected $guarded = [];
 
     protected $with = [
         'order'
