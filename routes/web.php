@@ -134,4 +134,6 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
 Route::get('help', fn () => Inertia::render('Help'))->name('help');
 Route::post('help', fn (HelpRequest $request) => back())->name('help');
 
+Route::get('present', fn () => Inertia::render('Present'))->name('present');
+
 require __DIR__.'/auth.php';
