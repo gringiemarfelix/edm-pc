@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('brand_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('slug')->unique();
+            $table->text('overview');
             $table->text('description');
             $table->double('price', 11, 2);
             $table->integer('stock')->default(0);
