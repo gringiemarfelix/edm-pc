@@ -1,25 +1,62 @@
 import AdminLayout from "@/Layouts/AdminLayout"
-import { Head, Link } from "@inertiajs/react"
-import { Avatar, Button, Card, Typography, } from "@material-tailwind/react"
-import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { Head, Link, router } from "@inertiajs/react"
+import { Avatar, Button, Card, Typography, Input } from "@material-tailwind/react"
+import { PlusIcon, PencilIcon, TrashIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { useEffect, useState } from "react";
+import { useDebounce } from "use-debounce"
 
 const TABLE_HEAD = ["Name", "Brand", "Category", "Price", "Stock", "Sold",  ""];
 
 const Index = ({ products }) => {
+  const [init, setInit] = useState(false)
+  const [search, setSearch] = useState("")
+  const [newSearch] = useDebounce(search, 250, {
+    leading: true,
+    trailing: true
+  })
+
+  useEffect(() => {
+    if(init){
+      router.get(route('admin.products.index', {
+        _query: {
+          search: newSearch
+        }
+      }), {}, {
+        preserveState: true
+      })
+    }else{
+      setInit(true)
+    }
+  }, [newSearch])
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  }
+
   return (
     <AdminLayout>
       <Head title="Products" />
       <div className="h-full w-full min-h-screen">
-        <div className="flex w-fit gap-3 p-6">
-          <Typography variant="h4">
-            Products
-          </Typography>
-          <Link href={route('admin.products.create')}>
-            <Button variant="gradient" className="flex items-center gap-3" size="sm">
-              <PlusIcon className="h-5 w-5" />
-              New
-            </Button>
-          </Link>
+        <div className="flex flex-col gap-3 p-6">
+          <div className="flex w-fit gap-3">
+            <Typography variant="h4">
+              Products
+            </Typography>
+            <Link href={route('admin.products.create')}>
+              <Button variant="gradient" className="flex items-center gap-3" size="sm">
+                <PlusIcon className="h-5 w-5" />
+                New
+              </Button>
+            </Link>
+          </div>
+          <div className="max-w-sm">
+            <Input 
+              label="Search" 
+              icon={<MagnifyingGlassIcon />} 
+              value={search}
+              onChange={handleSearch}
+            />
+          </div>
         </div>
         <div className="lg:m-6 h-full">
           <Card className="overflow-scroll lg:overflow-visible w-full">
