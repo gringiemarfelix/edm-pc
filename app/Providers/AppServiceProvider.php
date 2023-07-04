@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Foundation\Application;
+use App\Services\OptimizeImage;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 use Lalamove\Client\V3\Client as LalamoveClient;
 use Lalamove\Client\V3\Settings as LalamoveSettings;
 
@@ -14,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind('OptimizeImage', function () {
+            return new OptimizeImage;
+        });
     }
 
     /**
