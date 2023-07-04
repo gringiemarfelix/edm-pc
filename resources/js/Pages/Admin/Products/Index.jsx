@@ -46,7 +46,7 @@ const Index = ({ products }) => {
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <Avatar
-                            src={product?.image?.file}
+                            src={product?.image?.file ?? `https://placehold.co/600x400`}
                             onError={e => e.target.src = `https://ui-avatars.com/api/?size=128&background=e3f2fd&name=${product.name}`}
                             alt={product?.name + ' image'}
                             size="md"
