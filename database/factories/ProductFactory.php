@@ -26,7 +26,8 @@ class ProductFactory extends Factory
             'brand_id' => Brand::factory()->create()->id,
             'name' => $name,
             'slug' => Str::slug($name),
-            'description' => fake()->sentence(),
+            'overview' => fake()->sentences(15, true),
+            'description' => fake()->sentences(30, true),
             'price' => fake()->randomFloat(2, 200, 20000),
             'stock' => fake()->randomNumber(2, true),
             'sold' => fake()->randomNumber(2, true)
