@@ -47,6 +47,7 @@ const Index = ({ brands }) => {
                         <div className="flex items-center gap-3">
                           <Avatar
                             src={brand.logo}
+                            onError={e => e.target.src = `https://ui-avatars.com/api/?size=128&background=e3f2fd&name=${brand.name}`}
                             alt={brand.name + ' image'}
                             size="md"
                             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
