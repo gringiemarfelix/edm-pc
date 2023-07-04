@@ -17,6 +17,7 @@ import TwoFactor from "./Partials/TwoFactor";
 import AddAddress from "@/Components/Forms/AddAddress";
 import AddressList from "@/Components/AddressList";
 import Orders from "@/Components/Orders/Orders";
+import Refunds from "@/Components/Refunds/Refunds";
 
 const Edit = () => {
   const { auth, active } = usePage().props
@@ -171,9 +172,14 @@ const Edit = () => {
                   }
                 </TabPanel>
                 <TabPanel value="refunds" className="py-2 text-blue-gray-900">
-                  <div className="flex justify-center p-6">
-                    <Typography variant="paragraph" color="gray">No refunds found.</Typography>
-                  </div>
+                  {
+                    auth.user.refunds.length >= 0 ?
+                    <Refunds refunds={auth.user.refunds} />
+                    :
+                    <div className="flex justify-center p-6">
+                      <Typography variant="paragraph" color="gray">No refunds found.</Typography>
+                    </div>
+                  }
                 </TabPanel>
               </TabsBody>
             </CardBody>

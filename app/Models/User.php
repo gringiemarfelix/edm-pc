@@ -99,6 +99,11 @@ class User extends Authenticatable
         return $this->hasMany(ProductReview::class, 'user_id');
     }
 
+    public function refunds(): HasMany
+    {
+        return $this->hasMany(Refund::class, 'user_id');
+    }
+
     // Attributes
 
     public function getCartAttribute(): int

@@ -49,7 +49,10 @@ class ProfileController extends Controller
             },
             'orders' => function ($query) {
                 $query->orderBy('id', 'desc');
-            }
+            },
+            'refunds' => function ($query) {
+                $query->latest();
+            },
         ]);
 
         return Inertia::render('Profile/Edit', [
