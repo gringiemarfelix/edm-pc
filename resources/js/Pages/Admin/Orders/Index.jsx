@@ -42,7 +42,7 @@ const Index = ({ orders }) => {
           </Typography>
         </div>
         <div className="lg:m-6 h-full">
-          <Card className="overflow-scroll lg:overflow-auto w-full">
+          <Card className="overflow-scroll w-full">
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
