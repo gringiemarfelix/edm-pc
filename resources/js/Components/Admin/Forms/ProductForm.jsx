@@ -15,6 +15,7 @@ const ProductForm = ({ product }) => {
     price: product?.price ?? "",
     stock: product?.stock ?? "",
     slug: product?.slug ?? undefined,
+    overview: product?.overview ?? undefined,
     description: product?.description ?? undefined,
     images: []
   });
@@ -206,6 +207,22 @@ const ProductForm = ({ product }) => {
                 className="flex items-center gap-1 font-normal"
               >
                 {errors.stock}
+              </Typography>
+            )}
+          </div>
+          <div>
+            <Textarea 
+              label="Overview" 
+              value={data.overview} 
+              onChange={(e) => setData('overview', e.target.value)} 
+            />
+            {errors.overview && (
+              <Typography
+                variant="small"
+                color="red"
+                className="flex items-center gap-1 font-normal"
+              >
+                {errors.overview}
               </Typography>
             )}
           </div>
