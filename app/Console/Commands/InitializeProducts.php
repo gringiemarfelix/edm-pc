@@ -36,7 +36,7 @@ class InitializeProducts extends Command
                 'category_id' => $category->id
             ])
             ->has(Brand::factory()->state(function () {
-                return ['logo'];
+                return ['logo' => ''];
             }), 'brand')
             ->has(ProductImage::factory(6)->state(function () {
                 return ['file' => ''];
