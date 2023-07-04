@@ -13,7 +13,7 @@ const Index = () => {
       <Head title="Home" />
       <div
         style={{
-          height: navbarHeight ? `calc(90vh - ${navbarHeight}px)` : `100vh`
+          height: navbarHeight ? `calc(90vh - ${navbarHeight}px)` : `90vh`
         }}
       >
         <CustomCarousel />
