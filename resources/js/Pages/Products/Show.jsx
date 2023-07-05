@@ -274,7 +274,9 @@ const Show = () => {
                 </TabsHeader>
                 <TabsBody className="bg-blue-gray-50 shadow-inner rounded-lg my-3 lg:ml-3 lg:my-0">
                   <TabPanel value="overview" className="py-2 text-blue-gray-900">
-                    {product.overview}
+                    <Typography variant="paragraph" color="blue-gray" className="whitespace-pre-wrap">
+                      { product.overview }
+                    </Typography>
                   </TabPanel>
                   <TabPanel value="description" className="py-2 text-blue-gray-900">
                     <Typography variant="paragraph" color="blue-gray" className="whitespace-pre-wrap">
